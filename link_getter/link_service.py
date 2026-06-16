@@ -1,15 +1,16 @@
 from .json_reader import load_tractate_data
 from .validator import validate_daf_input
-from .link_builder import build_sefaria_link
+from .link_builder import (
+    build_sefaria_link,
+    build_sefaria_api_link
+)
 
 
 def generate_link(
     daf_input: str,
-    json_path: str
+    json_path: str,
+    api: bool = False
 ) -> str:
-    """
-    Validate input and generate a Sefaria link.
-    """
 
     tractate_data = load_tractate_data(
         json_path
@@ -34,6 +35,12 @@ def generate_link(
             f"Invalid input '{daf_input}'. "
             f"Expected a daf between "
             f"{start_daf}a and {end_daf}b."
+        )
+
+    if api:
+        return build_sefaria_api_link(
+            title,
+            daf_input
         )
 
     return build_sefaria_link(

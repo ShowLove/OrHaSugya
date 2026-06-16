@@ -1,0 +1,22 @@
+
+The directory has the following files. 
+
+ls -R
+README.md	data		link_getter	main.py
+
+./data:
+berakhot.json			berakhot_index_clean.json
+
+./link_getter:
+__init__.py	__pycache__	json_reader.py	link_builder.py	link_service.py	validator.py
+
+the program get's a link 
+The link sends me to the daf ln the sefaria page.
+Right now the code is a link generator
+but, what I actually want is
+
+4a
+↓
+https://www.sefaria.org/api/texts/Berakhot.4a
+↓
+JSON response
