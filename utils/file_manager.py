@@ -1,35 +1,49 @@
 import json
-from pathlib import Path
+import os
 
 
-BASE_DATA = Path("data")
-RAW_DIR = BASE_DATA / "raw"
-PROCESSED_DIR = BASE_DATA / "processed"
+RAW_DIR = "data/raw"
+PROCESSED_DIR = "data/processed"
 
 
-def ensure_structure() -> None:
-    RAW_DIR.mkdir(parents=True, exist_ok=True)
-    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+def ensure_dirs() -> None:
+    os.makedirs(RAW_DIR, exist_ok=True)
+    os.makedirs(PROCESSED_DIR, exist_ok=True)
 
 
-def raw_path(name: str) -> Path:
-    return RAW_DIR / f"{name}_raw.json"
+def save_raw_response(daf: str, data: dict) -> str:
+    """
+    Save raw Sefaria response.
+    """
+    ensure_dirs()
+
+    filename = f"berakhot_{daf.lower()}_raw.json"
+    path = os.path.join(RAW_DIR, filename)
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+    return path
 
 
-def processed_path(name: str) -> Path:
-    return PROCESSED_DIR / f"{name}_processed.json"
+def load_raw_response(daf: str) -> dict:
+    ensure_dirs()
 
+    path = os.path.join(RAW_DIR, f"berakhot_{daf.lower()}_raw.json")
 
-def file_exists(path: Path) -> bool:
-    return path.exists()
+    if not os.path.exists(path):
+        return None
 
-
-def read_json(path: Path) -> dict:
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def write_json(path: Path, data: dict) -> None:
-    ensure_structure()
+def save_processed(daf: str, data: dict) -> str:
+    ensure_dirs()
+
+    path = os.path.join(PROCESSED_DIR, f"berakhot_{daf.lower()}_processed.json")
+
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+    return path
