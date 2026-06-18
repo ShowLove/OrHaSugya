@@ -1,26 +1,12 @@
-def build_reader_url(
-    tractate_title: str,
-    daf_reference: str
-) -> str:
-    """
-    Build a standard Sefaria reader URL.
-    """
-
+def build_sefaria_link(tractate_name: str, daf_input: str) -> str:
     return (
         f"https://www.sefaria.org/"
-        f"{tractate_title}.{daf_reference.lower()}"
+        f"{tractate_name}.{daf_input.lower()}"
     )
 
 
-def build_api_url(
-    tractate_title: str,
-    daf_reference: str
-) -> str:
-    """
-    Build a Sefaria API URL.
-    """
-
+def build_sefaria_api_link(tractate_name: str, daf_input: str) -> str:
     return (
         f"https://www.sefaria.org/api/texts/"
-        f"{tractate_title}.{daf_reference.lower()}"
+        f"{tractate_name}.{daf_input.lower()}"
     )

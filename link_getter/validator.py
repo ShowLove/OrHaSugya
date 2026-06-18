@@ -1,36 +1,13 @@
 import re
 
 
-def is_valid_daf_reference(
-    daf_reference: str,
-    first_daf: int,
-    last_daf: int
-) -> bool:
-    """
-    Validate input such as:
-    2a
-    10b
-    64a
-    """
+def validate_daf_input(daf_input: str, start_daf: int, end_daf: int) -> bool:
 
-    daf_reference = (
-        daf_reference
-        .strip()
-        .lower()
-    )
-
-    match = re.fullmatch(
-        r"(\d+)([ab])",
-        daf_reference
-    )
+    match = re.fullmatch(r"(\d+)([ab])", daf_input.lower())
 
     if not match:
         return False
 
     daf_number = int(match.group(1))
 
-    return (
-        first_daf
-        <= daf_number
-        <= last_daf
-    )
+    return start_daf <= daf_number <= end_daf

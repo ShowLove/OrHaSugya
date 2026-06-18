@@ -1,49 +1,50 @@
-from .json_reader import load_tractate_metadata
-from .validator import is_valid_daf_reference
+from api.sefaria_client import fetch_daf_data
+from utils.file_manager import save_raw_response
+
+from .json_reader import load_tractate_data
+from .validator import validate_daf_input
 from .link_builder import (
-    build_reader_url,
-    build_api_url
+    build_sefaria_link,
+    build_sefaria_api_link
 )
 
 
-def generate_sefaria_link(
-    daf_reference: str,
-    metadata_path: str,
-    api: bool = False
-) -> str:
+def generate_link(daf_input: str, json_path: str, api: bool = False) -> str:
 
-    tractate_metadata = load_tractate_metadata(
-        metadata_path
-    )
+    tractate_data = load_tractate_data(json_path)
 
-    tractate_title = tractate_metadata["title"]
+    title = tractate_data["title"]
+    start_daf = tractate_data["daf_range"]["start"]
+    end_daf = tractate_data["daf_range"]["end"]
 
-    first_daf = (
-        tractate_metadata["daf_range"]["start"]
-    )
-
-    last_daf = (
-        tractate_metadata["daf_range"]["end"]
-    )
-
-    if not is_valid_daf_reference(
-        daf_reference,
-        first_daf,
-        last_daf
-    ):
+    if not validate_daf_input(daf_input, start_daf, end_daf):
         raise ValueError(
-            f"Invalid input '{daf_reference}'. "
-            f"Expected a daf between "
-            f"{first_daf}a and {last_daf}b."
+            f"Invalid input '{daf_input}'. "
+            f"Valid range: {start_daf}a - {end_daf}b"
         )
 
     if api:
-        return build_api_url(
-            tractate_title,
-            daf_reference
+        return build_sefaria_api_link(title, daf_input)
+
+    return build_sefaria_link(title, daf_input)
+
+
+def fetch_and_store_daf(daf_input: str, json_path: str) -> str:
+
+    tractate_data = load_tractate_data(json_path)
+
+    title = tractate_data["title"]
+    start_daf = tractate_data["daf_range"]["start"]
+    end_daf = tractate_data["daf_range"]["end"]
+
+    if not validate_daf_input(daf_input, start_daf, end_daf):
+        raise ValueError(
+            f"Invalid input '{daf_input}'. "
+            f"Valid range: {start_daf}a - {end_daf}b"
         )
 
-    return build_reader_url(
-        tractate_title,
-        daf_reference
-    )
+    data = fetch_daf_data(title, daf_input)
+
+    saved_path = save_raw_response(data, title, daf_input)
+
+    return saved_path
