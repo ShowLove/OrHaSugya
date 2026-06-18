@@ -1,14 +1,15 @@
 import requests
 
 
-def fetch_daf_data(tractate_name: str, daf_input: str) -> dict:
+BASE_URL = "https://www.sefaria.org/api/texts/"
 
-    url = (
-        "https://www.sefaria.org/api/texts/"
-        f"{tractate_name}.{daf_input.lower()}"
-    )
 
-    response = requests.get(url, timeout=10)
-    response.raise_for_status()
+def fetch_daf_data(ref: str) -> dict:
+    url = f"{BASE_URL}{ref}"
+
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        raise ValueError(f"Sefaria error: {response.status_code}")
 
     return response.json()

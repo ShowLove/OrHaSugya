@@ -1,49 +1,56 @@
 from link_getter.link_service import generate_link
-from utils.processor import process_raw_folder
+from utils.processor import process_single_daf, process_range
+
+import json
 
 DATA_FILE = "data/berakhot.json"
 
 
 def display_menu() -> None:
-    print("=== Half-Daf Link Generator ===\n")
-    print("Option:")
+    print("\n=== Half-Daf Link Generator ===\n")
     print("1. Generate Sefaria API link")
     print("2. Generate Sefaria link")
-    print("3. Process raw Sefaria files\n")
+    print("3. Process single daf")
+    print("4. Process range\n")
 
 
 def main() -> None:
 
     display_menu()
-
     option = input("Select option: ").strip()
 
-    # NEW OPTION: PROCESS RAW DATA
-    if option == "3":
-        process_raw_folder()
-        return
+    if option in ("1", "2", "3"):
+        daf = input("Input daf (e.g. 3a): ").strip()
 
-    if option not in ("1", "2"):
-        print("\nInvalid option.")
-        return
+    if option == "1":
+        print(generate_link(daf, DATA_FILE, api=True))
 
-    daf_input = input(
-        "\nInput daf portion (e.g. 2a, 10b): "
-    ).strip()
+    elif option == "2":
+        print(generate_link(daf, DATA_FILE, api=False))
 
-    try:
-        link = generate_link(
-            daf_input,
-            DATA_FILE,
-            api=(option == "1")
+    elif option == "3":
+        result = process_single_daf("Berakhot", daf)
+        print("Processed:", result["ref"])
+
+    elif option == "4":
+
+        start = input("Start daf: ").strip()
+        end = input("End daf: ").strip()
+
+        data = json.load(open(DATA_FILE))
+
+        results = process_range(
+            "Berakhot",
+            start,
+            end,
+            data["daf_range"]["start"],
+            data["daf_range"]["end"]
         )
 
-        print("\nGenerated Link:")
-        print(link)
+        print(f"\nProcessed {len(results)} dapim")
 
-    except ValueError as error:
-        print("\nError:")
-        print(error)
+    else:
+        print("Invalid option")
 
 
 if __name__ == "__main__":
