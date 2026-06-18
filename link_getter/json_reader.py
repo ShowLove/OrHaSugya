@@ -1,7 +1,7 @@
 import json
 
 
-def load_tractate_data(file_path: str) -> dict:
+def load_tractate_metadata(file_path: str) -> dict:
     """
     Load tractate metadata from JSON.
     """

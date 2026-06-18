@@ -1,9 +1,9 @@
-from link_getter.link_service import generate_link
+from link_getter.link_service import generate_sefaria_link
 
 DATA_FILE = "data/berakhot.json"
 
 
-def display_menu() -> None:
+def display_main_menu() -> None:
     print("=== Half-Daf Link Generator ===\n")
     print("Option:")
     print("1. Generate Sefaria API link")
@@ -12,7 +12,7 @@ def display_menu() -> None:
 
 def main() -> None:
 
-    display_menu()
+    display_main_menu()
 
     option = input(
         "Select option: "
@@ -22,15 +22,15 @@ def main() -> None:
         print("\nInvalid option.")
         return
 
-    daf_input = input(
+    daf_reference = input(
         "\nInput daf portion "
         "(e.g. 2a, 10b): "
     ).strip()
 
     try:
 
-        link = generate_link(
-            daf_input,
+        link = generate_sefaria_link(
+            daf_reference,
             DATA_FILE,
             api=(option == "1")
         )

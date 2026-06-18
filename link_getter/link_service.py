@@ -1,49 +1,49 @@
-from .json_reader import load_tractate_data
-from .validator import validate_daf_input
+from .json_reader import load_tractate_metadata
+from .validator import is_valid_daf_reference
 from .link_builder import (
-    build_sefaria_link,
-    build_sefaria_api_link
+    build_reader_url,
+    build_api_url
 )
 
 
-def generate_link(
-    daf_input: str,
-    json_path: str,
+def generate_sefaria_link(
+    daf_reference: str,
+    metadata_path: str,
     api: bool = False
 ) -> str:
 
-    tractate_data = load_tractate_data(
-        json_path
+    tractate_metadata = load_tractate_metadata(
+        metadata_path
     )
 
-    title = tractate_data["title"]
+    tractate_title = tractate_metadata["title"]
 
-    start_daf = (
-        tractate_data["daf_range"]["start"]
+    first_daf = (
+        tractate_metadata["daf_range"]["start"]
     )
 
-    end_daf = (
-        tractate_data["daf_range"]["end"]
+    last_daf = (
+        tractate_metadata["daf_range"]["end"]
     )
 
-    if not validate_daf_input(
-        daf_input,
-        start_daf,
-        end_daf
+    if not is_valid_daf_reference(
+        daf_reference,
+        first_daf,
+        last_daf
     ):
         raise ValueError(
-            f"Invalid input '{daf_input}'. "
+            f"Invalid input '{daf_reference}'. "
             f"Expected a daf between "
-            f"{start_daf}a and {end_daf}b."
+            f"{first_daf}a and {last_daf}b."
         )
 
     if api:
-        return build_sefaria_api_link(
-            title,
-            daf_input
+        return build_api_url(
+            tractate_title,
+            daf_reference
         )
 
-    return build_sefaria_link(
-        title,
-        daf_input
+    return build_reader_url(
+        tractate_title,
+        daf_reference
     )

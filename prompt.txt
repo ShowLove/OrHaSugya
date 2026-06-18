@@ -1,22 +1,290 @@
 
-The directory has the following files. 
+--- main.py ---
+from link_getter.link_service import generate_link
 
-ls -R
-README.md	data		link_getter	main.py
+DATA_FILE = "data/berakhot.json"
 
-./data:
-berakhot.json			berakhot_index_clean.json
 
-./link_getter:
-__init__.py	__pycache__	json_reader.py	link_builder.py	link_service.py	validator.py
+def display_menu() -> None:
+    print("=== Half-Daf Link Generator ===\n")
+    print("Option:")
+    print("1. Generate Sefaria API link")
+    print("2. Generate Sefaria link\n")
 
-the program get's a link 
-The link sends me to the daf ln the sefaria page.
-Right now the code is a link generator
-but, what I actually want is
 
-4a
-↓
-https://www.sefaria.org/api/texts/Berakhot.4a
-↓
-JSON response
+def main() -> None:
+
+    display_menu()
+
+    option = input(
+        "Select option: "
+    ).strip()
+
+    if option not in ("1", "2"):
+        print("\nInvalid option.")
+        return
+
+    daf_input = input(
+        "\nInput daf portion "
+        "(e.g. 2a, 10b): "
+    ).strip()
+
+    try:
+
+        link = generate_link(
+            daf_input,
+            DATA_FILE,
+            api=(option == "1")
+        )
+
+        print("\nGenerated Link:")
+        print(link)
+
+    except ValueError as error:
+
+        print("\nError:")
+        print(error)
+
+
+if __name__ == "__main__":
+    main()
+--- __init__.py ---
+# Package marker
+--- json_reader.py ---
+import json
+
+
+def load_tractate_data(file_path: str) -> dict:
+    """
+    Load tractate metadata from JSON.
+    """
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        return json.load(file)
+--- link_builder.py ---
+def build_sefaria_link(
+    tractate_name: str,
+    daf_input: str
+) -> str:
+    """
+    Build a standard Sefaria reader URL.
+    """
+
+    return (
+        f"https://www.sefaria.org/"
+        f"{tractate_name}.{daf_input.lower()}"
+    )
+
+
+def build_sefaria_api_link(
+    tractate_name: str,
+    daf_input: str
+) -> str:
+    """
+    Build a Sefaria API URL.
+    """
+
+    return (
+        f"https://www.sefaria.org/api/texts/"
+        f"{tractate_name}.{daf_input.lower()}"
+    )
+--- link_service.py ---
+from .json_reader import load_tractate_data
+from .validator import validate_daf_input
+from .link_builder import (
+    build_sefaria_link,
+    build_sefaria_api_link
+)
+
+
+def generate_link(
+    daf_input: str,
+    json_path: str,
+    api: bool = False
+) -> str:
+
+    tractate_data = load_tractate_data(
+        json_path
+    )
+
+    title = tractate_data["title"]
+
+    start_daf = (
+        tractate_data["daf_range"]["start"]
+    )
+
+    end_daf = (
+        tractate_data["daf_range"]["end"]
+    )
+
+    if not validate_daf_input(
+        daf_input,
+        start_daf,
+        end_daf
+    ):
+        raise ValueError(
+            f"Invalid input '{daf_input}'. "
+            f"Expected a daf between "
+            f"{start_daf}a and {end_daf}b."
+        )
+
+    if api:
+        return build_sefaria_api_link(
+            title,
+            daf_input
+        )
+
+    return build_sefaria_link(
+        title,
+        daf_input
+    )
+--- validator.py ---
+import re
+
+
+def validate_daf_input(
+    daf_input: str,
+    start_daf: int,
+    end_daf: int
+) -> bool:
+    """
+    Validate input such as:
+    2a
+    10b
+    64a
+    """
+
+    match = re.fullmatch(
+        r"(\d+)([ab])",
+        daf_input.lower()
+    )
+
+    if not match:
+        return False
+
+    daf_number = int(match.group(1))
+
+    return start_daf <= daf_number <= end_daf
+--- berakhot_index_clean.json ---
+{
+  "title": "Berakhot",
+  "heTitle": "ברכות",
+  "categories": ["Talmud", "Bavli", "Seder Zeraim"],
+
+  "description": {
+    "en": "Berakhot is the first tractate of Zeraim and the only one in the Babylonian Talmud. It focuses on laws of prayer, Shema, Amidah, and blessings.",
+    "he": "מסכת ברכות עוסקת בדיני תפילה, קריאת שמע וברכות."
+  },
+
+  "structure": {
+    "type": "JaggedArrayNode",
+    "depth": 2,
+    "sectionNames": ["Daf", "Line"]
+  },
+
+  "chapters": [
+    {
+      "id": 1,
+      "title_en": "MeEimatai",
+      "title_he": "מאימתי",
+      "refs": [
+        "Berakhot 2a", "Berakhot 2b", "Berakhot 3a", "Berakhot 3b", "Berakhot 4a", "Berakhot 4b", "Berakhot 5a"
+      ]
+    },
+    {
+      "id": 2,
+      "title_en": "Hayah Korei",
+      "title_he": "היה קורא",
+      "refs": [
+        "Berakhot 6a", "Berakhot 6b", "Berakhot 7a", "Berakhot 7b",
+        "Berakhot 8a", "Berakhot 8b", "Berakhot 9a", "Berakhot 9b",
+        "Berakhot 10a", "Berakhot 10b", "Berakhot 11a", "Berakhot 11b",
+        "Berakhot 12a", "Berakhot 12b", "Berakhot 13a", "Berakhot 13b", "Berakhot 14a"
+      ]
+    },
+    {
+      "id": 3,
+      "title_en": "Mi SheMeto",
+      "title_he": "מי שמתו",
+      "refs": [
+        "Berakhot 14b", "Berakhot 15a", "Berakhot 15b", "Berakhot 16a", "Berakhot 16b",
+        "Berakhot 17a", "Berakhot 17b", "Berakhot 18a", "Berakhot 18b", "Berakhot 19a"
+      ]
+    },
+    {
+      "id": 4,
+      "title_en": "Tefillat HaShachar",
+      "title_he": "תפילת השחר",
+      "refs": [
+        "Berakhot 19b", "Berakhot 20a", "Berakhot 20b", "Berakhot 21a", "Berakhot 21b",
+        "Berakhot 22a", "Berakhot 22b", "Berakhot 23a", "Berakhot 23b",
+        "Berakhot 24a", "Berakhot 24b", "Berakhot 25a", "Berakhot 25b",
+        "Berakhot 26a", "Berakhot 26b", "Berakhot 27a", "Berakhot 27b"
+      ]
+    },
+    {
+      "id": 5,
+      "title_en": "Ein Omdin",
+      "title_he": "אין עומדין",
+      "refs": [
+        "Berakhot 28a", "Berakhot 28b", "Berakhot 29a", "Berakhot 29b",
+        "Berakhot 30a", "Berakhot 30b", "Berakhot 31a", "Berakhot 31b",
+        "Berakhot 32a", "Berakhot 32b", "Berakhot 33a", "Berakhot 33b",
+        "Berakhot 34a", "Berakhot 34b"
+      ]
+    },
+    {
+      "id": 6,
+      "title_en": "Keitzad Mevarchin",
+      "title_he": "כיצד מברכין",
+      "refs": [
+        "Berakhot 35a", "Berakhot 35b", "Berakhot 36a", "Berakhot 36b",
+        "Berakhot 37a", "Berakhot 37b", "Berakhot 38a", "Berakhot 38b",
+        "Berakhot 39a", "Berakhot 39b", "Berakhot 40a", "Berakhot 40b",
+        "Berakhot 41a", "Berakhot 41b", "Berakhot 42a", "Berakhot 42b",
+        "Berakhot 43a", "Berakhot 43b", "Berakhot 44a", "Berakhot 44b"
+      ]
+    },
+    {
+      "id": 7,
+      "title_en": "Sheloshah SheAchlu",
+      "title_he": "שלשה שאכלו",
+      "refs": [
+        "Berakhot 45a", "Berakhot 45b", "Berakhot 46a", "Berakhot 46b",
+        "Berakhot 47a", "Berakhot 47b", "Berakhot 48a", "Berakhot 48b",
+        "Berakhot 49a", "Berakhot 49b", "Berakhot 50a", "Berakhot 50b"
+      ]
+    },
+    {
+      "id": 8,
+      "title_en": "Ellu Devarim",
+      "title_he": "אלו דברים",
+      "refs": [
+        "Berakhot 51a", "Berakhot 51b", "Berakhot 52a", "Berakhot 52b",
+        "Berakhot 53a", "Berakhot 53b"
+      ]
+    },
+    {
+      "id": 9,
+      "title_en": "HaRoeh",
+      "title_he": "הרואה",
+      "refs": [
+        "Berakhot 54a", "Berakhot 54b", "Berakhot 55a", "Berakhot 55b",
+        "Berakhot 56a", "Berakhot 56b", "Berakhot 57a", "Berakhot 57b",
+        "Berakhot 58a", "Berakhot 58b", "Berakhot 59a", "Berakhot 59b",
+        "Berakhot 60a", "Berakhot 60b", "Berakhot 61a", "Berakhot 61b",
+        "Berakhot 62a", "Berakhot 62b", "Berakhot 63a", "Berakhot 63b",
+        "Berakhot 64a"
+      ]
+    }
+  ]
+}
+--- berakhot.json ---
+{
+    "title": "Berakhot",
+    "heTitle": "ברכות",
+    "daf_range": {
+        "start": 2,
+        "end": 64
+    }
+}
