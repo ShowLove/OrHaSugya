@@ -1,16 +1,15 @@
-from link_getter.link_service import (
-    generate_link,
-    fetch_and_store_daf
-)
+from link_getter.link_service import generate_link
+from utils.processor import process_raw_folder
 
 DATA_FILE = "data/berakhot.json"
 
 
 def display_menu() -> None:
     print("=== Half-Daf Link Generator ===\n")
+    print("Option:")
     print("1. Generate Sefaria API link")
     print("2. Generate Sefaria link")
-    print("3. Fetch daf data from Sefaria API\n")
+    print("3. Process raw Sefaria files\n")
 
 
 def main() -> None:
@@ -19,32 +18,32 @@ def main() -> None:
 
     option = input("Select option: ").strip()
 
-    if option not in ("1", "2", "3"):
-        print("Invalid option")
+    # NEW OPTION: PROCESS RAW DATA
+    if option == "3":
+        process_raw_folder()
         return
 
-    daf_input = input("Input daf (e.g. 3a): ").strip()
+    if option not in ("1", "2"):
+        print("\nInvalid option.")
+        return
+
+    daf_input = input(
+        "\nInput daf portion (e.g. 2a, 10b): "
+    ).strip()
 
     try:
-
-        if option == "3":
-            path = fetch_and_store_daf(daf_input, DATA_FILE)
-            print("\nSaved to:")
-            print(path)
-            return
-
         link = generate_link(
             daf_input,
             DATA_FILE,
             api=(option == "1")
         )
 
-        print("\nResult:")
+        print("\nGenerated Link:")
         print(link)
 
-    except Exception as e:
+    except ValueError as error:
         print("\nError:")
-        print(e)
+        print(error)
 
 
 if __name__ == "__main__":
