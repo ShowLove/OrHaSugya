@@ -4,6 +4,8 @@ from utils.range_processor import (
     process_daf_range,
     process_full_book
 )
+from utils.export_bundle import export_processed_to_jsonl
+
 
 DATA_FILE = "data/berakhot.json"
 
@@ -15,6 +17,7 @@ def display_menu():
     print("3. Process single daf")
     print("4. Process daf range (Berakhot)")
     print("5. Get full Berakhot data")
+    print("6. Export processed data (JSONL)")
 
 
 def main():
@@ -45,6 +48,11 @@ def main():
 
     elif option == "5":
         process_full_book()
+
+    elif option == "6":
+        print("\n[INFO] Exporting processed data to JSONL...")
+        path = export_processed_to_jsonl()
+        print(f"[OK] Export complete: {path}")
 
     else:
         print("Invalid option")
