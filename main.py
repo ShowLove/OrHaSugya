@@ -30,7 +30,7 @@ def main() -> None:
 
     elif option == "3":
         result = process_single_daf("Berakhot", daf)
-        print("Processed:", result["ref"])
+        print("\nDone:", result["ref"])
 
     elif option == "4":
 
@@ -47,7 +47,7 @@ def main() -> None:
             data["daf_range"]["end"]
         )
 
-        print(f"\nProcessed {len(results)} dapim")
+        print(f"\nFinished processing {len(results)} entries")
 
     else:
         print("Invalid option")
