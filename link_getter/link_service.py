@@ -1,15 +1,21 @@
+# =========================
+# FILE: link_getter/link_service.py
+# =========================
+
 from link_getter.json_reader import load_tractate_data
 from link_getter.validator import validate_daf_input
 from link_getter.link_builder import (
     build_sefaria_link,
     build_sefaria_api_link
 )
+from utils.constants import DEFAULT_TRACTATE
 
 
 def generate_link(
     daf_input: str,
     json_path: str,
-    api: bool = False
+    api: bool = False,
+    tractate: str = DEFAULT_TRACTATE
 ) -> str:
 
     tractate_data = load_tractate_data(json_path)

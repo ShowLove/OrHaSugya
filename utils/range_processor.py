@@ -1,22 +1,18 @@
+# =========================
+# FILE: utils/range_processor.py
+# =========================
+
 import time
 from link_getter.json_reader import load_tractate_data
 from utils.berakhot_processor import process_daf_if_missing
+from utils.constants import DEFAULT_TRACTATE
 
 
 def parse_daf(daf: str) -> int:
-    """
-    Convert '10a' -> 10
-    """
     return int(daf[:-1])
 
 
 def build_daf_list(start: int, end: int) -> list:
-    """
-    Build full daf list including a + b pages.
-    Example:
-        4 → 4a, 4b
-        5 → 5a, 5b
-    """
     dafs = []
     for n in range(start, end + 1):
         dafs.append(f"{n}a")
@@ -24,14 +20,16 @@ def build_daf_list(start: int, end: int) -> list:
     return dafs
 
 
-def process_daf_range(start: str, end: str) -> list:
-    """
-    Process range like 4a → 10a safely.
-    """
+def process_daf_range(
+    start: str,
+    end: str,
+    tractate: str = DEFAULT_TRACTATE
+) -> list:
+
     start_num = parse_daf(start)
     end_num = parse_daf(end)
 
-    data = load_tractate_data("data/berakhot.json")
+    data = load_tractate_data(f"data/{tractate.lower()}.json")
 
     min_daf = data["daf_range"]["start"]
     max_daf = data["daf_range"]["end"]
@@ -45,17 +43,11 @@ def process_daf_range(start: str, end: str) -> list:
     results = []
 
     for i, daf in enumerate(dafs, start=1):
-
-        print(f"[INFO] ({i}/{len(dafs)}) Processing {daf}")
+        print(f"[INFO] ({i}/{len(dafs)}) Processing {tractate} {daf}")
 
         try:
-            result = process_daf_if_missing(daf)
-
-            results.append({
-                "daf": daf,
-                "data": result
-            })
-
+            result = process_daf_if_missing(daf, tractate)
+            results.append({"daf": daf, "data": result})
         except Exception as e:
             print(f"[ERROR] Failed {daf}: {e}")
 
@@ -64,15 +56,12 @@ def process_daf_range(start: str, end: str) -> list:
     return results
 
 
-def process_full_book():
-    """
-    Process entire Berakhot using the same pipeline as range processing.
-    """
-    data = load_tractate_data("data/berakhot.json")
+def process_full_book(tractate: str = DEFAULT_TRACTATE):
+    data = load_tractate_data(f"data/{tractate.lower()}.json")
 
     start = data["daf_range"]["start"]
     end = data["daf_range"]["end"]
 
-    print(f"[INFO] Processing full Berakhot: {start} → {end}")
+    print(f"[INFO] Processing full {tractate}: {start} → {end}")
 
-    return process_daf_range(f"{start}a", f"{end}a")
+    return process_daf_range(f"{start}a", f"{end}a", tractate)

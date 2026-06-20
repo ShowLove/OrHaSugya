@@ -1,3 +1,7 @@
+# =========================
+# FILE: utils/file_manager.py
+# =========================
+
 import json
 import os
 from utils.constants import (
@@ -5,19 +9,24 @@ from utils.constants import (
     PROCESSED_DIR,
     RAW_FILE_PREFIX,
     RAW_FILE_SUFFIX,
-    PROCESSED_FILE_SUFFIX
+    PROCESSED_FILE_SUFFIX,
+    DEFAULT_TRACTATE
 )
 
 
-def ensure_dirs() -> None:
+def ensure_dirs():
     os.makedirs(RAW_DIR, exist_ok=True)
     os.makedirs(PROCESSED_DIR, exist_ok=True)
 
 
-def save_raw_response(daf: str, data: dict) -> str:
+def _prefix(tractate: str) -> str:
+    return f"{tractate.lower()}_" if tractate else RAW_FILE_PREFIX
+
+
+def save_raw_response(daf: str, data: dict, tractate: str = DEFAULT_TRACTATE) -> str:
     ensure_dirs()
 
-    filename = f"{RAW_FILE_PREFIX}{daf.lower()}{RAW_FILE_SUFFIX}"
+    filename = f"{_prefix(tractate)}{daf.lower()}{RAW_FILE_SUFFIX}"
     path = os.path.join(RAW_DIR, filename)
 
     with open(path, "w", encoding="utf-8") as f:
@@ -26,12 +35,12 @@ def save_raw_response(daf: str, data: dict) -> str:
     return path
 
 
-def load_raw_response(daf: str) -> dict:
+def load_raw_response(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
     ensure_dirs()
 
     path = os.path.join(
         RAW_DIR,
-        f"{RAW_FILE_PREFIX}{daf.lower()}{RAW_FILE_SUFFIX}"
+        f"{_prefix(tractate)}{daf.lower()}{RAW_FILE_SUFFIX}"
     )
 
     if not os.path.exists(path):
@@ -41,12 +50,12 @@ def load_raw_response(daf: str) -> dict:
         return json.load(f)
 
 
-def save_processed(daf: str, data: dict) -> str:
+def save_processed(daf: str, data: dict, tractate: str = DEFAULT_TRACTATE) -> str:
     ensure_dirs()
 
     path = os.path.join(
         PROCESSED_DIR,
-        f"{RAW_FILE_PREFIX}{daf.lower()}{PROCESSED_FILE_SUFFIX}"
+        f"{_prefix(tractate)}{daf.lower()}{PROCESSED_FILE_SUFFIX}"
     )
 
     with open(path, "w", encoding="utf-8") as f:

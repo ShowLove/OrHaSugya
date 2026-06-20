@@ -1,3 +1,7 @@
+# =========================
+# FILE: utils/berakhot_processor.py
+# =========================
+
 import time
 from utils.file_manager import (
     save_raw_response,
@@ -6,30 +10,31 @@ from utils.file_manager import (
 )
 
 from api.sefaria_client import fetch_daf_data
+from utils.constants import DEFAULT_TRACTATE
 
 
-def process_single_daf(daf: str) -> dict:
+def process_single_daf(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
     """
     Full pipeline: fetch → save raw → process → save processed
+    Default = Berakhot (backward compatible)
     """
 
-    print(f"\n[PROCESS] Starting daf {daf}")
+    print(f"\n[PROCESS] Starting {tractate} {daf}")
 
-    raw = fetch_daf_data(daf)
+    raw = fetch_daf_data(daf, tractate)
 
-    # IMPORTANT DEBUG CHECK
     if not raw or (raw.get("text") == [] and raw.get("he") == []):
         print(f"[WARNING] Empty or invalid data returned for {daf}")
         print(f"[DEBUG KEYS] {list(raw.keys())}")
-        save_raw_response(daf, raw)
+        save_raw_response(daf, raw, tractate)
         return None
 
-    save_raw_response(daf, raw)
+    save_raw_response(daf, raw, tractate)
     print(f"[OK] Raw saved: {daf}")
 
     processed = process_raw_to_structured(raw)
 
-    save_processed(daf, processed)
+    save_processed(daf, processed, tractate)
     print(f"[OK] Processed saved: {daf}")
 
     time.sleep(0.5)
@@ -38,64 +43,37 @@ def process_single_daf(daf: str) -> dict:
 
 
 def process_raw_to_structured(raw: dict) -> dict:
-    """
-    Normalize Sefaria output across possible formats.
-    """
-
     return {
         "ref": raw.get("ref"),
         "heRef": raw.get("heRef"),
-
-        # robust extraction (Sefaria is inconsistent)
         "english": extract_english(raw),
         "hebrew": extract_hebrew(raw),
-
         "debug_keys": list(raw.keys()) if isinstance(raw, dict) else []
     }
 
 
 def extract_english(raw: dict):
-    """
-    Try multiple possible Sefaria formats.
-    """
-
     if not isinstance(raw, dict):
         return []
-
-    return (
-        raw.get("text")
-        or raw.get("texts")
-        or raw.get("english")
-        or []
-    )
+    return raw.get("text") or raw.get("texts") or raw.get("english") or []
 
 
 def extract_hebrew(raw: dict):
-    """
-    Try multiple possible Hebrew formats.
-    """
-
     if not isinstance(raw, dict):
         return []
-
-    return (
-        raw.get("he")
-        or raw.get("heText")
-        or raw.get("hebrew")
-        or []
-    )
+    return raw.get("he") or raw.get("heText") or raw.get("hebrew") or []
 
 
-def process_daf_if_missing(daf: str) -> dict:
+def process_daf_if_missing(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
     """
     Use cached raw if available, otherwise fetch.
     """
 
-    existing = load_raw_response(daf)
+    existing = load_raw_response(daf, tractate)
 
     if existing:
         print(f"[CACHE] Using existing raw for {daf}")
         return process_raw_to_structured(existing)
 
     print(f"[FETCH] No cache for {daf}")
-    return process_single_daf(daf)
+    return process_single_daf(daf, tractate)

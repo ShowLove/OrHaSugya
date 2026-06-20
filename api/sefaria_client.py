@@ -1,17 +1,18 @@
 import requests
 from utils.constants import (
     SEFARIA_BASE_URL,
-    TRACTATE_BERAKHOT,
+    DEFAULT_TRACTATE,
     API_TIMEOUT
 )
 
 
-def fetch_daf_data(daf: str) -> dict:
+def fetch_daf_data(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
     """
     Fetch clean Sefaria daf data.
+    Default = Berakhot (backward compatible)
     """
 
-    ref = f"{TRACTATE_BERAKHOT}.{daf}"
+    ref = f"{tractate}.{daf}"
     url = f"{SEFARIA_BASE_URL}/{ref}"
 
     params = {
