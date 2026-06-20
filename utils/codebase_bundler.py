@@ -2,30 +2,71 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-from utils.constants import (
-    IGNORE_DIRS,
-    IGNORE_FILES,
-    IGNORE_SUFFIXES
-)
+from utils.constants import CODEBASE_OUTPUT_FILE
 
+
+# ----------------------------
+# CLEAN LLM EXPORT RULES
+# ----------------------------
+
+ALLOWED_SUFFIXES = {
+    ".py",
+    ".md"
+}
+
+IGNORE_DIRS = {
+    "__pycache__",
+    ".git",
+    ".idea",
+    ".vscode",
+    "venv",
+    ".venv",
+    "node_modules",
+    "data"
+}
+
+IGNORE_FILES = {
+    "code_data.txt"
+}
+
+IGNORE_SUFFIXES = {
+    ".pyc",
+    ".DS_Store",
+    ".json",   # IMPORTANT: removes large datasets from context noise
+    ".log",
+    ".sqlite",
+    ".db"
+}
+
+
+# ----------------------------
+# FILTER LOGIC
+# ----------------------------
 
 def _should_ignore(path: Path) -> bool:
-    parts = set(path.parts)
-
-    if parts & IGNORE_DIRS:
+    if any(part in IGNORE_DIRS for part in path.parts):
         return True
+
     if path.name in IGNORE_FILES:
         return True
+
     if path.suffix in IGNORE_SUFFIXES:
         return True
+
+    if path.suffix not in ALLOWED_SUFFIXES:
+        return True
+
     return False
 
+
+# ----------------------------
+# TREE BUILDER
+# ----------------------------
 
 def _build_tree(root: Path) -> str:
     lines = []
 
     for dirpath, dirnames, filenames in os.walk(root):
-
         dirpath = Path(dirpath)
 
         dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
@@ -43,10 +84,14 @@ def _build_tree(root: Path) -> str:
     return "\n".join(lines)
 
 
+# ----------------------------
+# FILE COLLECTOR
+# ----------------------------
+
 def _collect_files(root: Path):
     for dirpath, dirnames, filenames in os.walk(root):
-
         dirpath = Path(dirpath)
+
         dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
 
         for file in filenames:
@@ -55,31 +100,35 @@ def _collect_files(root: Path):
                 yield file_path
 
 
+# ----------------------------
+# EXPORT
+# ----------------------------
+
 def export_codebase_bundle(root_path: str | None = None) -> str:
-    from utils.constants import CODEBASE_OUTPUT_FILE
 
     root = Path(__file__).resolve().parents[1] if root_path is None else Path(root_path).resolve()
 
     output_path = CODEBASE_OUTPUT_FILE
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    print(f"\n[INFO] Bundling codebase from: {root}")
+    print(f"\n[INFO] Exporting CLEAN codebase from: {root}")
 
     tree = _build_tree(root)
-    all_files = list(_collect_files(root))
+    files = list(_collect_files(root))
 
     with open(output_path, "w", encoding="utf-8") as out:
 
-        out.write("=== CODEBASE STRUCTURE ===\n\n")
+        out.write("=== CLEAN CODEBASE FOR LLM ===\n\n")
         out.write(tree)
         out.write("\n\n")
         out.write("=" * 80 + "\n\n")
 
         out.write(f"Generated: {datetime.now()}\n")
-        out.write(f"Root: {root}\n\n")
+        out.write(f"Root: {root}\n")
+        out.write("Mode: LLM-clean export (no data/json/cache files)\n\n")
         out.write("=" * 80 + "\n\n")
 
-        for file_path in all_files:
+        for file_path in files:
             try:
                 relative = file_path.relative_to(root)
 
@@ -94,5 +143,5 @@ def export_codebase_bundle(root_path: str | None = None) -> str:
             except Exception as e:
                 out.write(f"\n[ERROR READING FILE: {file_path}] {e}\n")
 
-    print(f"[OK] Codebase exported to: {output_path}")
+    print(f"[OK] Clean codebase exported to: {output_path}")
     return str(output_path)

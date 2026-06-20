@@ -56,9 +56,9 @@ def main():
         print(f"[OK] Export complete: {path}")
 
     elif option == "7":
-        print("\n[INFO] Exporting full codebase bundle...")
+        print("\n[INFO] Exporting CLEAN codebase bundle (LLM-ready)...")
         path = export_codebase_bundle()
-        print(f"[OK] Codebase exported: {path}")
+        print(f"[OK] Clean codebase exported: {path}")
 
     else:
         print("Invalid option")
