@@ -2,30 +2,21 @@ import os
 from pathlib import Path
 from datetime import datetime
 
-
-IGNORE_DIRS = {
-    "__pycache__",
-    ".git",
-    ".idea",
-    ".vscode",
-    "venv",
-    ".venv",
-    "node_modules",
-    "data"
-}
-
-IGNORE_FILES = {
-    "code_data.txt"
-}
+from utils.constants import (
+    IGNORE_DIRS,
+    IGNORE_FILES,
+    IGNORE_SUFFIXES
+)
 
 
 def _should_ignore(path: Path) -> bool:
     parts = set(path.parts)
+
     if parts & IGNORE_DIRS:
         return True
     if path.name in IGNORE_FILES:
         return True
-    if path.suffix in {".pyc", ".DS_Store"}:
+    if path.suffix in IGNORE_SUFFIXES:
         return True
     return False
 
@@ -34,13 +25,10 @@ def _build_tree(root: Path) -> str:
     lines = []
 
     for dirpath, dirnames, filenames in os.walk(root):
+
         dirpath = Path(dirpath)
 
-        # filter ignored dirs in-place
-        dirnames[:] = [
-            d for d in dirnames
-            if d not in IGNORE_DIRS
-        ]
+        dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
 
         level = len(dirpath.relative_to(root).parts)
         indent = "    " * level
@@ -57,12 +45,9 @@ def _build_tree(root: Path) -> str:
 
 def _collect_files(root: Path):
     for dirpath, dirnames, filenames in os.walk(root):
-        dirpath = Path(dirpath)
 
-        dirnames[:] = [
-            d for d in dirnames
-            if d not in IGNORE_DIRS
-        ]
+        dirpath = Path(dirpath)
+        dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
 
         for file in filenames:
             file_path = dirpath / file
@@ -71,26 +56,16 @@ def _collect_files(root: Path):
 
 
 def export_codebase_bundle(root_path: str | None = None) -> str:
-    """
-    Creates a single bundled file containing:
-    - directory tree
-    - all project source files
+    from utils.constants import CODEBASE_OUTPUT_FILE
 
-    Output: data/code_data.txt
-    """
+    root = Path(__file__).resolve().parents[1] if root_path is None else Path(root_path).resolve()
 
-    if root_path is None:
-        root = Path(__file__).resolve().parents[1]
-    else:
-        root = Path(root_path).resolve()
-
-    output_path = root / "data" / "code_data.txt"
+    output_path = CODEBASE_OUTPUT_FILE
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     print(f"\n[INFO] Bundling codebase from: {root}")
 
     tree = _build_tree(root)
-
     all_files = list(_collect_files(root))
 
     with open(output_path, "w", encoding="utf-8") as out:
@@ -120,5 +95,4 @@ def export_codebase_bundle(root_path: str | None = None) -> str:
                 out.write(f"\n[ERROR READING FILE: {file_path}] {e}\n")
 
     print(f"[OK] Codebase exported to: {output_path}")
-
     return str(output_path)

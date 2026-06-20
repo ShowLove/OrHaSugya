@@ -1,7 +1,9 @@
 import requests
-
-
-BASE_URL = "https://www.sefaria.org/api/texts"
+from utils.constants import (
+    SEFARIA_BASE_URL,
+    TRACTATE_BERAKHOT,
+    API_TIMEOUT
+)
 
 
 def fetch_daf_data(daf: str) -> dict:
@@ -9,9 +11,8 @@ def fetch_daf_data(daf: str) -> dict:
     Fetch clean Sefaria daf data.
     """
 
-    ref = f"Berakhot.{daf}"
-
-    url = f"{BASE_URL}/{ref}"
+    ref = f"{TRACTATE_BERAKHOT}.{daf}"
+    url = f"{SEFARIA_BASE_URL}/{ref}"
 
     params = {
         "context": 0,
@@ -22,10 +23,9 @@ def fetch_daf_data(daf: str) -> dict:
     try:
         print(f"[API] Fetching: {url}")
 
-        response = requests.get(url, params=params, timeout=10)
+        response = requests.get(url, params=params, timeout=API_TIMEOUT)
         data = response.json()
 
-        # HARD DEBUG SAFETY
         if "error" in data:
             print(f"[API ERROR] {data['error']}")
 

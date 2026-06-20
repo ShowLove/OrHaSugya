@@ -1,14 +1,14 @@
 import os
 import json
+from utils.constants import PROCESSED_DIR, BUNDLE_OUTPUT_FILE
 
 
-PROCESSED_DIR = "data/processed"
-
-
-def export_processed_to_jsonl(output_file="data/berakhot_bundle.jsonl"):
+def export_processed_to_jsonl(output_file=None):
     """
     Combine all processed files into a single JSONL file.
     """
+
+    output_file = output_file or BUNDLE_OUTPUT_FILE
 
     files = sorted(os.listdir(PROCESSED_DIR))
 
@@ -23,7 +23,6 @@ def export_processed_to_jsonl(output_file="data/berakhot_bundle.jsonl"):
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-                # normalize daf from filename
                 daf = file.replace("berakhot_", "").replace("_processed.json", "")
 
                 record = {
@@ -36,4 +35,4 @@ def export_processed_to_jsonl(output_file="data/berakhot_bundle.jsonl"):
 
                 out.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-    return output_file
+    return str(output_file)

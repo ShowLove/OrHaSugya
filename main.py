@@ -7,8 +7,7 @@ from utils.range_processor import (
 from utils.export_bundle import export_processed_to_jsonl
 from utils.codebase_bundler import export_codebase_bundle
 
-
-DATA_FILE = "data/berakhot.json"
+from utils.constants import DATA_FILE_BERAKHOT
 
 
 def display_menu():
@@ -32,7 +31,7 @@ def main():
 
         link = generate_link(
             daf_input,
-            DATA_FILE,
+            str(DATA_FILE_BERAKHOT),
             api=(option == "1")
         )
 
