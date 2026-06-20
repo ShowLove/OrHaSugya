@@ -4,19 +4,30 @@ from utils.berakhot_processor import process_daf_if_missing
 
 
 def parse_daf(daf: str) -> int:
+    """
+    Convert '10a' -> 10
+    """
     return int(daf[:-1])
 
 
-def get_all_dafs():
-    data = load_tractate_data("data/berakhot.json")
-    return list(range(data["daf_range"]["start"], data["daf_range"]["end"] + 1))
+def build_daf_list(start: int, end: int) -> list:
+    """
+    Build full daf list including a + b pages.
+    Example:
+        4 → 4a, 4b
+        5 → 5a, 5b
+    """
+    dafs = []
+    for n in range(start, end + 1):
+        dafs.append(f"{n}a")
+        dafs.append(f"{n}b")
+    return dafs
 
 
 def process_daf_range(start: str, end: str) -> list:
     """
     Process range like 4a → 10a safely.
     """
-
     start_num = parse_daf(start)
     end_num = parse_daf(end)
 
@@ -29,32 +40,39 @@ def process_daf_range(start: str, end: str) -> list:
         print("[ERROR] Range out of bounds")
         return []
 
+    dafs = build_daf_list(start_num, end_num)
+
     results = []
 
-    for n in range(start_num, end_num + 1):
-        daf = f"{n}a"
+    for i, daf in enumerate(dafs, start=1):
 
-        print(f"[INFO] Starting daf {daf}")
+        print(f"[INFO] ({i}/{len(dafs)}) Processing {daf}")
 
-        result = process_daf_if_missing(daf)
+        try:
+            result = process_daf_if_missing(daf)
 
-        results.append({
-            "daf": daf,
-            "data": result
-        })
+            results.append({
+                "daf": daf,
+                "data": result
+            })
 
-        time.sleep(0.75)  # avoid hammering API
+        except Exception as e:
+            print(f"[ERROR] Failed {daf}: {e}")
+
+        time.sleep(0.75)
 
     return results
 
 
 def process_full_book():
     """
-    Process entire Berakhot.
+    Process entire Berakhot using the same pipeline as range processing.
     """
-
     data = load_tractate_data("data/berakhot.json")
+
     start = data["daf_range"]["start"]
     end = data["daf_range"]["end"]
+
+    print(f"[INFO] Processing full Berakhot: {start} → {end}")
 
     return process_daf_range(f"{start}a", f"{end}a")

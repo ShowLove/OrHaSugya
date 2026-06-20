@@ -5,6 +5,7 @@ from utils.range_processor import (
     process_full_book
 )
 from utils.export_bundle import export_processed_to_jsonl
+from utils.codebase_bundler import export_codebase_bundle
 
 
 DATA_FILE = "data/berakhot.json"
@@ -18,6 +19,7 @@ def display_menu():
     print("4. Process daf range (Berakhot)")
     print("5. Get full Berakhot data")
     print("6. Export processed data (JSONL)")
+    print("7. Export FULL codebase (for ChatGPT)")
 
 
 def main():
@@ -53,6 +55,11 @@ def main():
         print("\n[INFO] Exporting processed data to JSONL...")
         path = export_processed_to_jsonl()
         print(f"[OK] Export complete: {path}")
+
+    elif option == "7":
+        print("\n[INFO] Exporting full codebase bundle...")
+        path = export_codebase_bundle()
+        print(f"[OK] Codebase exported: {path}")
 
     else:
         print("Invalid option")
