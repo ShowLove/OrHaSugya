@@ -3,15 +3,13 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parents[1]
 
 DATA_DIR = ROOT_DIR / "data"
-RAW_DIR = DATA_DIR / "raw"
-PROCESSED_DIR = DATA_DIR / "processed"
 
 DEFAULT_TRACTATE = "Berakhot"
 
-# BACKWARD COMPATIBILITY
+# backward compatibility
 TRACTATE_BERAKHOT = DEFAULT_TRACTATE
 
-# NEW LOCATION
+# metadata
 TRACTATE_METADATA_DIR = DATA_DIR / "tractate_metadata"
 
 DATA_FILE_BERAKHOT = (
@@ -27,6 +25,38 @@ def get_tractate_metadata_file(
         f"{tractate.lower().replace(' ', '_')}.json"
     )
 
+
+# ==================================================
+# TRACTATE DATA FOLDERS
+# ==================================================
+
+TRACTATE_DIR = DATA_DIR / "tractate"
+
+
+def get_tractate_dir(
+    tractate: str = DEFAULT_TRACTATE
+):
+    return (
+        TRACTATE_DIR /
+        tractate.lower().replace(" ", "_")
+    )
+
+
+def get_raw_dir(
+    tractate: str = DEFAULT_TRACTATE
+):
+    return get_tractate_dir(tractate) / "raw"
+
+
+def get_processed_dir(
+    tractate: str = DEFAULT_TRACTATE
+):
+    return get_tractate_dir(tractate) / "processed"
+
+
+# backward compatibility
+RAW_DIR = get_raw_dir()
+PROCESSED_DIR = get_processed_dir()
 
 SEFARIA_BASE_URL = "https://www.sefaria.org/api/texts"
 
