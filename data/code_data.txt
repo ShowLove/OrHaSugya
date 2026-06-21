@@ -26,7 +26,7 @@ git/
 
 ================================================================================
 
-Generated: 2026-06-20 17:08:33.533153
+Generated: 2026-06-21 08:45:22.400895
 Root: /Users/carlosgarzon/Desktop/Torah/Or HaSugya - Mafteach HaTalmud /git
 Mode: LLM-clean export (no data/json/cache files)
 
@@ -374,13 +374,7 @@ def export_codebase_bundle(root_path: str | None = None) -> str:
 FILE: utils/constants.py
 ================================================================================
 
-# utils/constants.py
-
 from pathlib import Path
-
-# ----------------------------
-# PROJECT ROOT / DATA
-# ----------------------------
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 
@@ -388,26 +382,14 @@ DATA_DIR = ROOT_DIR / "data"
 RAW_DIR = DATA_DIR / "raw"
 PROCESSED_DIR = DATA_DIR / "processed"
 
+DEFAULT_TRACTATE = "Berakhot"
+
+# BACKWARD COMPATIBILITY (fixes your crash)
+TRACTATE_BERAKHOT = DEFAULT_TRACTATE
+
 DATA_FILE_BERAKHOT = DATA_DIR / "berakhot.json"
 
-
-# ----------------------------
-# TRACTATE CONFIG
-# ----------------------------
-
-TRACTATE_BERAKHOT = "Berakhot"
-
-
-# ----------------------------
-# SEFARIA API
-# ----------------------------
-
 SEFARIA_BASE_URL = "https://www.sefaria.org/api/texts"
-
-
-# ----------------------------
-# FILE NAMING
-# ----------------------------
 
 RAW_FILE_PREFIX = "berakhot_"
 RAW_FILE_SUFFIX = "_raw.json"
@@ -416,42 +398,11 @@ PROCESSED_FILE_PREFIX = "berakhot_"
 PROCESSED_FILE_SUFFIX = "_processed.json"
 
 BUNDLE_OUTPUT_FILE = DATA_DIR / "berakhot_bundle.jsonl"
-
 CODEBASE_OUTPUT_FILE = DATA_DIR / "code_data.txt"
-
-
-# ----------------------------
-# PROCESSING SPEED / LIMITS
-# ----------------------------
 
 DEFAULT_DELAY = 0.5
 RANGE_DELAY = 0.75
 API_TIMEOUT = 10
-
-
-# ----------------------------
-# CODEBASE BUNDLER IGNORES
-# ----------------------------
-
-IGNORE_DIRS = {
-    "__pycache__",
-    ".git",
-    ".idea",
-    ".vscode",
-    "venv",
-    ".venv",
-    "node_modules",
-    "data"
-}
-
-IGNORE_FILES = {
-    "code_data.txt"
-}
-
-IGNORE_SUFFIXES = {
-    ".pyc",
-    ".DS_Store"
-}
 
 ================================================================================
 FILE: utils/export_bundle.py
@@ -818,25 +769,21 @@ def metadata_menu():
 FILE: utils/range_processor.py
 ================================================================================
 
+# =========================
+# FILE: utils/range_processor.py
+# =========================
+
 import time
 from link_getter.json_reader import load_tractate_data
 from utils.berakhot_processor import process_daf_if_missing
+from utils.constants import DEFAULT_TRACTATE
 
 
 def parse_daf(daf: str) -> int:
-    """
-    Convert '10a' -> 10
-    """
     return int(daf[:-1])
 
 
 def build_daf_list(start: int, end: int) -> list:
-    """
-    Build full daf list including a + b pages.
-    Example:
-        4 → 4a, 4b
-        5 → 5a, 5b
-    """
     dafs = []
     for n in range(start, end + 1):
         dafs.append(f"{n}a")
@@ -844,14 +791,16 @@ def build_daf_list(start: int, end: int) -> list:
     return dafs
 
 
-def process_daf_range(start: str, end: str) -> list:
-    """
-    Process range like 4a → 10a safely.
-    """
+def process_daf_range(
+    start: str,
+    end: str,
+    tractate: str = DEFAULT_TRACTATE
+) -> list:
+
     start_num = parse_daf(start)
     end_num = parse_daf(end)
 
-    data = load_tractate_data("data/berakhot.json")
+    data = load_tractate_data(f"data/{tractate.lower()}.json")
 
     min_daf = data["daf_range"]["start"]
     max_daf = data["daf_range"]["end"]
@@ -865,17 +814,11 @@ def process_daf_range(start: str, end: str) -> list:
     results = []
 
     for i, daf in enumerate(dafs, start=1):
-
-        print(f"[INFO] ({i}/{len(dafs)}) Processing {daf}")
+        print(f"[INFO] ({i}/{len(dafs)}) Processing {tractate} {daf}")
 
         try:
-            result = process_daf_if_missing(daf)
-
-            results.append({
-                "daf": daf,
-                "data": result
-            })
-
+            result = process_daf_if_missing(daf, tractate)
+            results.append({"daf": daf, "data": result})
         except Exception as e:
             print(f"[ERROR] Failed {daf}: {e}")
 
@@ -884,22 +827,23 @@ def process_daf_range(start: str, end: str) -> list:
     return results
 
 
-def process_full_book():
-    """
-    Process entire Berakhot using the same pipeline as range processing.
-    """
-    data = load_tractate_data("data/berakhot.json")
+def process_full_book(tractate: str = DEFAULT_TRACTATE):
+    data = load_tractate_data(f"data/{tractate.lower()}.json")
 
     start = data["daf_range"]["start"]
     end = data["daf_range"]["end"]
 
-    print(f"[INFO] Processing full Berakhot: {start} → {end}")
+    print(f"[INFO] Processing full {tractate}: {start} → {end}")
 
-    return process_daf_range(f"{start}a", f"{end}a")
+    return process_daf_range(f"{start}a", f"{end}a", tractate)
 
 ================================================================================
 FILE: utils/berakhot_processor.py
 ================================================================================
+
+# =========================
+# FILE: utils/berakhot_processor.py
+# =========================
 
 import time
 from utils.file_manager import (
@@ -909,30 +853,31 @@ from utils.file_manager import (
 )
 
 from api.sefaria_client import fetch_daf_data
+from utils.constants import DEFAULT_TRACTATE
 
 
-def process_single_daf(daf: str) -> dict:
+def process_single_daf(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
     """
     Full pipeline: fetch → save raw → process → save processed
+    Default = Berakhot (backward compatible)
     """
 
-    print(f"\n[PROCESS] Starting daf {daf}")
+    print(f"\n[PROCESS] Starting {tractate} {daf}")
 
-    raw = fetch_daf_data(daf)
+    raw = fetch_daf_data(daf, tractate)
 
-    # IMPORTANT DEBUG CHECK
     if not raw or (raw.get("text") == [] and raw.get("he") == []):
         print(f"[WARNING] Empty or invalid data returned for {daf}")
         print(f"[DEBUG KEYS] {list(raw.keys())}")
-        save_raw_response(daf, raw)
+        save_raw_response(daf, raw, tractate)
         return None
 
-    save_raw_response(daf, raw)
+    save_raw_response(daf, raw, tractate)
     print(f"[OK] Raw saved: {daf}")
 
     processed = process_raw_to_structured(raw)
 
-    save_processed(daf, processed)
+    save_processed(daf, processed, tractate)
     print(f"[OK] Processed saved: {daf}")
 
     time.sleep(0.5)
@@ -941,67 +886,40 @@ def process_single_daf(daf: str) -> dict:
 
 
 def process_raw_to_structured(raw: dict) -> dict:
-    """
-    Normalize Sefaria output across possible formats.
-    """
-
     return {
         "ref": raw.get("ref"),
         "heRef": raw.get("heRef"),
-
-        # robust extraction (Sefaria is inconsistent)
         "english": extract_english(raw),
         "hebrew": extract_hebrew(raw),
-
         "debug_keys": list(raw.keys()) if isinstance(raw, dict) else []
     }
 
 
 def extract_english(raw: dict):
-    """
-    Try multiple possible Sefaria formats.
-    """
-
     if not isinstance(raw, dict):
         return []
-
-    return (
-        raw.get("text")
-        or raw.get("texts")
-        or raw.get("english")
-        or []
-    )
+    return raw.get("text") or raw.get("texts") or raw.get("english") or []
 
 
 def extract_hebrew(raw: dict):
-    """
-    Try multiple possible Hebrew formats.
-    """
-
     if not isinstance(raw, dict):
         return []
-
-    return (
-        raw.get("he")
-        or raw.get("heText")
-        or raw.get("hebrew")
-        or []
-    )
+    return raw.get("he") or raw.get("heText") or raw.get("hebrew") or []
 
 
-def process_daf_if_missing(daf: str) -> dict:
+def process_daf_if_missing(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
     """
     Use cached raw if available, otherwise fetch.
     """
 
-    existing = load_raw_response(daf)
+    existing = load_raw_response(daf, tractate)
 
     if existing:
         print(f"[CACHE] Using existing raw for {daf}")
         return process_raw_to_structured(existing)
 
     print(f"[FETCH] No cache for {daf}")
-    return process_single_daf(daf)
+    return process_single_daf(daf, tractate)
 
 ================================================================================
 FILE: utils/file_utils.py
@@ -1031,6 +949,10 @@ def save_json(file_path: str, data: dict) -> None:
 FILE: utils/file_manager.py
 ================================================================================
 
+# =========================
+# FILE: utils/file_manager.py
+# =========================
+
 import json
 import os
 from utils.constants import (
@@ -1038,19 +960,24 @@ from utils.constants import (
     PROCESSED_DIR,
     RAW_FILE_PREFIX,
     RAW_FILE_SUFFIX,
-    PROCESSED_FILE_SUFFIX
+    PROCESSED_FILE_SUFFIX,
+    DEFAULT_TRACTATE
 )
 
 
-def ensure_dirs() -> None:
+def ensure_dirs():
     os.makedirs(RAW_DIR, exist_ok=True)
     os.makedirs(PROCESSED_DIR, exist_ok=True)
 
 
-def save_raw_response(daf: str, data: dict) -> str:
+def _prefix(tractate: str) -> str:
+    return f"{tractate.lower()}_" if tractate else RAW_FILE_PREFIX
+
+
+def save_raw_response(daf: str, data: dict, tractate: str = DEFAULT_TRACTATE) -> str:
     ensure_dirs()
 
-    filename = f"{RAW_FILE_PREFIX}{daf.lower()}{RAW_FILE_SUFFIX}"
+    filename = f"{_prefix(tractate)}{daf.lower()}{RAW_FILE_SUFFIX}"
     path = os.path.join(RAW_DIR, filename)
 
     with open(path, "w", encoding="utf-8") as f:
@@ -1059,12 +986,12 @@ def save_raw_response(daf: str, data: dict) -> str:
     return path
 
 
-def load_raw_response(daf: str) -> dict:
+def load_raw_response(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
     ensure_dirs()
 
     path = os.path.join(
         RAW_DIR,
-        f"{RAW_FILE_PREFIX}{daf.lower()}{RAW_FILE_SUFFIX}"
+        f"{_prefix(tractate)}{daf.lower()}{RAW_FILE_SUFFIX}"
     )
 
     if not os.path.exists(path):
@@ -1074,12 +1001,12 @@ def load_raw_response(daf: str) -> dict:
         return json.load(f)
 
 
-def save_processed(daf: str, data: dict) -> str:
+def save_processed(daf: str, data: dict, tractate: str = DEFAULT_TRACTATE) -> str:
     ensure_dirs()
 
     path = os.path.join(
         PROCESSED_DIR,
-        f"{RAW_FILE_PREFIX}{daf.lower()}{PROCESSED_FILE_SUFFIX}"
+        f"{_prefix(tractate)}{daf.lower()}{PROCESSED_FILE_SUFFIX}"
     )
 
     with open(path, "w", encoding="utf-8") as f:
@@ -1100,17 +1027,18 @@ FILE: api/sefaria_client.py
 import requests
 from utils.constants import (
     SEFARIA_BASE_URL,
-    TRACTATE_BERAKHOT,
+    DEFAULT_TRACTATE,
     API_TIMEOUT
 )
 
 
-def fetch_daf_data(daf: str) -> dict:
+def fetch_daf_data(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
     """
     Fetch clean Sefaria daf data.
+    Default = Berakhot (backward compatible)
     """
 
-    ref = f"{TRACTATE_BERAKHOT}.{daf}"
+    ref = f"{tractate}.{daf}"
     url = f"{SEFARIA_BASE_URL}/{ref}"
 
     params = {
@@ -1162,18 +1090,24 @@ def validate_daf_input(daf_input: str, start_daf: int, end_daf: int) -> bool:
 FILE: link_getter/link_service.py
 ================================================================================
 
+# =========================
+# FILE: link_getter/link_service.py
+# =========================
+
 from link_getter.json_reader import load_tractate_data
 from link_getter.validator import validate_daf_input
 from link_getter.link_builder import (
     build_sefaria_link,
     build_sefaria_api_link
 )
+from utils.constants import DEFAULT_TRACTATE
 
 
 def generate_link(
     daf_input: str,
     json_path: str,
-    api: bool = False
+    api: bool = False,
+    tractate: str = DEFAULT_TRACTATE
 ) -> str:
 
     tractate_data = load_tractate_data(json_path)

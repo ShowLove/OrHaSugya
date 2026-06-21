@@ -8,10 +8,25 @@ PROCESSED_DIR = DATA_DIR / "processed"
 
 DEFAULT_TRACTATE = "Berakhot"
 
-# BACKWARD COMPATIBILITY (fixes your crash)
+# BACKWARD COMPATIBILITY
 TRACTATE_BERAKHOT = DEFAULT_TRACTATE
 
-DATA_FILE_BERAKHOT = DATA_DIR / "berakhot.json"
+# NEW LOCATION
+TRACTATE_METADATA_DIR = DATA_DIR / "tractate_metadata"
+
+DATA_FILE_BERAKHOT = (
+    TRACTATE_METADATA_DIR / "berakhot.json"
+)
+
+
+def get_tractate_metadata_file(
+    tractate: str = DEFAULT_TRACTATE
+):
+    return (
+        TRACTATE_METADATA_DIR /
+        f"{tractate.lower().replace(' ', '_')}.json"
+    )
+
 
 SEFARIA_BASE_URL = "https://www.sefaria.org/api/texts"
 

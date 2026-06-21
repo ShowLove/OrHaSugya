@@ -3,9 +3,14 @@
 # =========================
 
 import time
+
 from link_getter.json_reader import load_tractate_data
 from utils.berakhot_processor import process_daf_if_missing
-from utils.constants import DEFAULT_TRACTATE
+
+from utils.constants import (
+    DEFAULT_TRACTATE,
+    get_tractate_metadata_file
+)
 
 
 def parse_daf(daf: str) -> int:
@@ -14,9 +19,11 @@ def parse_daf(daf: str) -> int:
 
 def build_daf_list(start: int, end: int) -> list:
     dafs = []
+
     for n in range(start, end + 1):
         dafs.append(f"{n}a")
         dafs.append(f"{n}b")
+
     return dafs
 
 
@@ -29,7 +36,9 @@ def process_daf_range(
     start_num = parse_daf(start)
     end_num = parse_daf(end)
 
-    data = load_tractate_data(f"data/{tractate.lower()}.json")
+    data = load_tractate_data(
+        str(get_tractate_metadata_file(tractate))
+    )
 
     min_daf = data["daf_range"]["start"]
     max_daf = data["daf_range"]["end"]
@@ -47,7 +56,11 @@ def process_daf_range(
 
         try:
             result = process_daf_if_missing(daf, tractate)
-            results.append({"daf": daf, "data": result})
+            results.append({
+                "daf": daf,
+                "data": result
+            })
+
         except Exception as e:
             print(f"[ERROR] Failed {daf}: {e}")
 
@@ -56,12 +69,24 @@ def process_daf_range(
     return results
 
 
-def process_full_book(tractate: str = DEFAULT_TRACTATE):
-    data = load_tractate_data(f"data/{tractate.lower()}.json")
+def process_full_book(
+    tractate: str = DEFAULT_TRACTATE
+):
+
+    data = load_tractate_data(
+        str(get_tractate_metadata_file(tractate))
+    )
 
     start = data["daf_range"]["start"]
     end = data["daf_range"]["end"]
 
-    print(f"[INFO] Processing full {tractate}: {start} → {end}")
+    print(
+        f"[INFO] Processing full {tractate}: "
+        f"{start} → {end}"
+    )
 
-    return process_daf_range(f"{start}a", f"{end}a", tractate)
+    return process_daf_range(
+        f"{start}a",
+        f"{end}a",
+        tractate
+    )
