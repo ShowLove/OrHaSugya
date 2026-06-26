@@ -35,6 +35,7 @@ def display_test_menu():
     print("4. Process single daf")
     print("5. Process daf range")
     print("6. Get full tractate data")
+    print("7. Get full data for ALL tractates")
     print("0. Back")
 
 
@@ -80,6 +81,42 @@ def select_tractate():
     print(
         f"\n[OK] Current tractate: {selected_tractate}"
     )
+
+
+def process_all_tractates():
+
+    tractates = get_available_tractates()
+
+    if not tractates:
+        print("[ERROR] No tractate metadata files found.")
+        return
+
+    print("\n=== Processing ALL Tractates ===\n")
+
+    for i, tractate in enumerate(
+        tractates,
+        start=1
+    ):
+        print(
+            f"\n[INFO] ({i}/{len(tractates)}) "
+            f"Processing full tractate: {tractate}"
+        )
+
+        try:
+            process_full_book(
+                tractate
+            )
+
+            print(
+                f"[OK] Completed full tractate: {tractate}"
+            )
+
+        except Exception as e:
+            print(
+                f"[ERROR] Failed full tractate {tractate}: {e}"
+            )
+
+    print("\n[OK] Finished processing all tractates.")
 
 
 def run_test_menu():
@@ -150,6 +187,20 @@ def run_test_menu():
             process_full_book(
                 current_tractate
             )
+
+        elif option == "7":
+
+            confirm = input(
+                "\nThis will process every tractate metadata file. Continue? (y/n): "
+            ).strip().lower()
+
+            if confirm == "y":
+
+                process_all_tractates()
+
+            else:
+
+                print("[CANCELLED] Did not process all tractates.")
 
         elif option == "0":
 

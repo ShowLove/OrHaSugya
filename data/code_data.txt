@@ -16,6 +16,7 @@ git/
         range_processor.py
         berakhot_processor.py
         file_utils.py
+        app_state.py
         file_manager.py
     api/
         __init__.py
@@ -29,7 +30,7 @@ git/
 
 ================================================================================
 
-Generated: 2026-06-26 13:19:25.864530
+Generated: 2026-06-26 14:00:10.821196
 Root: /Users/carlosgarzon/Desktop/Torah/Or HaSugya - Mafteach HaTalmud /git
 Mode: LLM-clean export (no data/json/cache files)
 
@@ -154,6 +155,10 @@ FILE: main.py
 
 from test.test_menu import run_test_menu
 
+from utils.app_state import (
+    get_current_tractate
+)
+
 from utils.export_bundle import (
     export_processed_to_jsonl
 )
@@ -164,10 +169,14 @@ from utils.codebase_bundler import (
 
 
 def display_menu():
+
+    current_tractate = get_current_tractate()
+
     print("\n=== Half-Daf System ===\n")
+    print(f"Current tractate: {current_tractate}\n")
 
     print("1. Development Tools")
-    print("2. Export processed tractate as JSONL")
+    print("2. Export current tractate processed data as JSONL")
     print("3. Export FULL codebase (for ChatGPT)")
 
 
@@ -187,8 +196,10 @@ def main():
 
         elif option == "2":
 
+            current_tractate = get_current_tractate()
+
             print(
-                "\n[INFO] Exporting processed tractate as JSONL..."
+                f"\n[INFO] Exporting processed {current_tractate} data as JSONL..."
             )
 
             path = export_processed_to_jsonl()
@@ -242,21 +253,75 @@ from utils.range_processor import (
     process_full_book
 )
 
+from utils.app_state import (
+    get_current_tractate,
+    set_current_tractate
+)
+
 from utils.constants import (
-    DATA_FILE_BERAKHOT
+    get_available_tractates,
+    get_tractate_metadata_file
 )
 
 
 def display_test_menu():
 
-    print("\n=== Development Tools ===\n")
+    current_tractate = get_current_tractate()
 
-    print("1. Generate Sefaria API link")
-    print("2. Generate Sefaria link")
-    print("3. Process single daf")
-    print("4. Process daf range (Berakhot)")
-    print("5. Get full Berakhot data")
+    print("\n=== Development Tools ===\n")
+    print(f"Current tractate: {current_tractate}\n")
+
+    print("1. Change tractate")
+    print("2. Generate Sefaria API link")
+    print("3. Generate Sefaria link")
+    print("4. Process single daf")
+    print("5. Process daf range")
+    print("6. Get full tractate data")
     print("0. Back")
+
+
+def select_tractate():
+
+    tractates = get_available_tractates()
+
+    if not tractates:
+        print("[ERROR] No tractate metadata files found.")
+        return
+
+    print("\n=== Available Tractates ===\n")
+
+    for i, tractate in enumerate(
+        tractates,
+        start=1
+    ):
+        print(f"{i}. {tractate}")
+
+    selection = input(
+        "\nSelect tractate: "
+    ).strip()
+
+    try:
+        selection = int(selection)
+
+    except ValueError:
+        print("Invalid selection")
+        return
+
+    if selection < 1 or selection > len(tractates):
+        print("Invalid selection")
+        return
+
+    selected_tractate = tractates[
+        selection - 1
+    ]
+
+    set_current_tractate(
+        selected_tractate
+    )
+
+    print(
+        f"\n[OK] Current tractate: {selected_tractate}"
+    )
 
 
 def run_test_menu():
@@ -269,7 +334,13 @@ def run_test_menu():
             "\nSelect option: "
         ).strip()
 
-        if option in ("1", "2"):
+        current_tractate = get_current_tractate()
+
+        if option == "1":
+
+            select_tractate()
+
+        elif option in ("2", "3"):
 
             daf_input = input(
                 "Enter daf (e.g. 3a): "
@@ -277,22 +348,30 @@ def run_test_menu():
 
             link = generate_link(
                 daf_input,
-                str(DATA_FILE_BERAKHOT),
-                api=(option == "1")
+                str(
+                    get_tractate_metadata_file(
+                        current_tractate
+                    )
+                ),
+                api=(option == "2"),
+                tractate=current_tractate
             )
 
             print("\nGenerated:")
             print(link)
 
-        elif option == "3":
+        elif option == "4":
 
             daf = input(
                 "Enter daf: "
             ).strip()
 
-            process_single_daf(daf)
+            process_single_daf(
+                daf,
+                current_tractate
+            )
 
-        elif option == "4":
+        elif option == "5":
 
             start = input(
                 "Start daf (e.g. 4a): "
@@ -304,12 +383,15 @@ def run_test_menu():
 
             process_daf_range(
                 start,
-                end
+                end,
+                current_tractate
             )
 
-        elif option == "5":
+        elif option == "6":
 
-            process_full_book()
+            process_full_book(
+                current_tractate
+            )
 
         elif option == "0":
 
@@ -487,15 +569,30 @@ DATA_DIR = ROOT_DIR / "data"
 
 DEFAULT_TRACTATE = "Berakhot"
 
-# backward compatibility
-TRACTATE_BERAKHOT = DEFAULT_TRACTATE
+# ==================================================
+# METADATA
+# ==================================================
 
-# metadata
 TRACTATE_METADATA_DIR = DATA_DIR / "tractate_metadata"
 
-DATA_FILE_BERAKHOT = (
-    TRACTATE_METADATA_DIR / "berakhot.json"
-)
+
+def normalize_tractate_name(tractate: str) -> str:
+    return tractate.lower().replace(" ", "_")
+
+
+def display_tractate_name(filename: str) -> str:
+    return filename.replace("_", " ").title()
+
+
+def get_available_tractates() -> list[str]:
+    files = sorted(
+        TRACTATE_METADATA_DIR.glob("*.json")
+    )
+
+    return [
+        display_tractate_name(f.stem)
+        for f in files
+    ]
 
 
 def get_tractate_metadata_file(
@@ -503,9 +600,16 @@ def get_tractate_metadata_file(
 ):
     return (
         TRACTATE_METADATA_DIR /
-        f"{tractate.lower().replace(' ', '_')}.json"
+        f"{normalize_tractate_name(tractate)}.json"
     )
 
+
+# backward compatibility
+TRACTATE_BERAKHOT = DEFAULT_TRACTATE
+
+DATA_FILE_BERAKHOT = get_tractate_metadata_file(
+    DEFAULT_TRACTATE
+)
 
 # ==================================================
 # TRACTATE DATA FOLDERS
@@ -519,7 +623,7 @@ def get_tractate_dir(
 ):
     return (
         TRACTATE_DIR /
-        tractate.lower().replace(" ", "_")
+        normalize_tractate_name(tractate)
     )
 
 
@@ -547,7 +651,20 @@ RAW_FILE_SUFFIX = "_raw.json"
 PROCESSED_FILE_PREFIX = "berakhot_"
 PROCESSED_FILE_SUFFIX = "_processed.json"
 
-BUNDLE_OUTPUT_FILE = DATA_DIR / "berakhot_bundle.jsonl"
+
+def get_bundle_output_file(
+    tractate: str = DEFAULT_TRACTATE
+):
+    return (
+        DATA_DIR /
+        f"{normalize_tractate_name(tractate)}_bundle.jsonl"
+    )
+
+
+BUNDLE_OUTPUT_FILE = get_bundle_output_file(
+    DEFAULT_TRACTATE
+)
+
 CODEBASE_OUTPUT_FILE = DATA_DIR / "code_data.txt"
 
 DEFAULT_DELAY = 0.5
@@ -560,40 +677,87 @@ FILE: utils/export_bundle.py
 
 import os
 import json
-from utils.constants import PROCESSED_DIR, BUNDLE_OUTPUT_FILE
+
+from utils.app_state import (
+    get_current_tractate
+)
+
+from utils.constants import (
+    get_processed_dir,
+    get_bundle_output_file
+)
 
 
-def export_processed_to_jsonl(output_file=None):
+def export_processed_to_jsonl(
+    tractate: str | None = None,
+    output_file=None
+):
     """
-    Combine all processed files into a single JSONL file.
+    Combine all processed files for the selected tractate
+    into a single JSONL file.
     """
 
-    output_file = output_file or BUNDLE_OUTPUT_FILE
+    if tractate is None:
+        tractate = get_current_tractate()
 
-    files = sorted(os.listdir(PROCESSED_DIR))
+    processed_dir = get_processed_dir(
+        tractate
+    )
 
-    with open(output_file, "w", encoding="utf-8") as out:
+    output_file = (
+        output_file or
+        get_bundle_output_file(tractate)
+    )
+
+    if not processed_dir.exists():
+        raise FileNotFoundError(
+            f"Processed directory does not exist: {processed_dir}"
+        )
+
+    files = sorted(
+        os.listdir(processed_dir)
+    )
+
+    with open(
+        output_file,
+        "w",
+        encoding="utf-8"
+    ) as out:
 
         for file in files:
+
             if not file.endswith("_processed.json"):
                 continue
 
-            path = os.path.join(PROCESSED_DIR, file)
+            path = processed_dir / file
 
-            with open(path, "r", encoding="utf-8") as f:
+            with open(
+                path,
+                "r",
+                encoding="utf-8"
+            ) as f:
                 data = json.load(f)
 
-                daf = file.replace("berakhot_", "").replace("_processed.json", "")
+            daf = file.replace(
+                "_processed.json",
+                ""
+            )
 
-                record = {
-                    "daf": daf,
-                    "ref": data.get("ref"),
-                    "heRef": data.get("heRef"),
-                    "english": data.get("english", []),
-                    "hebrew": data.get("hebrew", [])
-                }
+            record = {
+                "tractate": tractate,
+                "daf": daf,
+                "ref": data.get("ref"),
+                "heRef": data.get("heRef"),
+                "english": data.get("english", []),
+                "hebrew": data.get("hebrew", [])
+            }
 
-                out.write(json.dumps(record, ensure_ascii=False) + "\n")
+            out.write(
+                json.dumps(
+                    record,
+                    ensure_ascii=False
+                ) + "\n"
+            )
 
     return str(output_file)
 
@@ -926,10 +1090,16 @@ FILE: utils/range_processor.py
 import time
 
 from link_getter.json_reader import load_tractate_data
-from utils.berakhot_processor import process_daf_if_missing
+
+from utils.berakhot_processor import (
+    process_daf_if_missing
+)
+
+from utils.app_state import (
+    get_current_tractate
+)
 
 from utils.constants import (
-    DEFAULT_TRACTATE,
     get_tractate_metadata_file
 )
 
@@ -951,14 +1121,21 @@ def build_daf_list(start: int, end: int) -> list:
 def process_daf_range(
     start: str,
     end: str,
-    tractate: str = DEFAULT_TRACTATE
+    tractate: str | None = None
 ) -> list:
+
+    if tractate is None:
+        tractate = get_current_tractate()
 
     start_num = parse_daf(start)
     end_num = parse_daf(end)
 
     data = load_tractate_data(
-        str(get_tractate_metadata_file(tractate))
+        str(
+            get_tractate_metadata_file(
+                tractate
+            )
+        )
     )
 
     min_daf = data["daf_range"]["start"]
@@ -968,15 +1145,28 @@ def process_daf_range(
         print("[ERROR] Range out of bounds")
         return []
 
-    dafs = build_daf_list(start_num, end_num)
+    dafs = build_daf_list(
+        start_num,
+        end_num
+    )
 
     results = []
 
-    for i, daf in enumerate(dafs, start=1):
-        print(f"[INFO] ({i}/{len(dafs)}) Processing {tractate} {daf}")
+    for i, daf in enumerate(
+        dafs,
+        start=1
+    ):
+        print(
+            f"[INFO] ({i}/{len(dafs)}) "
+            f"Processing {tractate} {daf}"
+        )
 
         try:
-            result = process_daf_if_missing(daf, tractate)
+            result = process_daf_if_missing(
+                daf,
+                tractate
+            )
+
             results.append({
                 "daf": daf,
                 "data": result
@@ -991,11 +1181,18 @@ def process_daf_range(
 
 
 def process_full_book(
-    tractate: str = DEFAULT_TRACTATE
+    tractate: str | None = None
 ):
 
+    if tractate is None:
+        tractate = get_current_tractate()
+
     data = load_tractate_data(
-        str(get_tractate_metadata_file(tractate))
+        str(
+            get_tractate_metadata_file(
+                tractate
+            )
+        )
     )
 
     start = data["daf_range"]["start"]
@@ -1021,38 +1218,79 @@ FILE: utils/berakhot_processor.py
 # =========================
 
 import time
+
 from utils.file_manager import (
     save_raw_response,
     load_raw_response,
     save_processed,
 )
 
-from api.sefaria_client import fetch_daf_data
-from utils.constants import DEFAULT_TRACTATE
+from api.sefaria_client import (
+    fetch_daf_data
+)
+
+from utils.app_state import (
+    get_current_tractate
+)
 
 
-def process_single_daf(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
+def process_single_daf(
+    daf: str,
+    tractate: str | None = None
+) -> dict:
     """
-    Full pipeline: fetch → save raw → process → save processed
-    Default = Berakhot (backward compatible)
+    Full pipeline: fetch → save raw → process → save processed.
+    Defaults to the currently selected tractate.
     """
+
+    if tractate is None:
+        tractate = get_current_tractate()
 
     print(f"\n[PROCESS] Starting {tractate} {daf}")
 
-    raw = fetch_daf_data(daf, tractate)
+    raw = fetch_daf_data(
+        daf,
+        tractate
+    )
 
-    if not raw or (raw.get("text") == [] and raw.get("he") == []):
-        print(f"[WARNING] Empty or invalid data returned for {daf}")
-        print(f"[DEBUG KEYS] {list(raw.keys())}")
-        save_raw_response(daf, raw, tractate)
+    if not raw or (
+        raw.get("text") == [] and
+        raw.get("he") == []
+    ):
+        print(
+            f"[WARNING] Empty or invalid data returned for {daf}"
+        )
+
+        print(
+            f"[DEBUG KEYS] {list(raw.keys())}"
+        )
+
+        save_raw_response(
+            daf,
+            raw,
+            tractate
+        )
+
         return None
 
-    save_raw_response(daf, raw, tractate)
+    save_raw_response(
+        daf,
+        raw,
+        tractate
+    )
+
     print(f"[OK] Raw saved: {daf}")
 
-    processed = process_raw_to_structured(raw)
+    processed = process_raw_to_structured(
+        raw
+    )
 
-    save_processed(daf, processed, tractate)
+    save_processed(
+        daf,
+        processed,
+        tractate
+    )
+
     print(f"[OK] Processed saved: {daf}")
 
     time.sleep(0.5)
@@ -1073,28 +1311,59 @@ def process_raw_to_structured(raw: dict) -> dict:
 def extract_english(raw: dict):
     if not isinstance(raw, dict):
         return []
-    return raw.get("text") or raw.get("texts") or raw.get("english") or []
+
+    return (
+        raw.get("text") or
+        raw.get("texts") or
+        raw.get("english") or
+        []
+    )
 
 
 def extract_hebrew(raw: dict):
     if not isinstance(raw, dict):
         return []
-    return raw.get("he") or raw.get("heText") or raw.get("hebrew") or []
+
+    return (
+        raw.get("he") or
+        raw.get("heText") or
+        raw.get("hebrew") or
+        []
+    )
 
 
-def process_daf_if_missing(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
+def process_daf_if_missing(
+    daf: str,
+    tractate: str | None = None
+) -> dict:
     """
     Use cached raw if available, otherwise fetch.
+    Defaults to the currently selected tractate.
     """
 
-    existing = load_raw_response(daf, tractate)
+    if tractate is None:
+        tractate = get_current_tractate()
+
+    existing = load_raw_response(
+        daf,
+        tractate
+    )
 
     if existing:
-        print(f"[CACHE] Using existing raw for {daf}")
-        return process_raw_to_structured(existing)
+        print(
+            f"[CACHE] Using existing raw for {tractate} {daf}"
+        )
 
-    print(f"[FETCH] No cache for {daf}")
-    return process_single_daf(daf, tractate)
+        return process_raw_to_structured(
+            existing
+        )
+
+    print(f"[FETCH] No cache for {tractate} {daf}")
+
+    return process_single_daf(
+        daf,
+        tractate
+    )
 
 ================================================================================
 FILE: utils/file_utils.py
@@ -1119,6 +1388,33 @@ def load_json(file_path: str) -> dict:
 def save_json(file_path: str, data: dict) -> None:
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+================================================================================
+FILE: utils/app_state.py
+================================================================================
+
+# =========================
+# FILE: utils/app_state.py
+# =========================
+
+from utils.constants import DEFAULT_TRACTATE
+
+
+_current_tractate = DEFAULT_TRACTATE
+
+
+def get_current_tractate() -> str:
+    return _current_tractate
+
+
+def set_current_tractate(tractate: str) -> None:
+    global _current_tractate
+    _current_tractate = tractate
+
+
+def reset_current_tractate() -> None:
+    global _current_tractate
+    _current_tractate = DEFAULT_TRACTATE
 
 ================================================================================
 FILE: utils/file_manager.py
