@@ -3,6 +3,9 @@
 git/
     README.md
     main.py
+    test/
+        __init__.py
+        test_menu.py
     utils/
         codebase_bundler.py
         constants.py
@@ -26,7 +29,7 @@ git/
 
 ================================================================================
 
-Generated: 2026-06-26 07:07:54.359431
+Generated: 2026-06-26 13:19:25.864530
 Root: /Users/carlosgarzon/Desktop/Torah/Or HaSugya - Mafteach HaTalmud /git
 Mode: LLM-clean export (no data/json/cache files)
 
@@ -149,74 +152,176 @@ Now, you can safely manage and install Python packages without encountering the 
 FILE: main.py
 ================================================================================
 
-from link_getter.link_service import generate_link
-from utils.berakhot_processor import process_single_daf
-from utils.range_processor import (
-    process_daf_range,
-    process_full_book
-)
-from utils.export_bundle import export_processed_to_jsonl
-from utils.codebase_bundler import export_codebase_bundle
+from test.test_menu import run_test_menu
 
-from utils.constants import DATA_FILE_BERAKHOT
+from utils.export_bundle import (
+    export_processed_to_jsonl
+)
+
+from utils.codebase_bundler import (
+    export_codebase_bundle
+)
 
 
 def display_menu():
     print("\n=== Half-Daf System ===\n")
+
+    print("1. Development Tools")
+    print("2. Export processed tractate as JSONL")
+    print("3. Export FULL codebase (for ChatGPT)")
+
+
+def main():
+
+    while True:
+
+        display_menu()
+
+        option = input(
+            "\nSelect option: "
+        ).strip()
+
+        if option == "1":
+
+            run_test_menu()
+
+        elif option == "2":
+
+            print(
+                "\n[INFO] Exporting processed tractate as JSONL..."
+            )
+
+            path = export_processed_to_jsonl()
+
+            print(
+                f"[OK] Export complete: {path}"
+            )
+
+        elif option == "3":
+
+            print(
+                "\n[INFO] Exporting CLEAN codebase bundle (LLM-ready)..."
+            )
+
+            path = export_codebase_bundle()
+
+            print(
+                f"[OK] Clean codebase exported: {path}"
+            )
+
+        else:
+
+            print("Invalid option")
+
+        print()
+
+
+if __name__ == "__main__":
+    main()
+
+================================================================================
+FILE: test/__init__.py
+================================================================================
+
+# test package
+
+================================================================================
+FILE: test/test_menu.py
+================================================================================
+
+from link_getter.link_service import (
+    generate_link
+)
+
+from utils.berakhot_processor import (
+    process_single_daf
+)
+
+from utils.range_processor import (
+    process_daf_range,
+    process_full_book
+)
+
+from utils.constants import (
+    DATA_FILE_BERAKHOT
+)
+
+
+def display_test_menu():
+
+    print("\n=== Development Tools ===\n")
+
     print("1. Generate Sefaria API link")
     print("2. Generate Sefaria link")
     print("3. Process single daf")
     print("4. Process daf range (Berakhot)")
     print("5. Get full Berakhot data")
-    print("6. Export processed data (JSONL)")
-    print("7. Export FULL codebase (for ChatGPT)")
+    print("0. Back")
 
 
-def main():
+def run_test_menu():
 
-    display_menu()
-    option = input("\nSelect option: ").strip()
+    while True:
 
-    if option in ("1", "2"):
-        daf_input = input("Enter daf (e.g. 3a): ").strip()
+        display_test_menu()
 
-        link = generate_link(
-            daf_input,
-            str(DATA_FILE_BERAKHOT),
-            api=(option == "1")
+        option = input(
+            "\nSelect option: "
+        ).strip()
+
+        if option in ("1", "2"):
+
+            daf_input = input(
+                "Enter daf (e.g. 3a): "
+            ).strip()
+
+            link = generate_link(
+                daf_input,
+                str(DATA_FILE_BERAKHOT),
+                api=(option == "1")
+            )
+
+            print("\nGenerated:")
+            print(link)
+
+        elif option == "3":
+
+            daf = input(
+                "Enter daf: "
+            ).strip()
+
+            process_single_daf(daf)
+
+        elif option == "4":
+
+            start = input(
+                "Start daf (e.g. 4a): "
+            ).strip()
+
+            end = input(
+                "End daf (e.g. 10a): "
+            ).strip()
+
+            process_daf_range(
+                start,
+                end
+            )
+
+        elif option == "5":
+
+            process_full_book()
+
+        elif option == "0":
+
+            return
+
+        else:
+
+            print("Invalid option")
+
+        input(
+            "\nPress Enter to continue..."
         )
-
-        print("\nGenerated:")
-        print(link)
-
-    elif option == "3":
-        daf = input("Enter daf: ").strip()
-        process_single_daf(daf)
-
-    elif option == "4":
-        start = input("Start daf (e.g. 4a): ").strip()
-        end = input("End daf (e.g. 10a): ").strip()
-        process_daf_range(start, end)
-
-    elif option == "5":
-        process_full_book()
-
-    elif option == "6":
-        print("\n[INFO] Exporting processed data to JSONL...")
-        path = export_processed_to_jsonl()
-        print(f"[OK] Export complete: {path}")
-
-    elif option == "7":
-        print("\n[INFO] Exporting CLEAN codebase bundle (LLM-ready)...")
-        path = export_codebase_bundle()
-        print(f"[OK] Clean codebase exported: {path}")
-
-    else:
-        print("Invalid option")
-
-
-if __name__ == "__main__":
-    main()
 
 ================================================================================
 FILE: utils/codebase_bundler.py

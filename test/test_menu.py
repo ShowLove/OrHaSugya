@@ -11,21 +11,75 @@ from utils.range_processor import (
     process_full_book
 )
 
+from utils.app_state import (
+    get_current_tractate,
+    set_current_tractate
+)
+
 from utils.constants import (
-    DATA_FILE_BERAKHOT
+    get_available_tractates,
+    get_tractate_metadata_file
 )
 
 
 def display_test_menu():
 
-    print("\n=== Development Tools ===\n")
+    current_tractate = get_current_tractate()
 
-    print("1. Generate Sefaria API link")
-    print("2. Generate Sefaria link")
-    print("3. Process single daf")
-    print("4. Process daf range (Berakhot)")
-    print("5. Get full Berakhot data")
+    print("\n=== Development Tools ===\n")
+    print(f"Current tractate: {current_tractate}\n")
+
+    print("1. Change tractate")
+    print("2. Generate Sefaria API link")
+    print("3. Generate Sefaria link")
+    print("4. Process single daf")
+    print("5. Process daf range")
+    print("6. Get full tractate data")
     print("0. Back")
+
+
+def select_tractate():
+
+    tractates = get_available_tractates()
+
+    if not tractates:
+        print("[ERROR] No tractate metadata files found.")
+        return
+
+    print("\n=== Available Tractates ===\n")
+
+    for i, tractate in enumerate(
+        tractates,
+        start=1
+    ):
+        print(f"{i}. {tractate}")
+
+    selection = input(
+        "\nSelect tractate: "
+    ).strip()
+
+    try:
+        selection = int(selection)
+
+    except ValueError:
+        print("Invalid selection")
+        return
+
+    if selection < 1 or selection > len(tractates):
+        print("Invalid selection")
+        return
+
+    selected_tractate = tractates[
+        selection - 1
+    ]
+
+    set_current_tractate(
+        selected_tractate
+    )
+
+    print(
+        f"\n[OK] Current tractate: {selected_tractate}"
+    )
 
 
 def run_test_menu():
@@ -38,7 +92,13 @@ def run_test_menu():
             "\nSelect option: "
         ).strip()
 
-        if option in ("1", "2"):
+        current_tractate = get_current_tractate()
+
+        if option == "1":
+
+            select_tractate()
+
+        elif option in ("2", "3"):
 
             daf_input = input(
                 "Enter daf (e.g. 3a): "
@@ -46,22 +106,30 @@ def run_test_menu():
 
             link = generate_link(
                 daf_input,
-                str(DATA_FILE_BERAKHOT),
-                api=(option == "1")
+                str(
+                    get_tractate_metadata_file(
+                        current_tractate
+                    )
+                ),
+                api=(option == "2"),
+                tractate=current_tractate
             )
 
             print("\nGenerated:")
             print(link)
 
-        elif option == "3":
+        elif option == "4":
 
             daf = input(
                 "Enter daf: "
             ).strip()
 
-            process_single_daf(daf)
+            process_single_daf(
+                daf,
+                current_tractate
+            )
 
-        elif option == "4":
+        elif option == "5":
 
             start = input(
                 "Start daf (e.g. 4a): "
@@ -73,12 +141,15 @@ def run_test_menu():
 
             process_daf_range(
                 start,
-                end
+                end,
+                current_tractate
             )
 
-        elif option == "5":
+        elif option == "6":
 
-            process_full_book()
+            process_full_book(
+                current_tractate
+            )
 
         elif option == "0":
 

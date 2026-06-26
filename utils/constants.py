@@ -6,15 +6,30 @@ DATA_DIR = ROOT_DIR / "data"
 
 DEFAULT_TRACTATE = "Berakhot"
 
-# backward compatibility
-TRACTATE_BERAKHOT = DEFAULT_TRACTATE
+# ==================================================
+# METADATA
+# ==================================================
 
-# metadata
 TRACTATE_METADATA_DIR = DATA_DIR / "tractate_metadata"
 
-DATA_FILE_BERAKHOT = (
-    TRACTATE_METADATA_DIR / "berakhot.json"
-)
+
+def normalize_tractate_name(tractate: str) -> str:
+    return tractate.lower().replace(" ", "_")
+
+
+def display_tractate_name(filename: str) -> str:
+    return filename.replace("_", " ").title()
+
+
+def get_available_tractates() -> list[str]:
+    files = sorted(
+        TRACTATE_METADATA_DIR.glob("*.json")
+    )
+
+    return [
+        display_tractate_name(f.stem)
+        for f in files
+    ]
 
 
 def get_tractate_metadata_file(
@@ -22,9 +37,16 @@ def get_tractate_metadata_file(
 ):
     return (
         TRACTATE_METADATA_DIR /
-        f"{tractate.lower().replace(' ', '_')}.json"
+        f"{normalize_tractate_name(tractate)}.json"
     )
 
+
+# backward compatibility
+TRACTATE_BERAKHOT = DEFAULT_TRACTATE
+
+DATA_FILE_BERAKHOT = get_tractate_metadata_file(
+    DEFAULT_TRACTATE
+)
 
 # ==================================================
 # TRACTATE DATA FOLDERS
@@ -38,7 +60,7 @@ def get_tractate_dir(
 ):
     return (
         TRACTATE_DIR /
-        tractate.lower().replace(" ", "_")
+        normalize_tractate_name(tractate)
     )
 
 
@@ -66,7 +88,20 @@ RAW_FILE_SUFFIX = "_raw.json"
 PROCESSED_FILE_PREFIX = "berakhot_"
 PROCESSED_FILE_SUFFIX = "_processed.json"
 
-BUNDLE_OUTPUT_FILE = DATA_DIR / "berakhot_bundle.jsonl"
+
+def get_bundle_output_file(
+    tractate: str = DEFAULT_TRACTATE
+):
+    return (
+        DATA_DIR /
+        f"{normalize_tractate_name(tractate)}_bundle.jsonl"
+    )
+
+
+BUNDLE_OUTPUT_FILE = get_bundle_output_file(
+    DEFAULT_TRACTATE
+)
+
 CODEBASE_OUTPUT_FILE = DATA_DIR / "code_data.txt"
 
 DEFAULT_DELAY = 0.5

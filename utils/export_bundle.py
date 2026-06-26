@@ -1,38 +1,85 @@
 import os
 import json
-from utils.constants import PROCESSED_DIR, BUNDLE_OUTPUT_FILE
+
+from utils.app_state import (
+    get_current_tractate
+)
+
+from utils.constants import (
+    get_processed_dir,
+    get_bundle_output_file
+)
 
 
-def export_processed_to_jsonl(output_file=None):
+def export_processed_to_jsonl(
+    tractate: str | None = None,
+    output_file=None
+):
     """
-    Combine all processed files into a single JSONL file.
+    Combine all processed files for the selected tractate
+    into a single JSONL file.
     """
 
-    output_file = output_file or BUNDLE_OUTPUT_FILE
+    if tractate is None:
+        tractate = get_current_tractate()
 
-    files = sorted(os.listdir(PROCESSED_DIR))
+    processed_dir = get_processed_dir(
+        tractate
+    )
 
-    with open(output_file, "w", encoding="utf-8") as out:
+    output_file = (
+        output_file or
+        get_bundle_output_file(tractate)
+    )
+
+    if not processed_dir.exists():
+        raise FileNotFoundError(
+            f"Processed directory does not exist: {processed_dir}"
+        )
+
+    files = sorted(
+        os.listdir(processed_dir)
+    )
+
+    with open(
+        output_file,
+        "w",
+        encoding="utf-8"
+    ) as out:
 
         for file in files:
+
             if not file.endswith("_processed.json"):
                 continue
 
-            path = os.path.join(PROCESSED_DIR, file)
+            path = processed_dir / file
 
-            with open(path, "r", encoding="utf-8") as f:
+            with open(
+                path,
+                "r",
+                encoding="utf-8"
+            ) as f:
                 data = json.load(f)
 
-                daf = file.replace("berakhot_", "").replace("_processed.json", "")
+            daf = file.replace(
+                "_processed.json",
+                ""
+            )
 
-                record = {
-                    "daf": daf,
-                    "ref": data.get("ref"),
-                    "heRef": data.get("heRef"),
-                    "english": data.get("english", []),
-                    "hebrew": data.get("hebrew", [])
-                }
+            record = {
+                "tractate": tractate,
+                "daf": daf,
+                "ref": data.get("ref"),
+                "heRef": data.get("heRef"),
+                "english": data.get("english", []),
+                "hebrew": data.get("hebrew", [])
+            }
 
-                out.write(json.dumps(record, ensure_ascii=False) + "\n")
+            out.write(
+                json.dumps(
+                    record,
+                    ensure_ascii=False
+                ) + "\n"
+            )
 
     return str(output_file)

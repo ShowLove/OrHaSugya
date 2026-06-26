@@ -1,5 +1,9 @@
 from test.test_menu import run_test_menu
 
+from utils.app_state import (
+    get_current_tractate
+)
+
 from utils.export_bundle import (
     export_processed_to_jsonl
 )
@@ -10,10 +14,14 @@ from utils.codebase_bundler import (
 
 
 def display_menu():
+
+    current_tractate = get_current_tractate()
+
     print("\n=== Half-Daf System ===\n")
+    print(f"Current tractate: {current_tractate}\n")
 
     print("1. Development Tools")
-    print("2. Export processed tractate as JSONL")
+    print("2. Export current tractate processed data as JSONL")
     print("3. Export FULL codebase (for ChatGPT)")
 
 
@@ -33,8 +41,10 @@ def main():
 
         elif option == "2":
 
+            current_tractate = get_current_tractate()
+
             print(
-                "\n[INFO] Exporting processed tractate as JSONL..."
+                f"\n[INFO] Exporting processed {current_tractate} data as JSONL..."
             )
 
             path = export_processed_to_jsonl()

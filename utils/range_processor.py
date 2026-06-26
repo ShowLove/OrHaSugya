@@ -5,10 +5,16 @@
 import time
 
 from link_getter.json_reader import load_tractate_data
-from utils.berakhot_processor import process_daf_if_missing
+
+from utils.berakhot_processor import (
+    process_daf_if_missing
+)
+
+from utils.app_state import (
+    get_current_tractate
+)
 
 from utils.constants import (
-    DEFAULT_TRACTATE,
     get_tractate_metadata_file
 )
 
@@ -30,14 +36,21 @@ def build_daf_list(start: int, end: int) -> list:
 def process_daf_range(
     start: str,
     end: str,
-    tractate: str = DEFAULT_TRACTATE
+    tractate: str | None = None
 ) -> list:
+
+    if tractate is None:
+        tractate = get_current_tractate()
 
     start_num = parse_daf(start)
     end_num = parse_daf(end)
 
     data = load_tractate_data(
-        str(get_tractate_metadata_file(tractate))
+        str(
+            get_tractate_metadata_file(
+                tractate
+            )
+        )
     )
 
     min_daf = data["daf_range"]["start"]
@@ -47,15 +60,28 @@ def process_daf_range(
         print("[ERROR] Range out of bounds")
         return []
 
-    dafs = build_daf_list(start_num, end_num)
+    dafs = build_daf_list(
+        start_num,
+        end_num
+    )
 
     results = []
 
-    for i, daf in enumerate(dafs, start=1):
-        print(f"[INFO] ({i}/{len(dafs)}) Processing {tractate} {daf}")
+    for i, daf in enumerate(
+        dafs,
+        start=1
+    ):
+        print(
+            f"[INFO] ({i}/{len(dafs)}) "
+            f"Processing {tractate} {daf}"
+        )
 
         try:
-            result = process_daf_if_missing(daf, tractate)
+            result = process_daf_if_missing(
+                daf,
+                tractate
+            )
+
             results.append({
                 "daf": daf,
                 "data": result
@@ -70,11 +96,18 @@ def process_daf_range(
 
 
 def process_full_book(
-    tractate: str = DEFAULT_TRACTATE
+    tractate: str | None = None
 ):
 
+    if tractate is None:
+        tractate = get_current_tractate()
+
     data = load_tractate_data(
-        str(get_tractate_metadata_file(tractate))
+        str(
+            get_tractate_metadata_file(
+                tractate
+            )
+        )
     )
 
     start = data["daf_range"]["start"]

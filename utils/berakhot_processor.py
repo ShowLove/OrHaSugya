@@ -3,38 +3,79 @@
 # =========================
 
 import time
+
 from utils.file_manager import (
     save_raw_response,
     load_raw_response,
     save_processed,
 )
 
-from api.sefaria_client import fetch_daf_data
-from utils.constants import DEFAULT_TRACTATE
+from api.sefaria_client import (
+    fetch_daf_data
+)
+
+from utils.app_state import (
+    get_current_tractate
+)
 
 
-def process_single_daf(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
+def process_single_daf(
+    daf: str,
+    tractate: str | None = None
+) -> dict:
     """
-    Full pipeline: fetch → save raw → process → save processed
-    Default = Berakhot (backward compatible)
+    Full pipeline: fetch → save raw → process → save processed.
+    Defaults to the currently selected tractate.
     """
+
+    if tractate is None:
+        tractate = get_current_tractate()
 
     print(f"\n[PROCESS] Starting {tractate} {daf}")
 
-    raw = fetch_daf_data(daf, tractate)
+    raw = fetch_daf_data(
+        daf,
+        tractate
+    )
 
-    if not raw or (raw.get("text") == [] and raw.get("he") == []):
-        print(f"[WARNING] Empty or invalid data returned for {daf}")
-        print(f"[DEBUG KEYS] {list(raw.keys())}")
-        save_raw_response(daf, raw, tractate)
+    if not raw or (
+        raw.get("text") == [] and
+        raw.get("he") == []
+    ):
+        print(
+            f"[WARNING] Empty or invalid data returned for {daf}"
+        )
+
+        print(
+            f"[DEBUG KEYS] {list(raw.keys())}"
+        )
+
+        save_raw_response(
+            daf,
+            raw,
+            tractate
+        )
+
         return None
 
-    save_raw_response(daf, raw, tractate)
+    save_raw_response(
+        daf,
+        raw,
+        tractate
+    )
+
     print(f"[OK] Raw saved: {daf}")
 
-    processed = process_raw_to_structured(raw)
+    processed = process_raw_to_structured(
+        raw
+    )
 
-    save_processed(daf, processed, tractate)
+    save_processed(
+        daf,
+        processed,
+        tractate
+    )
+
     print(f"[OK] Processed saved: {daf}")
 
     time.sleep(0.5)
@@ -55,25 +96,56 @@ def process_raw_to_structured(raw: dict) -> dict:
 def extract_english(raw: dict):
     if not isinstance(raw, dict):
         return []
-    return raw.get("text") or raw.get("texts") or raw.get("english") or []
+
+    return (
+        raw.get("text") or
+        raw.get("texts") or
+        raw.get("english") or
+        []
+    )
 
 
 def extract_hebrew(raw: dict):
     if not isinstance(raw, dict):
         return []
-    return raw.get("he") or raw.get("heText") or raw.get("hebrew") or []
+
+    return (
+        raw.get("he") or
+        raw.get("heText") or
+        raw.get("hebrew") or
+        []
+    )
 
 
-def process_daf_if_missing(daf: str, tractate: str = DEFAULT_TRACTATE) -> dict:
+def process_daf_if_missing(
+    daf: str,
+    tractate: str | None = None
+) -> dict:
     """
     Use cached raw if available, otherwise fetch.
+    Defaults to the currently selected tractate.
     """
 
-    existing = load_raw_response(daf, tractate)
+    if tractate is None:
+        tractate = get_current_tractate()
+
+    existing = load_raw_response(
+        daf,
+        tractate
+    )
 
     if existing:
-        print(f"[CACHE] Using existing raw for {daf}")
-        return process_raw_to_structured(existing)
+        print(
+            f"[CACHE] Using existing raw for {tractate} {daf}"
+        )
 
-    print(f"[FETCH] No cache for {daf}")
-    return process_single_daf(daf, tractate)
+        return process_raw_to_structured(
+            existing
+        )
+
+    print(f"[FETCH] No cache for {tractate} {daf}")
+
+    return process_single_daf(
+        daf,
+        tractate
+    )
