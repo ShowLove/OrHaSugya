@@ -10,26 +10,112 @@ DEFAULT_TRACTATE = "Berakhot"
 # METADATA
 # ==================================================
 
-TRACTATE_METADATA_DIR = DATA_DIR / "tractate_metadata"
+TRACTATE_METADATA_DIR = (
+    DATA_DIR / "tractate_metadata"
+)
 
 
-def normalize_tractate_name(tractate: str) -> str:
-    return tractate.lower().replace(" ", "_")
-
-
-def display_tractate_name(filename: str) -> str:
-    return filename.replace("_", " ").title()
-
-
-def get_available_tractates() -> list[str]:
-    files = sorted(
-        TRACTATE_METADATA_DIR.glob("*.json")
+def normalize_tractate_name(
+    tractate: str
+) -> str:
+    return (
+        tractate
+        .lower()
+        .replace(" ", "_")
     )
 
-    return [
-        display_tractate_name(f.stem)
-        for f in files
+
+def display_tractate_name(
+    filename: str
+) -> str:
+    return (
+        filename
+        .replace("_", " ")
+        .title()
+    )
+
+
+# ==================================================
+# TRADITIONAL SHAS ORDER
+# ==================================================
+
+TRACTATE_ORDER = [
+
+    "Berakhot",
+    "Shabbat",
+    "Eruvin",
+    "Pesachim",
+    "Shekalim",
+    "Yoma",
+    "Sukkah",
+    "Beitzah",
+    "Rosh Hashanah",
+    "Taanit",
+    "Megillah",
+    "Moed Katan",
+    "Chagigah",
+
+    "Yevamot",
+    "Ketubot",
+    "Nedarim",
+    "Nazir",
+    "Sotah",
+    "Gittin",
+    "Kiddushin",
+
+    "Bava Kamma",
+    "Bava Metzia",
+    "Bava Batra",
+    "Sanhedrin",
+    "Makkot",
+    "Shevuot",
+    "Avodah Zarah",
+    "Horayot",
+
+    "Zevachim",
+    "Menachot",
+    "Chullin",
+    "Bekhorot",
+    "Arakhin",
+    "Temurah",
+    "Keritot",
+    "Meilah",
+    "Kinnim",
+    "Tamid",
+    "Middot",
+
+    "Niddah"
+]
+
+
+def get_available_tractates():
+    """
+    Returns tractates in the traditional
+    order of Shas. If metadata exists for
+    additional tractates in the future,
+    they are appended alphabetically.
+    """
+
+    metadata = {
+        display_tractate_name(
+            f.stem
+        )
+        for f in TRACTATE_METADATA_DIR.glob(
+            "*.json"
+        )
+    }
+
+    ordered = [
+        tractate
+        for tractate in TRACTATE_ORDER
+        if tractate in metadata
     ]
+
+    remaining = sorted(
+        metadata - set(ordered)
+    )
+
+    return ordered + remaining
 
 
 def get_tractate_metadata_file(
@@ -41,18 +127,13 @@ def get_tractate_metadata_file(
     )
 
 
-# backward compatibility
-TRACTATE_BERAKHOT = DEFAULT_TRACTATE
+# ==================================================
+# TRACTATE DATA
+# ==================================================
 
-DATA_FILE_BERAKHOT = get_tractate_metadata_file(
-    DEFAULT_TRACTATE
+TRACTATE_DIR = (
+    DATA_DIR / "tractate"
 )
-
-# ==================================================
-# TRACTATE DATA FOLDERS
-# ==================================================
-
-TRACTATE_DIR = DATA_DIR / "tractate"
 
 
 def get_tractate_dir(
@@ -60,50 +141,119 @@ def get_tractate_dir(
 ):
     return (
         TRACTATE_DIR /
-        normalize_tractate_name(tractate)
+        normalize_tractate_name(
+            tractate
+        )
     )
 
 
 def get_raw_dir(
     tractate: str = DEFAULT_TRACTATE
 ):
-    return get_tractate_dir(tractate) / "raw"
+    return (
+        get_tractate_dir(
+            tractate
+        )
+        / "raw"
+    )
 
 
 def get_processed_dir(
     tractate: str = DEFAULT_TRACTATE
 ):
-    return get_tractate_dir(tractate) / "processed"
+    return (
+        get_tractate_dir(
+            tractate
+        )
+        / "processed"
+    )
 
 
-# backward compatibility
+# --------------------------------------------------
+# Backward compatibility
+# --------------------------------------------------
+
+TRACTATE_BERAKHOT = DEFAULT_TRACTATE
+
+DATA_FILE_BERAKHOT = (
+    get_tractate_metadata_file(
+        DEFAULT_TRACTATE
+    )
+)
+
 RAW_DIR = get_raw_dir()
 PROCESSED_DIR = get_processed_dir()
 
-SEFARIA_BASE_URL = "https://www.sefaria.org/api/texts"
 
-RAW_FILE_PREFIX = "berakhot_"
-RAW_FILE_SUFFIX = "_raw.json"
+# ==================================================
+# EXPORT BUNDLES
+# ==================================================
 
-PROCESSED_FILE_PREFIX = "berakhot_"
-PROCESSED_FILE_SUFFIX = "_processed.json"
+TRACTATE_EXPORT_BUNDLES_DIR = (
+    DATA_DIR /
+    "tractate_export_bundles"
+)
 
 
 def get_bundle_output_file(
     tractate: str = DEFAULT_TRACTATE
 ):
     return (
-        DATA_DIR /
+        TRACTATE_EXPORT_BUNDLES_DIR /
         f"{normalize_tractate_name(tractate)}_bundle.jsonl"
     )
 
 
-BUNDLE_OUTPUT_FILE = get_bundle_output_file(
-    DEFAULT_TRACTATE
+ALL_TRACTATES_BUNDLE_FILE = (
+    TRACTATE_EXPORT_BUNDLES_DIR /
+    "all_tractates_bundle.jsonl"
 )
 
-CODEBASE_OUTPUT_FILE = DATA_DIR / "code_data.txt"
+
+# --------------------------------------------------
+# Backward compatibility
+# --------------------------------------------------
+
+BUNDLE_OUTPUT_FILE = (
+    get_bundle_output_file(
+        DEFAULT_TRACTATE
+    )
+)
+
+
+# ==================================================
+# CODE EXPORT
+# ==================================================
+
+CODEBASE_OUTPUT_FILE = (
+    DATA_DIR /
+    "code_data.txt"
+)
+
+
+# ==================================================
+# API
+# ==================================================
+
+SEFARIA_BASE_URL = (
+    "https://www.sefaria.org/api/texts"
+)
+
+API_TIMEOUT = 10
 
 DEFAULT_DELAY = 0.5
+
 RANGE_DELAY = 0.75
-API_TIMEOUT = 10
+
+
+# ==================================================
+# FILE SUFFIXES
+# ==================================================
+
+RAW_FILE_PREFIX = "berakhot_"
+
+RAW_FILE_SUFFIX = "_raw.json"
+
+PROCESSED_FILE_PREFIX = "berakhot_"
+
+PROCESSED_FILE_SUFFIX = "_processed.json"

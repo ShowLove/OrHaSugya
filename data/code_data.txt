@@ -30,7 +30,7 @@ git/
 
 ================================================================================
 
-Generated: 2026-06-26 14:00:10.821196
+Generated: 2026-06-26 17:07:23.711843
 Root: /Users/carlosgarzon/Desktop/Torah/Or HaSugya - Mafteach HaTalmud /git
 Mode: LLM-clean export (no data/json/cache files)
 
@@ -160,7 +160,8 @@ from utils.app_state import (
 )
 
 from utils.export_bundle import (
-    export_processed_to_jsonl
+    export_processed_to_jsonl,
+    export_all_processed_to_jsonl
 )
 
 from utils.codebase_bundler import (
@@ -177,7 +178,8 @@ def display_menu():
 
     print("1. Development Tools")
     print("2. Export current tractate processed data as JSONL")
-    print("3. Export FULL codebase (for ChatGPT)")
+    print("3. Export ALL tractates processed data as JSONL")
+    print("4. Export FULL codebase (for ChatGPT)")
 
 
 def main():
@@ -209,6 +211,26 @@ def main():
             )
 
         elif option == "3":
+
+            confirm = input(
+                "\nThis will export processed data for ALL tractates. Continue? (y/n): "
+            ).strip().lower()
+
+            if confirm == "y":
+
+                paths = export_all_processed_to_jsonl()
+
+                print(
+                    f"\n[OK] Exported {len(paths)} tractate bundle(s)."
+                )
+
+            else:
+
+                print(
+                    "[CANCELLED] Did not export all tractates."
+                )
+
+        elif option == "4":
 
             print(
                 "\n[INFO] Exporting CLEAN codebase bundle (LLM-ready)..."
@@ -277,6 +299,7 @@ def display_test_menu():
     print("4. Process single daf")
     print("5. Process daf range")
     print("6. Get full tractate data")
+    print("7. Get full data for ALL tractates")
     print("0. Back")
 
 
@@ -322,6 +345,42 @@ def select_tractate():
     print(
         f"\n[OK] Current tractate: {selected_tractate}"
     )
+
+
+def process_all_tractates():
+
+    tractates = get_available_tractates()
+
+    if not tractates:
+        print("[ERROR] No tractate metadata files found.")
+        return
+
+    print("\n=== Processing ALL Tractates ===\n")
+
+    for i, tractate in enumerate(
+        tractates,
+        start=1
+    ):
+        print(
+            f"\n[INFO] ({i}/{len(tractates)}) "
+            f"Processing full tractate: {tractate}"
+        )
+
+        try:
+            process_full_book(
+                tractate
+            )
+
+            print(
+                f"[OK] Completed full tractate: {tractate}"
+            )
+
+        except Exception as e:
+            print(
+                f"[ERROR] Failed full tractate {tractate}: {e}"
+            )
+
+    print("\n[OK] Finished processing all tractates.")
 
 
 def run_test_menu():
@@ -392,6 +451,20 @@ def run_test_menu():
             process_full_book(
                 current_tractate
             )
+
+        elif option == "7":
+
+            confirm = input(
+                "\nThis will process every tractate metadata file. Continue? (y/n): "
+            ).strip().lower()
+
+            if confirm == "y":
+
+                process_all_tractates()
+
+            else:
+
+                print("[CANCELLED] Did not process all tractates.")
 
         elif option == "0":
 
@@ -573,18 +646,32 @@ DEFAULT_TRACTATE = "Berakhot"
 # METADATA
 # ==================================================
 
-TRACTATE_METADATA_DIR = DATA_DIR / "tractate_metadata"
+TRACTATE_METADATA_DIR = (
+    DATA_DIR / "tractate_metadata"
+)
 
 
-def normalize_tractate_name(tractate: str) -> str:
-    return tractate.lower().replace(" ", "_")
+def normalize_tractate_name(
+    tractate: str
+) -> str:
+    return (
+        tractate
+        .lower()
+        .replace(" ", "_")
+    )
 
 
-def display_tractate_name(filename: str) -> str:
-    return filename.replace("_", " ").title()
+def display_tractate_name(
+    filename: str
+) -> str:
+    return (
+        filename
+        .replace("_", " ")
+        .title()
+    )
 
 
-def get_available_tractates() -> list[str]:
+def get_available_tractates():
     files = sorted(
         TRACTATE_METADATA_DIR.glob("*.json")
     )
@@ -604,18 +691,13 @@ def get_tractate_metadata_file(
     )
 
 
-# backward compatibility
-TRACTATE_BERAKHOT = DEFAULT_TRACTATE
+# ==================================================
+# TRACTATE DATA
+# ==================================================
 
-DATA_FILE_BERAKHOT = get_tractate_metadata_file(
-    DEFAULT_TRACTATE
+TRACTATE_DIR = (
+    DATA_DIR / "tractate"
 )
-
-# ==================================================
-# TRACTATE DATA FOLDERS
-# ==================================================
-
-TRACTATE_DIR = DATA_DIR / "tractate"
 
 
 def get_tractate_dir(
@@ -623,53 +705,112 @@ def get_tractate_dir(
 ):
     return (
         TRACTATE_DIR /
-        normalize_tractate_name(tractate)
+        normalize_tractate_name(
+            tractate
+        )
     )
 
 
 def get_raw_dir(
     tractate: str = DEFAULT_TRACTATE
 ):
-    return get_tractate_dir(tractate) / "raw"
+    return (
+        get_tractate_dir(
+            tractate
+        )
+        / "raw"
+    )
 
 
 def get_processed_dir(
     tractate: str = DEFAULT_TRACTATE
 ):
-    return get_tractate_dir(tractate) / "processed"
+    return (
+        get_tractate_dir(
+            tractate
+        )
+        / "processed"
+    )
 
 
 # backward compatibility
+
+TRACTATE_BERAKHOT = DEFAULT_TRACTATE
+
+DATA_FILE_BERAKHOT = (
+    get_tractate_metadata_file(
+        DEFAULT_TRACTATE
+    )
+)
+
 RAW_DIR = get_raw_dir()
 PROCESSED_DIR = get_processed_dir()
 
-SEFARIA_BASE_URL = "https://www.sefaria.org/api/texts"
 
-RAW_FILE_PREFIX = "berakhot_"
-RAW_FILE_SUFFIX = "_raw.json"
+# ==================================================
+# EXPORT BUNDLES
+# ==================================================
 
-PROCESSED_FILE_PREFIX = "berakhot_"
-PROCESSED_FILE_SUFFIX = "_processed.json"
+TRACTATE_EXPORT_BUNDLES_DIR = (
+    DATA_DIR /
+    "tractate_export_bundles"
+)
 
 
 def get_bundle_output_file(
     tractate: str = DEFAULT_TRACTATE
 ):
     return (
-        DATA_DIR /
+        TRACTATE_EXPORT_BUNDLES_DIR /
         f"{normalize_tractate_name(tractate)}_bundle.jsonl"
     )
 
 
-BUNDLE_OUTPUT_FILE = get_bundle_output_file(
-    DEFAULT_TRACTATE
+# backward compatibility
+
+BUNDLE_OUTPUT_FILE = (
+    get_bundle_output_file(
+        DEFAULT_TRACTATE
+    )
 )
 
-CODEBASE_OUTPUT_FILE = DATA_DIR / "code_data.txt"
+
+# ==================================================
+# CODE EXPORT
+# ==================================================
+
+CODEBASE_OUTPUT_FILE = (
+    DATA_DIR /
+    "code_data.txt"
+)
+
+
+# ==================================================
+# API
+# ==================================================
+
+SEFARIA_BASE_URL = (
+    "https://www.sefaria.org/api/texts"
+)
+
+API_TIMEOUT = 10
 
 DEFAULT_DELAY = 0.5
+
 RANGE_DELAY = 0.75
-API_TIMEOUT = 10
+
+
+# ==================================================
+# FILE SUFFIXES
+# ==================================================
+
+RAW_FILE_PREFIX = "berakhot_"
+
+RAW_FILE_SUFFIX = "_raw.json"
+
+PROCESSED_FILE_PREFIX = "berakhot_"
+
+PROCESSED_FILE_SUFFIX = "_processed.json"
 
 ================================================================================
 FILE: utils/export_bundle.py
@@ -683,8 +824,10 @@ from utils.app_state import (
 )
 
 from utils.constants import (
+    get_available_tractates,
     get_processed_dir,
-    get_bundle_output_file
+    get_bundle_output_file,
+    TRACTATE_EXPORT_BUNDLES_DIR
 )
 
 
@@ -693,7 +836,7 @@ def export_processed_to_jsonl(
     output_file=None
 ):
     """
-    Combine all processed files for the selected tractate
+    Combine all processed files for one tractate
     into a single JSONL file.
     """
 
@@ -707,6 +850,11 @@ def export_processed_to_jsonl(
     output_file = (
         output_file or
         get_bundle_output_file(tractate)
+    )
+
+    TRACTATE_EXPORT_BUNDLES_DIR.mkdir(
+        parents=True,
+        exist_ok=True
     )
 
     if not processed_dir.exists():
@@ -760,6 +908,65 @@ def export_processed_to_jsonl(
             )
 
     return str(output_file)
+
+
+def export_all_processed_to_jsonl():
+    """
+    Export processed data for all available tractates.
+    Creates one JSONL bundle per tractate.
+    """
+
+    tractates = get_available_tractates()
+
+    if not tractates:
+        print("[ERROR] No tractate metadata files found.")
+        return []
+
+    exported_files = []
+
+    TRACTATE_EXPORT_BUNDLES_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    print("\n=== Exporting ALL Tractates to JSONL ===\n")
+
+    for i, tractate in enumerate(
+        tractates,
+        start=1
+    ):
+
+        print(
+            f"[INFO] ({i}/{len(tractates)}) "
+            f"Exporting {tractate}..."
+        )
+
+        try:
+            path = export_processed_to_jsonl(
+                tractate
+            )
+
+            exported_files.append(path)
+
+            print(
+                f"[OK] Exported: {path}"
+            )
+
+        except FileNotFoundError as e:
+            print(
+                f"[SKIP] {tractate}: {e}"
+            )
+
+        except Exception as e:
+            print(
+                f"[ERROR] Failed {tractate}: {e}"
+            )
+
+    print(
+        f"\n[OK] Finished exporting {len(exported_files)} tractate bundle(s)."
+    )
+
+    return exported_files
 
 ================================================================================
 FILE: utils/__init__.py

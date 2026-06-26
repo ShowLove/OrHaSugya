@@ -5,7 +5,8 @@ from utils.app_state import (
 )
 
 from utils.export_bundle import (
-    export_processed_to_jsonl
+    export_processed_to_jsonl,
+    export_all_processed_to_jsonl
 )
 
 from utils.codebase_bundler import (
@@ -22,7 +23,8 @@ def display_menu():
 
     print("1. Development Tools")
     print("2. Export current tractate processed data as JSONL")
-    print("3. Export FULL codebase (for ChatGPT)")
+    print("3. Export ALL tractates processed data as JSONL")
+    print("4. Export FULL codebase (for ChatGPT)")
 
 
 def main():
@@ -54,6 +56,26 @@ def main():
             )
 
         elif option == "3":
+
+            confirm = input(
+                "\nThis will export processed data for ALL tractates. Continue? (y/n): "
+            ).strip().lower()
+
+            if confirm == "y":
+
+                paths = export_all_processed_to_jsonl()
+
+                print(
+                    f"\n[OK] Exported {len(paths)} tractate bundle(s)."
+                )
+
+            else:
+
+                print(
+                    "[CANCELLED] Did not export all tractates."
+                )
+
+        elif option == "4":
 
             print(
                 "\n[INFO] Exporting CLEAN codebase bundle (LLM-ready)..."
