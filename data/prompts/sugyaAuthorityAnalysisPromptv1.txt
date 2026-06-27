@@ -1,0 +1,472 @@
+You are an expert in the structure of the Babylonian Talmud.
+
+You are given TWO files.
+
+FILE 1
+
+The previously reconstructed sugya boundaries.
+
+Example:
+
+berakhot_sugya_analysis_pass1.json
+
+FILE 2
+
+The original tractate data.
+
+Example:
+
+berakhot_bundle.jsonl
+
+The purpose of this analysis is NOT to redefine the sugyot.
+
+Instead, the purpose is to reconstruct the AUTHORITY STRUCTURE of each sugya and determine whether the source structure supports the proposed sugya boundaries.
+
+====================================================
+PRIMARY OBJECTIVE
+====================================================
+
+For every sugya:
+
+1. Collect every source cited.
+
+2. Determine how each source functions inside the argument.
+
+3. Determine which sources are structurally central.
+
+4. Determine whether the authority structure supports the existing sugya boundary.
+
+Do NOT modify sugya boundaries.
+
+Only evaluate them.
+
+====================================================
+SOURCE TYPES
+====================================================
+
+Identify every cited source.
+
+Possible source types include:
+
+Torah
+
+Neviim
+
+Ketuvim
+
+Mishnah
+
+Tosefta
+
+Baraita
+
+Earlier Amora
+
+Later Amora
+
+Named Rabbi
+
+Unnamed Rabbi
+
+Historical Event
+
+Ma'aseh
+
+Aggadah
+
+Practical Example
+
+Logical Principle
+
+Gezerah Shavah
+
+Kal VaChomer
+
+Binyan Av
+
+Heqesh
+
+Other Derashah
+
+Custom
+
+Halakhic Principle
+
+====================================================
+AUTHORITY RANK
+====================================================
+
+Every source receives ONE Authority Rank.
+
+Use this hierarchy.
+
+100
+
+Torah
+
+95
+
+Explicit Biblical Derivation
+
+90
+
+Mishnah
+
+85
+
+Tosefta
+
+80
+
+Baraita
+
+75
+
+Accepted Halakhic Principle
+
+70
+
+Early Amora
+
+65
+
+Later Amora
+
+60
+
+Named Sage
+
+55
+
+Anonymous Gemara
+
+50
+
+Logical Principle
+
+45
+
+Historical Incident
+
+40
+
+Aggadah
+
+35
+
+Illustration
+
+30
+
+Example
+
+20
+
+Narrative Detail
+
+10
+
+Tangential Reference
+
+Authority Rank measures normative authority only.
+
+====================================================
+STRUCTURAL CENTRALITY
+====================================================
+
+Separately assign Structural Centrality.
+
+100
+
+The sugya cannot exist without this source.
+
+80
+
+Major pillar of the discussion.
+
+60
+
+Frequently relied upon.
+
+40
+
+Supporting evidence.
+
+20
+
+Minor support.
+
+10
+
+Illustration only.
+
+Structural Centrality is NOT Authority Rank.
+
+A Baraita may be more structurally central than a Torah verse.
+
+====================================================
+SOURCE ROLE
+====================================================
+
+Every source receives ONE primary role.
+
+FOUNDATION
+
+QUESTION
+
+PROOF
+
+SUPPORT
+
+OBJECTION
+
+LIMITATION
+
+DISTINCTION
+
+RESOLUTION
+
+DIGRESSION
+
+BACKGROUND
+
+ILLUSTRATION
+
+PRACTICAL APPLICATION
+
+====================================================
+SOURCE DEPENDENCIES
+====================================================
+
+Determine whether each source depends upon another source.
+
+Examples:
+
+Baraita explains Mishnah.
+
+Amora explains Baraita.
+
+Verse supports Mishnah.
+
+Story illustrates Halakhah.
+
+Record only DIRECT dependency.
+
+Do not attempt to construct the full graph.
+
+====================================================
+CENTRAL SOURCE
+====================================================
+
+Choose ONE central source.
+
+This is NOT necessarily the highest authority.
+
+It is the source around which the largest portion of the sugya revolves.
+
+Explain why.
+
+====================================================
+BOUNDARY VALIDATION
+====================================================
+
+Evaluate the proposed sugya boundary.
+
+Options:
+
+SUPPORTED
+
+LIKELY SUPPORTED
+
+UNCERTAIN
+
+LIKELY INCORRECT
+
+INCORRECT
+
+Base this ONLY on source structure.
+
+====================================================
+INTERLEAVING
+====================================================
+
+If an embedded digression introduces temporary sources but later returns to the original authority structure:
+
+Do NOT promote the digression sources to central.
+
+Mark them as:
+
+DIGRESSION
+
+====================================================
+OUTPUT FORMAT
+====================================================
+
+Return ONE JSON object.
+
+Schema:
+
+{
+  "tractate": "...",
+  "analysis_version": 1,
+  "sugyot": [
+
+    {
+
+      "sugya_number": 1,
+
+      "start": {
+        "daf": "...",
+        "segment": ...
+      },
+
+      "end": {
+        "daf": "...",
+        "segment": ...
+      },
+
+      "boundary_validation": {
+
+        "assessment":
+          "SUPPORTED",
+
+        "confidence": 96,
+
+        "reason":
+          "Authority graph changes substantially."
+      },
+
+      "central_source": {
+
+        "citation": "...",
+
+        "type": "...",
+
+        "authority_rank": ...,
+
+        "structural_centrality": ...,
+
+        "reason":
+          "..."
+      },
+
+      "source_groups": [
+
+        {
+
+          "theme":
+            "...",
+
+          "sources": [
+
+            {
+
+              "citation": "...",
+
+              "type": "...",
+
+              "authority_rank": ...,
+
+              "structural_centrality": ...,
+
+              "role": "...",
+
+              "depends_on":
+                "...",
+
+              "supports":
+                "...",
+
+              "confidence": ...
+            }
+
+          ]
+
+        }
+
+      ],
+
+      "summary": {
+
+        "primary_question":
+          "...",
+
+        "primary_resolution":
+          "...",
+
+        "overall_confidence":
+          ...
+      }
+
+    }
+
+  ]
+}
+
+====================================================
+GROUPING RULES
+====================================================
+
+Do NOT produce one flat list of sources.
+
+Instead group sources into logical clusters.
+
+Examples:
+
+Biblical Foundations
+
+Mishnaic Foundations
+
+Baraitot
+
+Primary Amoraic Debate
+
+Supporting Proofs
+
+Secondary Proofs
+
+Aggadic Digression
+
+Practical Conclusions
+
+Create as few groups as necessary.
+
+====================================================
+KEEP THE JSON COMPACT
+====================================================
+
+Avoid long prose.
+
+Use concise explanations.
+
+One sentence per reason.
+
+One sentence per summary.
+
+This JSON will become the input to future analysis passes.
+
+====================================================
+DO NOT
+
+Do NOT include full quotations.
+
+Do NOT include long summaries.
+
+Do NOT build a complete dependency graph.
+
+Do NOT explain every opinion.
+
+Store only structural information.
+
+====================================================
+FINAL REVIEW
+
+Before producing the JSON:
+
+Perform a second pass.
+
+Check whether the Authority Structure agrees with the supplied sugya boundaries.
+
+Only after completing this review generate the JSON.
+
+The output must be valid JSON only.

@@ -1,0 +1,881 @@
+Here is the updated full prompt you can save as your next `.txt` prompt file.
+
+# Sugya Argument Analysis Prompt v3
+
+You are an expert in the structure of the Babylonian Talmud.
+
+You are given THREE files.
+
+FILE 1
+
+berakhot_sugya_analysis_pass1.json
+
+This file contains the proposed sugya boundaries.
+
+FILE 2
+
+berakhot_bundle.jsonl
+
+This file contains the original text of the tractate.
+
+FILE 3
+
+berakhot_authority_analysis_all_sugyot.json
+
+This file contains the authority structure of each sugya in terms of sources cited and how each source functions inside the argument.
+
+Your purpose is NOT to redefine the sugyot.
+
+Instead, analyze every sugya independently according to the supplied sugya boundaries.
+
+The purpose of this analysis is to reconstruct the complete ARGUMENT STRUCTURE of every sugya.
+
+====================================================
+
+PRIMARY OBJECTIVE
+
+====================================================
+
+For every sugya:
+
+• identify every distinct argument
+
+• identify every side of every argument
+
+• identify every participant
+
+• identify every supporting source
+
+• determine how each source supports each argument
+
+• identify objections
+
+• identify resolutions
+
+• identify unresolved disputes
+
+• identify practical conclusions
+
+• identify narrative lessons when the sugya is primarily aggadic
+
+• provide bounded details that explain the concrete content of the issue, question, positions, reasoning, underlying principles, and conclusions
+
+The final output must be ONE valid JSON object.
+
+====================================================
+
+UNIFORM SUMMARY + DETAILS RULE
+
+====================================================
+
+Whenever a field explains an idea, use this structure:
+
+{
+"summary": "",
+"details": ""
+}
+
+Use this structure for:
+
+issue
+
+question
+
+position
+
+reasoning
+
+underlying_principle
+
+status
+
+accepted_position
+
+story
+
+lesson
+
+main_issue
+
+main_conclusion
+
+This makes the JSON consistent and easier to analyze later.
+
+====================================================
+
+IMPORTANT DETAILS REQUIREMENT
+
+====================================================
+
+Every argument must include bounded explanatory details.
+
+These details are meant to answer:
+
+“What exactly does this mean in context?”
+
+For example, do not merely say:
+
+"Rabban Gamliel’s practical ruling."
+
+Instead explain:
+
+"Rabban Gamliel rules that even though the Rabbis say evening Shema may be recited only until midnight, one who failed to recite it before midnight may still recite it until dawn."
+
+Details should be specific enough to understand the argument without rereading the full sugya.
+
+But details must remain compact.
+
+====================================================
+
+DETAIL LENGTH LIMITS
+
+====================================================
+
+Use these limits:
+
+issue.details:
+
+1 to 3 sentences.
+
+question.details:
+
+1 to 2 sentences.
+
+position.details:
+
+1 to 3 sentences.
+
+reasoning.details:
+
+1 to 3 sentences.
+
+underlying_principle.details:
+
+1 to 3 sentences.
+
+status.details:
+
+1 to 3 sentences.
+
+accepted_position.details:
+
+1 to 3 sentences.
+
+conclusion_details:
+
+2 to 5 sentences.
+
+story.details:
+
+1 to 3 sentences.
+
+lesson.details:
+
+1 to 3 sentences.
+
+Do NOT quote long passages.
+
+Do NOT reproduce the Gemara.
+
+Do NOT write essay-style commentary.
+
+Use concise explanation only.
+
+====================================================
+
+ARGUMENT DEFINITION
+
+====================================================
+
+An argument is any identifiable disagreement,
+
+investigation,
+
+question,
+
+proof,
+
+challenge,
+
+resolution,
+
+or conceptual distinction.
+
+A sugya may contain:
+
+zero,
+
+one,
+
+or many arguments.
+
+Do NOT assume one argument per sugya.
+
+====================================================
+
+FOR EACH ARGUMENT
+
+====================================================
+
+Determine:
+
+Question
+
+What question is being investigated?
+
+Question Details
+
+What specifically is the question asking in context?
+
+Issue
+
+What legal,
+
+theological,
+
+ethical,
+
+or conceptual issue is under discussion?
+
+Issue Details
+
+What is concretely at stake in the issue?
+
+Argument Type
+
+Choose ONE.
+
+Halakhic
+
+Aggadic
+
+Exegetical
+
+Logical
+
+Historical
+
+Narrative
+
+Practical
+
+Mixed
+
+====================================================
+
+SIDES OF THE ARGUMENT
+
+====================================================
+
+Identify every side.
+
+For every side determine:
+
+position.summary
+
+A short label for the position.
+
+position.details
+
+A compact explanation of what this position actually says.
+
+reasoning.summary
+
+A short statement of why this side holds its position.
+
+reasoning.details
+
+A concrete explanation of how this reasoning works in the sugya.
+
+underlying_principle.summary
+
+The broader principle behind this position.
+
+underlying_principle.details
+
+A compact explanation of how that principle operates here.
+
+supporting_sources
+
+supporting_rabbis
+
+strength
+
+Choose ONE:
+
+Strong
+
+Moderate
+
+Weak
+
+Unclear
+
+====================================================
+
+RABBINIC PARTICIPANTS
+
+====================================================
+
+For every rabbi determine:
+
+Name
+
+Role
+
+Choose ONE:
+
+Introduces Question
+
+Supports Position
+
+Opposes Position
+
+Challenges
+
+Resolves
+
+Clarifies
+
+Limits
+
+Expands
+
+Illustrates
+
+Concludes
+
+If multiple rabbis hold the same position,
+
+group them together.
+
+====================================================
+
+SOURCE RELATIONSHIPS
+
+====================================================
+
+For every source determine:
+
+Citation
+
+Source Type
+
+Torah
+
+Neviim
+
+Ketuvim
+
+Mishnah
+
+Tosefta
+
+Baraita
+
+Amora
+
+Aggadah
+
+Historical Event
+
+Logical Principle
+
+Role
+
+FOUNDATION
+
+PROOF
+
+SUPPORT
+
+QUESTION
+
+OBJECTION
+
+LIMITATION
+
+DISTINCTION
+
+RESOLUTION
+
+ILLUSTRATION
+
+APPLICATION
+
+Determine exactly WHICH argument the source supports.
+
+Do NOT merely list sources.
+
+relationship_details
+
+Explain briefly how the source functions in the argument.
+
+====================================================
+
+ARGUMENT FLOW
+
+====================================================
+
+Reconstruct the logical flow.
+
+Examples:
+
+Question
+
+↓
+
+Answer
+
+↓
+
+Challenge
+
+↓
+
+Counterproof
+
+↓
+
+Resolution
+
+or
+
+Question
+
+↓
+
+Baraita
+
+↓
+
+Objection
+
+↓
+
+Distinction
+
+↓
+
+Resolution
+
+or
+
+Narrative
+
+↓
+
+Lesson
+
+↓
+
+Application
+
+Represent this as an ordered list.
+
+Each step should be concise.
+
+====================================================
+
+AGGADIC SECTIONS
+
+====================================================
+
+If the sugya is primarily narrative,
+
+do NOT force a halakhic structure.
+
+Instead determine:
+
+story.summary
+
+A short label for the narrative or aggadic unit.
+
+story.details
+
+What happens in the story or teaching.
+
+Characters
+
+Conflict
+
+lesson.summary
+
+The main lesson.
+
+lesson.details
+
+What the lesson means in context.
+
+Underlying theological principle
+
+Underlying ethical principle
+
+Practical takeaway
+
+How the story relates to the surrounding sugya.
+
+The details should explain what the story is actually about,
+
+but should remain compact.
+
+====================================================
+
+CONCLUSIONS
+
+====================================================
+
+Determine:
+
+Did the sugya reach consensus?
+
+Represent status as an object.
+
+status.summary
+
+Choose ONE:
+
+Consensus
+
+Majority Position
+
+Accepted Halakhah
+
+Unresolved
+
+Multiple Valid Opinions
+
+Open Question
+
+Narrative Only
+
+status.details
+
+Explain why the sugya falls into this category.
+
+If the status is Multiple Valid Opinions,
+
+do NOT merely write "Multiple Valid Opinions."
+
+Summarize the options.
+
+Example:
+
+"The sugya preserves three opinions: Rabbi Eliezer limits evening Shema to the first watch, the Rabbis set midnight as a protective deadline, and Rabban Gamliel allows recitation until dawn."
+
+accepted_position
+
+Represent as an object:
+
+accepted_position.summary
+
+A short statement of the accepted or most practical position.
+
+accepted_position.details
+
+Explain exactly what was accepted, how it functions, and why.
+
+If there is no accepted position,
+
+use:
+
+{
+"summary": null,
+"details": null
+}
+
+remaining_disagreements
+
+Represent every remaining position as an object:
+
+{
+"position": {
+"summary": "",
+"details": ""
+}
+}
+
+Do not merely list names.
+
+Summarize what each surviving opinion actually maintains.
+
+conclusion_details
+
+Explain the practical or conceptual implication of the sugya's conclusion.
+
+Keep this explanation between 2 and 5 sentences.
+
+====================================================
+
+CONFIDENCE
+
+====================================================
+
+Every argument receives a confidence score.
+
+100
+
+Certain
+
+90
+
+Very likely
+
+75
+
+Probable
+
+50
+
+Uncertain
+
+====================================================
+
+OUTPUT FORMAT
+
+====================================================
+
+Return ONE JSON object.
+
+Schema:
+
+{
+"tractate": "...",
+"analysis_version": 3,
+"sugyot": [
+{
+"sugya_number": 1,
+"start": {
+"daf": "",
+"segment": 1
+},
+"end": {
+"daf": "",
+"segment": 1
+},
+"arguments": [
+{
+"argument_number": 1,
+"title": "",
+"argument_type": "",
+"issue": {
+"summary": "",
+"details": ""
+},
+"question": {
+"summary": "",
+"details": ""
+},
+"sides": [
+{
+"position": {
+"summary": "",
+"details": ""
+},
+"supporting_rabbis": [],
+"supporting_sources": [],
+"reasoning": {
+"summary": "",
+"details": ""
+},
+"underlying_principle": {
+"summary": "",
+"details": ""
+},
+"strength": "Strong | Moderate | Weak | Unclear"
+}
+],
+"argument_flow": [
+"Question",
+"Proof",
+"Challenge",
+"Resolution"
+],
+"source_relationships": [
+{
+"citation": "",
+"source_type": "",
+"role": "",
+"supports_argument_number": 1,
+"relationship_details": ""
+}
+],
+"rabbinic_participants": [
+{
+"name": "",
+"role": ""
+}
+],
+"resolution": {
+"status": {
+"summary": "Consensus | Majority Position | Accepted Halakhah | Unresolved | Multiple Valid Opinions | Open Question | Narrative Only",
+"details": ""
+},
+"accepted_position": {
+"summary": "",
+"details": ""
+},
+"conclusion_details": "",
+"remaining_disagreements": [
+{
+"position": {
+"summary": "",
+"details": ""
+}
+}
+]
+},
+"confidence": 95
+}
+],
+"aggadic_analysis": {
+"present": true,
+"story": {
+"summary": "",
+"details": ""
+},
+"characters": [],
+"conflict": "",
+"lesson": {
+"summary": "",
+"details": ""
+},
+"ethical_principle": {
+"summary": "",
+"details": ""
+},
+"theological_principle": {
+"summary": "",
+"details": ""
+},
+"practical_takeaway": "",
+"relationship_to_sugya": ""
+},
+"overall_summary": {
+"main_issue": {
+"summary": "",
+"details": ""
+},
+"main_conclusion": {
+"summary": "",
+"details": ""
+},
+"overall_confidence": 95
+}
+}
+]
+}
+
+====================================================
+
+DETAIL QUALITY RULES
+
+====================================================
+
+Bad detail:
+
+"Rabban Gamliel gives a practical ruling."
+
+Good detail:
+
+"Rabban Gamliel tells his sons that they may still recite evening Shema before dawn, because the underlying time extends until dawn even though the Rabbis set midnight as a safeguard."
+
+Bad detail:
+
+"The Gemara asks about the source."
+
+Good detail:
+
+"The Gemara asks why the Mishnah begins with evening Shema instead of morning Shema, since the Torah phrase 'when you rise' might imply beginning with morning."
+
+Bad detail:
+
+"One side says yes."
+
+Good detail:
+
+"This side holds that the Mishnah follows the order of creation, where evening precedes morning."
+
+Bad status.details:
+
+"Multiple Valid Opinions."
+
+Good status.details:
+
+"The sugya preserves three positions: Rabbi Eliezer limits the time to the first watch, the Rabbis set midnight as a safeguard, and Rabban Gamliel permits recitation until dawn."
+
+Bad accepted_position.details:
+
+"Rabban Gamliel is accepted."
+
+Good accepted_position.details:
+
+"The practical conclusion recognizes that the underlying mitzvah extends until dawn, while the Rabbis' midnight deadline functions as a protective enactment to prevent delay."
+
+====================================================
+
+KEEP THE JSON COMPACT
+
+====================================================
+
+Use concise phrases.
+
+Avoid long prose.
+
+Never quote long passages.
+
+Never reproduce large sections of Gemara.
+
+Details should clarify context,
+
+not become commentary.
+
+Use 1 to 3 sentences for most detail fields.
+
+Use 2 to 5 sentences only for conclusion_details.
+
+====================================================
+
+FINAL REVIEW
+
+====================================================
+
+After analyzing every argument,
+
+perform a second pass.
+
+Verify:
+
+Every argument has been captured.
+
+Every issue has summary and details.
+
+Every question has summary and details.
+
+Every position has summary and details.
+
+Every reasoning field has summary and details.
+
+Every underlying_principle field has summary and details.
+
+Every status field has summary and details.
+
+If status.summary is Multiple Valid Opinions,
+
+status.details summarizes the actual options.
+
+Every accepted_position field has summary and details,
+
+or null values if no accepted position exists.
+
+Every remaining disagreement is represented as an object with summary and details.
+
+Every participant is assigned to the correct side.
+
+Every source is connected to the correct argument.
+
+Every conclusion reflects the actual discussion.
+
+Only after this review produce the final JSON.
+
+The final output MUST be valid JSON only.
