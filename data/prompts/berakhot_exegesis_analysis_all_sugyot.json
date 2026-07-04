@@ -1,0 +1,730 @@
+# Sugya Source Interpretation Analysis Prompt v1
+
+You are an expert in the structure of the Babylonian Talmud, Rabbinic hermeneutics, and the interpretation of Tanakh within the Gemara.
+
+You are given FOUR files.
+
+FILE 1
+
+berakhot_bundle.jsonl
+
+This is the original source text.
+
+This is the PRIMARY source.
+
+All conclusions must ultimately be based on this file.
+
+---
+
+FILE 2
+
+berakhot_sugya_analysis_pass1.json
+
+This defines the sugya boundaries.
+
+Do NOT redefine the sugyot.
+
+Use these boundaries exactly.
+
+---
+
+FILE 3
+
+berakhot_authority_analysis_all_sugyot.json
+
+This identifies the authorities and sources.
+
+Use this only as a helper.
+
+Always verify against the original bundle.
+
+---
+
+FILE 4
+
+berakhot_argument_analysis_all_sugyot_v3_expanded_details.json
+
+This identifies the arguments.
+
+Use it only as a guide.
+
+Always verify conclusions against the original bundle.
+
+====================================================
+
+PRIMARY OBJECTIVE
+
+====================================================
+
+Analyze every sugya independently.
+
+Your purpose is NOT to summarize the sugya.
+
+Your purpose is to reconstruct HOW the Gemara interprets every source that appears in the sugya.
+
+Specifically determine:
+
+• why each source is introduced
+
+• how each source is interpreted
+
+• which rabbi interprets it
+
+• how different rabbis interpret the same source differently
+
+• what textual features of the source drive the interpretation
+
+• how each interpretation advances the argument
+
+• how each interpretation relates to the overall purpose of the sugya
+
+The final output must be ONE valid JSON document.
+
+====================================================
+
+MULTI-PASS ANALYSIS
+
+====================================================
+
+Perform this analysis in six passes.
+
+PASS 1
+
+Locate every source.
+
+Include:
+
+Torah
+
+Nevi'im
+
+Ketuvim
+
+Mishnah
+
+Tosefta
+
+Baraita
+
+Amoraic statements
+
+Named rabbis
+
+Narrative precedents
+
+Logical principles
+
+Earlier discussions referenced by the Gemara
+
+PASS 2
+
+For every source determine
+
+why it appears.
+
+Classify its function.
+
+Choose one or more:
+
+FOUNDATION
+
+PROOF
+
+TEXTUAL PROOF
+
+QUESTION
+
+CHALLENGE
+
+OBJECTION
+
+DISTINCTION
+
+LIMITATION
+
+RESOLUTION
+
+APPLICATION
+
+ILLUSTRATION
+
+NARRATIVE SUPPORT
+
+THEOLOGICAL SUPPORT
+
+ETHICAL SUPPORT
+
+PASS 3
+
+Analyze the text itself.
+
+Determine
+
+exactly
+
+which words
+
+phrases
+
+or grammatical constructions
+
+are significant.
+
+Especially for Tanakh,
+
+identify
+
+specific Hebrew words
+
+that the Gemara builds its interpretation upon.
+
+Do NOT merely summarize the verse.
+
+Explain WHY those words matter.
+
+PASS 4
+
+Determine how every rabbinic participant understands the source.
+
+For every participant identify
+
+whether the source is read
+
+literally
+
+contextually
+
+grammatically
+
+midrashically
+
+conceptually
+
+analogically
+
+through a gezerah shavah
+
+through a kal vachomer
+
+through another hermeneutic principle
+
+or through practical halakhic reasoning.
+
+PASS 5
+
+Compare all interpretations.
+
+Determine
+
+where rabbis agree
+
+where they disagree
+
+whether they interpret
+
+the same Hebrew words differently
+
+different Hebrew words
+
+or the same words with different assumptions.
+
+Determine whether later participants
+
+expand
+
+limit
+
+qualify
+
+reinterpret
+
+harmonize
+
+or reject
+
+earlier interpretations.
+
+PASS 6
+
+Generate the final JSON.
+
+====================================================
+
+TEXTUAL ANALYSIS
+
+====================================================
+
+For every source identify
+
+quoted_text
+
+The exact portion relied upon.
+
+If only part of a verse is important,
+
+identify only that portion.
+
+hebrew_focus
+
+The Hebrew words that drive the interpretation.
+
+literal_meaning
+
+What those Hebrew words mean literally.
+
+grammatical_features
+
+Examples
+
+plural
+
+singular
+
+verb tense
+
+preposition
+
+article
+
+word order
+
+ambiguity
+
+parallelism
+
+repetition
+
+construct form
+
+missing word
+
+extra word
+
+Anything that becomes important in the sugya.
+
+context_in_original_source
+
+How the verse functions in Tanakh before the Gemara interprets it.
+
+====================================================
+
+RABBINIC INTERPRETATION
+
+====================================================
+
+For every rabbinic participant who uses a source determine
+
+rabbi
+
+position
+
+why_the_source_is_used
+
+textual_reading
+
+hebrew_reasoning
+
+logical_reasoning
+
+hermeneutic_method
+
+Choose one or more
+
+Plain Meaning
+
+Contextual Reading
+
+Grammatical Reading
+
+Midrash
+
+Gezerah Shavah
+
+Kal Vachomer
+
+Binyan Av
+
+Ribui
+
+Miut
+
+Analogy
+
+Logical Inference
+
+Halakhic Tradition
+
+Narrative Interpretation
+
+Other
+
+argument_role
+
+Choose one
+
+Introduces
+
+Supports
+
+Challenges
+
+Qualifies
+
+Limits
+
+Expands
+
+Resolves
+
+Illustrates
+
+Concludes
+
+confidence
+
+====================================================
+
+COMPARATIVE INTERPRETATION
+
+====================================================
+
+For every source determine
+
+agreement
+
+Which interpretations agree.
+
+disagreement
+
+Which interpretations differ.
+
+shared_assumptions
+
+Underlying assumptions held by multiple participants.
+
+different_assumptions
+
+Assumptions unique to one interpretation.
+
+interpretive_progression
+
+Explain how the Gemara develops the interpretation from beginning to end.
+
+====================================================
+
+SOURCE RELATIONSHIP TO THE SUGYA
+
+====================================================
+
+For every source determine
+
+why_this_source_was_chosen
+
+Why did the Gemara use THIS source rather than another?
+
+relationship_to_argument
+
+Exactly how this source advances the current argument.
+
+relationship_to_sugya
+
+How this source contributes to the overall purpose of the sugya.
+
+relationship_to_other_sources
+
+Does this source support
+
+replace
+
+limit
+
+reinterpret
+
+or harmonize another source?
+
+importance
+
+Choose one
+
+Primary
+
+Major
+
+Supporting
+
+Illustrative
+
+Minor
+
+====================================================
+
+SUGYA-LEVEL EXEGETICAL ANALYSIS
+
+====================================================
+
+After analyzing every source individually,
+
+perform a second analysis of the sugya as a whole.
+
+Determine
+
+primary_textual_theme
+
+What is the main interpretive problem?
+
+primary_hermeneutic_method
+
+Which interpretive method dominates the sugya?
+
+development_of_interpretation
+
+Describe how the Gemara develops its reading over the course of the sugya.
+
+relationship_between_sources
+
+How do all of the cited sources work together?
+
+overall_argument_progression
+
+How do the textual interpretations build the overall argument?
+
+overall_message
+
+What larger lesson is produced through these interpretations?
+
+why_this_sugya_is_structured_this_way
+
+Explain why these sources appear in this order.
+
+textual_strategy
+
+Summarize the Gemara's overall strategy for reading Scripture and earlier authorities.
+
+====================================================
+
+OUTPUT FORMAT
+
+====================================================
+
+Return ONE valid JSON object.
+
+Schema
+
+{
+"tractate": "",
+"analysis_version": 1,
+"analysis_type": "Sugya Source Interpretation Analysis",
+
+"sugyot": [
+
+```
+{
+
+  "sugya_number": 1,
+
+  "start": {},
+
+  "end": {},
+
+  "sources":[
+
+    {
+
+      "source_number":1,
+
+      "citation":"",
+
+      "source_type":"",
+
+      "quoted_text":"",
+
+      "hebrew_focus":[ ],
+
+      "literal_meaning":"",
+
+      "grammatical_features":[ ],
+
+      "context_in_original_source":"",
+
+      "overall_function":"",
+
+      "why_this_source_was_chosen":"",
+
+      "relationship_to_argument":"",
+
+      "relationship_to_sugya":"",
+
+      "relationship_to_other_sources":"",
+
+      "importance":"Primary",
+
+      "interpretations":[
+
+        {
+
+          "rabbi":"",
+
+          "position":"",
+
+          "why_the_source_is_used":"",
+
+          "textual_reading":"",
+
+          "hebrew_reasoning":"",
+
+          "logical_reasoning":"",
+
+          "hermeneutic_method":[ ],
+
+          "argument_role":"",
+
+          "confidence":95
+
+        }
+
+      ],
+
+      "comparative_analysis":{
+
+        "agreement":[ ],
+
+        "disagreement":[ ],
+
+        "shared_assumptions":[ ],
+
+        "different_assumptions":[ ],
+
+        "interpretive_progression":""
+
+      }
+
+    }
+
+  ],
+
+  "sugya_level_analysis":{
+
+    "primary_textual_theme":"",
+
+    "primary_hermeneutic_method":"",
+
+    "development_of_interpretation":"",
+
+    "relationship_between_sources":"",
+
+    "overall_argument_progression":"",
+
+    "overall_message":"",
+
+    "why_this_sugya_is_structured_this_way":"",
+
+    "textual_strategy":""
+
+  }
+
+}
+```
+
+]
+
+}
+
+====================================================
+
+QUALITY RULES
+
+====================================================
+
+Do NOT merely summarize.
+
+Do NOT merely list citations.
+
+Do NOT merely list rabbis.
+
+Instead reconstruct the reasoning process.
+
+Treat every verse as a miniature commentary problem.
+
+For every source explain
+
+• what the source originally says
+
+• what words the Gemara notices
+
+• what words are ignored
+
+• what assumptions are introduced
+
+• which rabbi introduces those assumptions
+
+• whether another rabbi accepts them
+
+• whether another rabbi rejects them
+
+• how the interpretation develops
+
+• how the interpretation advances the argument
+
+• how the interpretation advances the overall sugya
+
+====================================================
+
+TEXTUAL FOCUS
+
+====================================================
+
+When the source is from Tanakh,
+
+pay special attention to the Hebrew.
+
+Explain
+
+• lexical choices
+
+• grammatical forms
+
+• unusual wording
+
+• ambiguity
+
+• repeated words
+
+• omissions
+
+• additions
+
+• syntactic structure
+
+• alternative possible readings
+
+Describe how the Sages transform the plain meaning of the Hebrew text into the interpretation used by the Gemara.
+
+====================================================
+
+FINAL REVIEW
+
+====================================================
+
+After completing every sugya,
+
+perform one final review.
+
+Verify that
+
+Every source has been analyzed.
+
+Every rabbi has been connected to the correct source.
+
+Every interpretation explains the textual reasoning.
+
+Every interpretation explains the Hebrew.
+
+Every source explains how it contributes to the argument.
+
+Every source explains how it contributes to the sugya.
+
+Every sugya contains a complete sugya-level analysis.
+
+Only after this review produce the final JSON.
+
+The final output MUST be valid JSON only.
