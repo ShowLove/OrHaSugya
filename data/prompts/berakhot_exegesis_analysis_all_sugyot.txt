@@ -1,0 +1,573 @@
+# Sugya Source Interpretation Analysis Prompt v2
+
+You are an expert in the Babylonian Talmud, Rabbinic hermeneutics, Biblical Hebrew, and the methods by which the Sages derive law, theology, ethics, and narrative meaning from earlier sources.
+
+You are given FOUR files.
+
+---
+
+## FILE 1
+
+**berakhot_bundle.jsonl**
+
+This is the ORIGINAL TEXT.
+
+This is the PRIMARY source.
+
+Every conclusion MUST ultimately be supported by this file.
+
+---
+
+## FILE 2
+
+**berakhot_sugya_analysis_pass1.json**
+
+This defines the sugya boundaries.
+
+Do NOT redefine the sugyot.
+
+Use these boundaries exactly.
+
+---
+
+## FILE 3
+
+**berakhot_authority_analysis_all_sugyot.json**
+
+This identifies the authorities and the cited sources.
+
+Use this only as a helper.
+
+Always verify against the original bundle.
+
+---
+
+## FILE 4
+
+**berakhot_argument_analysis_all_sugyot_v3_expanded_details.json**
+
+This reconstructs the arguments.
+
+Use it only as a guide.
+
+Always verify every conclusion against the original bundle.
+
+---
+
+# PRIMARY OBJECTIVE
+
+This analysis is NOT a summary of the sugya.
+
+This analysis is NOT merely a list of sources.
+
+This analysis is NOT merely a list of rabbis.
+
+Instead, reconstruct **the complete interpretive process** by which the Gemara transforms earlier sources into the conclusions of the sugya.
+
+Your task is to explain, source by source:
+
+* Why this source appears.
+* Why this specific source was chosen instead of another.
+* What words or phrases the Gemara notices.
+* How each rabbi understands those words.
+* How the Hebrew wording influences the interpretation.
+* What logical inferences are drawn from the text.
+* How the interpretation advances the argument.
+* How the interpretation contributes to the sugya as a whole.
+
+The final output must be ONE valid JSON object.
+
+---
+
+# MULTI-PASS ANALYSIS
+
+Perform the analysis in seven passes.
+
+## PASS 1
+
+Identify every source.
+
+Include:
+
+* Torah
+* Nevi'im
+* Ketuvim
+* Mishnah
+* Tosefta
+* Baraita
+* Earlier Amoraim
+* Contemporary Amoraim
+* Named Rabbis
+* Historical events
+* Earlier arguments
+* Logical principles
+
+---
+
+## PASS 2
+
+Determine why every source appears.
+
+Classify its function.
+
+Choose one or more:
+
+* FOUNDATION
+* TEXTUAL FOUNDATION
+* PROOF
+* SUPPORT
+* QUESTION
+* CHALLENGE
+* OBJECTION
+* DISTINCTION
+* LIMITATION
+* RESOLUTION
+* APPLICATION
+* ILLUSTRATION
+* ETHICAL SUPPORT
+* THEOLOGICAL SUPPORT
+* NARRATIVE SUPPORT
+
+---
+
+## PASS 3
+
+Perform a complete textual analysis.
+
+Do NOT summarize the verse.
+
+Instead determine:
+
+* Which exact Hebrew words matter.
+* Which words are ignored.
+* Which grammatical forms matter.
+* Which ambiguities are exploited.
+* Which assumptions are introduced.
+
+---
+
+## PASS 4
+
+Determine how every rabbinic participant interprets the source.
+
+For every participant reconstruct the complete reasoning process.
+
+---
+
+## PASS 5
+
+Compare every interpretation.
+
+Determine
+
+* agreements
+* disagreements
+* reinterpretations
+* qualifications
+* limitations
+* harmonizations
+
+---
+
+## PASS 6
+
+Analyze how every source contributes to the overall sugya.
+
+Explain how removing the source would change the sugya.
+
+---
+
+## PASS 7
+
+Generate the final JSON.
+
+---
+
+# CRITICAL RULE
+
+Never write generic statements.
+
+The following are forbidden:
+
+"The source supports the argument."
+
+"The source advances the discussion."
+
+"The verse is interpreted."
+
+"The source is used in the sugya."
+
+Instead explain HOW.
+
+---
+
+# SOURCE ANALYSIS
+
+For every source determine:
+
+```json
+{
+  "citation": "",
+  "source_type": "",
+
+  "quoted_text": "",
+
+  "overall_function": "",
+
+  "importance": "",
+
+  "why_this_source_was_chosen": "",
+
+  "relationship_to_argument": {
+    "summary":"",
+    "details":""
+  },
+
+  "relationship_to_sugya": {
+    "summary":"",
+    "details":""
+  },
+
+  "source_interactions":[ ]
+}
+```
+
+---
+
+# TEXTUAL ANALYSIS
+
+For every source perform a textual analysis.
+
+```json
+{
+"textual_analysis":{
+
+"quoted_portion":"",
+
+"hebrew_focus":[ ],
+
+"plain_meaning":"",
+
+"context_in_original_source":"",
+
+"ignored_portions":[ ],
+
+"textual_observations":[ ],
+
+"grammatical_observations":[ ],
+
+"ambiguities":[ ],
+
+"alternative_possible_readings":[ ]
+
+}
+}
+```
+
+---
+
+# HEBREW ANALYSIS
+
+Whenever the source is Hebrew Scripture,
+
+analyze every significant Hebrew expression.
+
+Do NOT simply translate.
+
+Instead explain why the wording matters.
+
+```json
+{
+"hebrew_analysis":[
+
+{
+
+"phrase":"",
+
+"root":"",
+
+"part_of_speech":"",
+
+"grammatical_form":"",
+
+"literal_translation":"",
+
+"plain_meaning":"",
+
+"rabbinic_reading":"",
+
+"why_this_reading":"",
+
+"alternative_readings":[ ],
+
+"effect_on_argument":""
+
+}
+
+]
+}
+```
+
+Example:
+
+Phrase:
+
+בשכבך
+
+Root:
+
+שכב
+
+Grammatical form:
+
+Preposition ב + infinitive construct with second-person masculine singular suffix
+
+Literal meaning:
+
+"When you lie down"
+
+Rabbinic reading:
+
+"The time when people normally retire for sleep."
+
+Effect on argument:
+
+"This transforms a description of human behavior into a legal definition of the evening Shema period."
+
+---
+
+# INTERPRETIVE LOGIC
+
+Every source must reconstruct the reasoning process.
+
+```json
+{
+"interpretive_logic":{
+
+"textual_observation":"",
+
+"inference":"",
+
+"logical_step":"",
+
+"conclusion":""
+
+}
+}
+```
+
+Example
+
+Observation
+
+"The Torah says בשכבך."
+
+↓
+
+Inference
+
+"The Torah refers to a recognizable behavioral period."
+
+↓
+
+Logical Step
+
+"A behavioral period can define legal time."
+
+↓
+
+Conclusion
+
+"The mitzvah lasts throughout that period."
+
+---
+
+# TEXTUAL TRANSFORMATION
+
+Explain how the Gemara changes the meaning of the text.
+
+```json
+{
+"textual_transformation":{
+
+"plain_reading":"",
+
+"rabbinic_reading":"",
+
+"reason_for_difference":""
+
+}
+}
+```
+
+---
+
+# INTERPRETIVE COMMENTARY
+
+Every rabbinic interpretation must contain
+
+```json
+{
+
+"rabbi":"",
+
+"position":"",
+
+"textual_reading":{
+
+"summary":"",
+
+"details":""
+
+},
+
+"logical_reasoning":{
+
+"summary":"",
+
+"details":""
+
+},
+
+"why_the_source_is_used":{
+
+"summary":"",
+
+"details":""
+
+},
+
+"hermeneutic_method":[ ],
+
+"argument_role":"",
+
+"confidence":95
+
+}
+```
+
+The DETAILS field must reconstruct the reasoning process.
+
+Never merely state that the source supports something.
+
+Explain HOW.
+
+---
+
+# SOURCE INTERACTION
+
+Replace generic relationships with explicit interactions.
+
+```json
+"source_interactions":[
+
+{
+
+"other_source":"",
+
+"interaction_type":"Clarifies",
+
+"details":""
+
+},
+
+{
+
+"other_source":"",
+
+"interaction_type":"Supports",
+
+"details":""
+
+},
+
+{
+
+"other_source":"",
+
+"interaction_type":"Limits",
+
+"details":""
+
+}
+
+]
+```
+
+---
+
+# ARGUMENT DEPENDENCY
+
+Every source should include
+
+```json
+{
+"argument_dependency":{
+
+"if_removed":"",
+
+"replacement_possible":true,
+
+"replacement_reason":"",
+
+"importance_to_argument":""
+
+}
+}
+```
+
+---
+
+# SUGYA-LEVEL ANALYSIS
+
+After every source has been analyzed,
+
+perform a second analysis.
+
+Determine
+
+```json
+{
+
+"primary_textual_theme":"",
+
+"primary_hermeneutic_method":"",
+
+"development_of_interpretation":"",
+
+"relationship_between_sources":"",
+
+"overall_argument_progression":"",
+
+"overall_message":"",
+
+"why_this_sugya_is_structured_this_way":"",
+
+"textual_strategy":"",
+
+"interpretive_strategy":"",
+
+"how_the_sources_collectively_create_the_argument":""
+
+}
+```
+
+---
+
+# FINAL REVIEW
+
+Perform one final verification pass.
+
+Verify that
+
+* Every source has a complete textual analysis.
+* Every Hebrew expression has grammatical analysis.
+* Every interpretation reconstructs the chain of reasoning.
+* Every logical reasoning field explains HOW the conclusion follows.
+* Every source interaction explains the relationship between sources.
+* Every argument dependency explains why the source matters.
+* Every sugya includes a complete interpretive synthesis.
+
+If any field contains a generic statement, rewrite it until it explains the actual reasoning process.
+
+The final output MUST be valid JSON only.
