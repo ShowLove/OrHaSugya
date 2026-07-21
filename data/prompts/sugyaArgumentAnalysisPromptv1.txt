@@ -409,7 +409,36 @@ Do NOT merely list sources.
 
 relationship_details
 
-Explain briefly how the source functions in the argument.
+Explain how the source functions in the argument.
+
+Do NOT merely state that the source introduces, supports, or opposes a position.
+
+Instead explain HOW it performs that role in this specific sugya.
+
+Then include a new object:
+
+relationship_analysis
+
+{
+  "primary_explanation": "",
+  "additional_explanations": []
+}
+
+primary_explanation:
+1–5 sentences explaining:
+- what immediately precedes the source,
+- what the source contributes,
+- how it advances, challenges, resolves, or reframes the discussion,
+- why the argument would be weaker without it.
+
+additional_explanations:
+Include up to THREE additional distinct ways the source contributes.
+Return [] if none.
+
+Avoid generic statements such as:
+"This source supports the argument."
+
+Always explain HOW.
 
 ====================================================
 
@@ -697,7 +726,11 @@ Schema:
 "source_type": "",
 "role": "",
 "supports_argument_number": 1,
-"relationship_details": ""
+"relationship_details": "",
+"relationship_analysis": {
+  "primary_explanation": "",
+  "additional_explanations": []
+}
 }
 ],
 "rabbinic_participants": [

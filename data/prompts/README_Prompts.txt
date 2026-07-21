@@ -2,6 +2,18 @@ Based on the prompts themselves, they define a clear multi-stage analysis pipeli
 
 ---
 
+---
+
+# Recommended Workflow
+
+| 1     | Sugya Boundary Analysis                   | 
+| 2     | Authority Structure Analysis              | 
+| 3     | Argument Structure Analysis               | 
+| 4     | Source Interpretation / Exegesis Analysis | 
+
+
+---
+
 # Or HaSugya Analysis Pipeline
 
 ## Overview
@@ -201,17 +213,7 @@ For every sugya:
 
 This is the deepest analytical layer of the pipeline.
 
----
 
-# Recommended Workflow
-
-| 1     | Sugya Boundary Analysis                   | 
-| 2     | Authority Structure Analysis              | 
-| 3     | Argument Structure Analysis               | 
-| 4     | Source Interpretation / Exegesis Analysis | 
-
-
----
 
 # Overall Philosophy
 
