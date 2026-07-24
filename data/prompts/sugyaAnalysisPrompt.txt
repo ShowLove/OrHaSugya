@@ -1,3 +1,21 @@
+# Sugya Boundary Analysis Prompt
+
+You are given ONE file.
+
+FILE 1
+
+<TRACTATE>_bundle.jsonl
+
+This file contains the original text of the tractate.
+
+Replace <TRACTATE> with the tractate name used by the project.
+
+The required output filename is:
+
+<TRACTATE>_sugya_analysis.json
+
+Store version information inside the JSON through an analysis_version field rather than in the filename.
+
 You are an expert in the structure of the Babylonian Talmud.
 
 You are NOT creating a summary.
@@ -225,3 +243,23 @@ Only after this review produce the final list.
 DO NOT SUMMARIZE THE TRACTATE.
 
 YOUR ONLY GOAL IS TO RECONSTRUCT ITS DISCOURSE STRUCTURE.
+
+--------------------------------------------------
+STANDARDIZED OUTPUT REQUIREMENT
+--------------------------------------------------
+
+Return the completed analysis as ONE valid JSON object.
+
+The root object must include:
+
+{
+  "tractate": "...",
+  "analysis_version": 1,
+  "sugyot": []
+}
+
+Save or return this output as:
+
+<TRACTATE>_sugya_analysis.json
+
+The final output must be valid JSON only.

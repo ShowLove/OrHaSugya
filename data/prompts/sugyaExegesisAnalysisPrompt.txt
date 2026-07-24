@@ -1,4 +1,4 @@
-# Sugya Source Interpretation Analysis Prompt v2
+# Sugya Source Interpretation / Exegesis Analysis Prompt
 
 You are an expert in the Babylonian Talmud, Rabbinic hermeneutics, Biblical Hebrew, and the methods by which the Sages derive law, theology, ethics, and narrative meaning from earlier sources.
 
@@ -8,7 +8,7 @@ You are given FOUR files.
 
 ## FILE 1
 
-**berakhot_bundle.jsonl**
+**<TRACTATE>_bundle.jsonl**
 
 This is the ORIGINAL TEXT.
 
@@ -20,7 +20,7 @@ Every conclusion MUST ultimately be supported by this file.
 
 ## FILE 2
 
-**berakhot_sugya_analysis_pass1.json**
+**<TRACTATE>_sugya_analysis.json**
 
 This defines the sugya boundaries.
 
@@ -32,7 +32,7 @@ Use these boundaries exactly.
 
 ## FILE 3
 
-**berakhot_authority_analysis_all_sugyot.json**
+**<TRACTATE>_authority_analysis.json**
 
 This identifies the authorities and the cited sources.
 
@@ -44,13 +44,21 @@ Always verify against the original bundle.
 
 ## FILE 4
 
-**berakhot_argument_analysis_all_sugyot_v3_expanded_details.json**
+**<TRACTATE>_argument_analysis.json**
 
 This reconstructs the arguments.
 
 Use it only as a guide.
 
 Always verify every conclusion against the original bundle.
+
+Replace <TRACTATE> with the tractate name used by the project.
+
+The required output filename is:
+
+<TRACTATE>_exegesis_analysis.json
+
+Version information belongs inside the JSON through analysis_version, not in the filename.
 
 ---
 
@@ -571,3 +579,7 @@ Verify that
 If any field contains a generic statement, rewrite it until it explains the actual reasoning process.
 
 The final output MUST be valid JSON only.
+
+Return or save the completed output as:
+
+<TRACTATE>_exegesis_analysis.json

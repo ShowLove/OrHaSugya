@@ -1,6 +1,4 @@
-Here is the updated full prompt you can save as your next `.txt` prompt file.
-
-# Sugya Argument Analysis Prompt v3
+# Sugya Argument Analysis Prompt
 
 You are an expert in the structure of the Babylonian Talmud.
 
@@ -8,21 +6,29 @@ You are given THREE files.
 
 FILE 1
 
-berakhot_sugya_analysis_pass1.json
+<TRACTATE>_sugya_analysis.json
 
 This file contains the proposed sugya boundaries.
 
 FILE 2
 
-berakhot_bundle.jsonl
+<TRACTATE>_bundle.jsonl
 
 This file contains the original text of the tractate.
 
 FILE 3
 
-berakhot_authority_analysis_all_sugyot.json
+<TRACTATE>_authority_analysis.json
 
 This file contains the authority structure of each sugya in terms of sources cited and how each source functions inside the argument.
+
+Replace <TRACTATE> with the tractate name used by the project.
+
+The required output filename is:
+
+<TRACTATE>_argument_analysis.json
+
+Version information belongs inside the JSON through analysis_version, not in the filename.
 
 Your purpose is NOT to redefine the sugyot.
 
@@ -912,3 +918,7 @@ Every conclusion reflects the actual discussion.
 Only after this review produce the final JSON.
 
 The final output MUST be valid JSON only.
+
+Return or save the completed output as:
+
+<TRACTATE>_argument_analysis.json

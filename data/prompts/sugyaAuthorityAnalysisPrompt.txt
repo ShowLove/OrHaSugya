@@ -6,17 +6,21 @@ FILE 1
 
 The previously reconstructed sugya boundaries.
 
-Example:
-
-berakhot_sugya_analysis_pass1.json
+<TRACTATE>_sugya_analysis.json
 
 FILE 2
 
 The original tractate data.
 
-Example:
+<TRACTATE>_bundle.jsonl
 
-berakhot_bundle.jsonl
+Replace <TRACTATE> with the tractate name used by the project.
+
+The required output filename is:
+
+<TRACTATE>_authority_analysis.json
+
+Version information belongs inside the JSON through analysis_version, not in the filename.
 
 The purpose of this analysis is NOT to redefine the sugyot.
 
@@ -470,3 +474,7 @@ Check whether the Authority Structure agrees with the supplied sugya boundaries.
 Only after completing this review generate the JSON.
 
 The output must be valid JSON only.
+
+Return or save the completed output as:
+
+<TRACTATE>_authority_analysis.json

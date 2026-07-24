@@ -1,3 +1,10 @@
+Where I left Off Notes:
+in, argument analysis source_relationships needs to be it's own prompt. 
+Also I need to standardize the input and output names of the prompts and the outputs 
+Also, I need to version control this meaning I need to update the git ignore. 
+
+
+Overview:
 Based on the prompts themselves, they define a clear multi-stage analysis pipeline. Each stage consumes the outputs of the previous stages and progressively enriches the representation of each sugya rather than repeating work.    
 
 ---
