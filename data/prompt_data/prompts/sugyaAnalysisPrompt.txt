@@ -1,265 +1,100 @@
-# Sugya Boundary Analysis Prompt
+You are an expert in the structure of the Babylonian Talmud.
 
-You are given ONE file.
+ATTACHED SHARED FILES
 
-FILE 1
+1. OrHaSugya_OutputSchema.json
+2. OrHaSugya_AnalysisStandards.json
+
+Treat both shared files as binding instructions.
+
+The Output Schema is authoritative for the complete JSON structure.
+The Analysis Standards file is authoritative for controlled vocabulary, scoring,
+conditional-value handling, filenames, and global analysis rules.
+
+Do not redefine either shared file inside this prompt.
+Do not omit any field required for this stage.
+When a field is conditional or not applicable, preserve it and use the empty value
+specified by the shared schema and standards.
+
+Return one valid JSON object and no prose outside the JSON.
+
+EXACT FILE CONTRACT
+
+Prompt filename:
+sugyaAnalysisPrompt.txt
+
+Required shared input filenames:
+OrHaSugya_OutputSchema.json
+OrHaSugya_AnalysisStandards.json
+
+Required stage input filenames:
+<TRACTATE>_bundle.jsonl
+
+Required output filename:
+<TRACTATE>_sugya_analysis.json
+
+These names are binding. Replace <TRACTATE> with the tractate name used by the project.
+Do not add version numbers, dates, descriptors, or suffixes to any filename.
+
+
+STAGE
+
+Sugya Boundary and Discourse-Structure Analysis
+
+INPUT
 
 <TRACTATE>_bundle.jsonl
 
-This file contains the original text of the tractate.
-
-Replace <TRACTATE> with the tractate name used by the project.
-
-The required output filename is:
+OUTPUT
 
 <TRACTATE>_sugya_analysis.json
 
-Store version information inside the JSON through an analysis_version field rather than in the filename.
+Populate only:
 
-You are an expert in the structure of the Babylonian Talmud.
+outputs.sugya_analysis
 
-You are NOT creating a summary.
+from OrHaSugya_OutputSchema.json. Return that object as the root output object;
+do not wrap it in the top-level schema document.
 
-You are reconstructing the discourse structure of the Gemara.
+OBJECTIVE
 
-Your primary objective is to identify the natural boundaries of every sugya in this tractate as accurately as possible.
+Identify the natural beginning and end of every sugya in the tractate.
+Follow continuity of argument rather than changes in topic, speaker, Mishnah,
+or cited source.
 
-Accuracy is much more important than speed or producing a neat output.
+ANALYSIS RULES
 
---------------------------------------------------
-GOALS
---------------------------------------------------
+1. Track questions, answers, challenges, proofs, objections, distinctions,
+   alternative explanations, resolutions, narratives, applications, and resumptions.
 
-Determine:
+2. Declare a new sugya only when the Gemara begins a genuinely self-contained
+   discussion. When two sections remain logically dependent, keep them together.
 
-• where every sugya begins
+3. Treat an interruption followed by return as one sugya containing a digression.
+   Record the digression and resume information using every applicable schema field.
 
-• where every sugya ends
+4. For each boundary, identify the concrete evidence:
+   new Mishnah, new legal question, formal transition, change in argumentative task,
+   closure of the prior investigation, embedded narrative, return to an earlier
+   discussion, or another textually supported signal.
 
-• when a discussion is merely a continuation of an existing sugya
+5. Record all primary verses and rabbis materially involved in the sugya.
+   Do not treat every mentioned name as primary.
 
-• when a discussion is an embedded digression
+6. Give a concise title, purpose, structure description, confidence score,
+   boundary reason, and start snippet as required by the schema.
 
-• when the Gemara resumes an earlier sugya after an interruption
+7. After the first pass, perform a complete second pass over the tractate.
+   Check for false splits, missed transitions, embedded digressions, resumptions,
+   and invalid daf/segment locations. Populate the second-pass validation fields.
 
-Do NOT assume that every new topic begins a new sugya.
+8. Accuracy is more important than producing small units. Prefer a slightly broader
+   sugya over an unsupported split.
 
-Do NOT assume every Mishnah begins a new sugya.
+FINAL CHECK
 
-Do NOT assume every Amora begins a new sugya.
-
-Instead, determine whether the logical discussion has actually changed.
-
---------------------------------------------------
-IMPORTANT PRINCIPLE
---------------------------------------------------
-
-Follow the ARGUMENT rather than the subject matter.
-
-Track the flow of:
-
-question
-
-challenge
-
-proof
-
-resolution
-
-objection
-
-alternative explanation
-
-baraita
-
-mishnah
-
-biblical proof
-
-story
-
-halakhic conclusion
-
-Only declare a new sugya when the Gemara genuinely transitions into a new self-contained discussion.
-
---------------------------------------------------
-INTERLEAVING
---------------------------------------------------
-
-The Gemara sometimes interrupts one sugya with another.
-
-Example:
-
-Sugya A begins
-
-↓
-
-Sugya B interrupts
-
-↓
-
-Sugya B ends
-
-↓
-
-Sugya A resumes
-
-Treat this as ONE sugya containing an embedded digression.
-
-Do NOT split Sugya A into two unrelated sugyot.
-
-Explicitly mark:
-
-DIGRESSION
-
-and
-
-RESUME
-
-when appropriate.
-
---------------------------------------------------
-CONFIDENCE
---------------------------------------------------
-
-Every boundary must include a confidence score.
-
-100 = essentially certain
-
-90 = very likely
-
-75 = probable
-
-50 = uncertain
-
-25 = weak evidence
-
---------------------------------------------------
-REASONING
---------------------------------------------------
-
-For every possible boundary explain WHY.
-
-Examples:
-
-new Mishnah
-
-new legal question
-
-transition phrase
-
-change of speakers
-
-new scriptural derivation
-
-return to previous discussion
-
-embedded narrative
-
-change in legal subject
-
-etc.
-
---------------------------------------------------
-DO NOT FORCE BOUNDARIES
---------------------------------------------------
-
-If two discussions appear connected,
-
-keep them together.
-
-It is preferable to create a slightly larger sugya than to incorrectly split one.
-
---------------------------------------------------
-OUTPUT FORMAT
---------------------------------------------------
-
-For every detected sugya output:
-
-Sugya #
-
-Start:
-tractate
-daf
-line/segment if possible
-
-End:
-tractate
-daf
-line/segment if possible
-
-Title:
-(one sentence)
-
-Purpose:
-(one paragraph)
-
-Structure:
-Question →
-Answer →
-Challenge →
-Resolution
-
-Contains Digressions?
-Yes / No
-
-If yes:
-
-Start of digression
-
-End of digression
-
-Resume location
-
-Primary verses used
-
-Primary Rabbis involved
-
-Confidence
-
-Reason for every boundary
-
---------------------------------------------------
-FINAL REVIEW
---------------------------------------------------
-
-After identifying every sugya,
-
-perform a second complete pass over the tractate.
-
-During this second pass:
-
-look for places where a sugya was incorrectly split
-
-look for places where two sugyot should be merged
-
-look for resumptions after digressions
-
-look for hidden transitions
-
-Only after this review produce the final list.
-
---------------------------------------------------
-DO NOT SUMMARIZE THE TRACTATE.
-
-YOUR ONLY GOAL IS TO RECONSTRUCT ITS DISCOURSE STRUCTURE.
-
---------------------------------------------------
-STANDARDIZED OUTPUT REQUIREMENT
---------------------------------------------------
-
-Return the completed analysis as ONE valid JSON object.
-
-The root object must include:
-
-{
-  "tractate": "...",
-  "analysis_version": 1,
-  "sugyot": []
-}
-
-Save or return this output as:
-
-<TRACTATE>_sugya_analysis.json
-
-The final output must be valid JSON only.
+Verify that:
+- every daf/segment location exists in the bundle;
+- sugyot cover the intended tractate sequence without accidental gaps or overlaps;
+- all conditional digression fields remain present;
+- the root object exactly matches the sugya_analysis schema.

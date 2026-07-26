@@ -1,585 +1,163 @@
-# Sugya Source Interpretation / Exegesis Analysis Prompt
+You are an expert in the structure of the Babylonian Talmud.
 
-You are an expert in the Babylonian Talmud, Rabbinic hermeneutics, Biblical Hebrew, and the methods by which the Sages derive law, theology, ethics, and narrative meaning from earlier sources.
+ATTACHED SHARED FILES
 
-You are given FOUR files.
+1. OrHaSugya_OutputSchema.json
+2. OrHaSugya_AnalysisStandards.json
 
----
+Treat both shared files as binding instructions.
 
-## FILE 1
+The Output Schema is authoritative for the complete JSON structure.
+The Analysis Standards file is authoritative for controlled vocabulary, scoring,
+conditional-value handling, filenames, and global analysis rules.
 
-**<TRACTATE>_bundle.jsonl**
+Do not redefine either shared file inside this prompt.
+Do not omit any field required for this stage.
+When a field is conditional or not applicable, preserve it and use the empty value
+specified by the shared schema and standards.
 
-This is the ORIGINAL TEXT.
+Return one valid JSON object and no prose outside the JSON.
 
-This is the PRIMARY source.
+EXACT FILE CONTRACT
 
-Every conclusion MUST ultimately be supported by this file.
+Prompt filename:
+sugyaExegesisAnalysisPrompt.txt
 
----
+Required shared input filenames:
+OrHaSugya_OutputSchema.json
+OrHaSugya_AnalysisStandards.json
 
-## FILE 2
+Required stage input filenames:
+<TRACTATE>_bundle.jsonl
+<TRACTATE>_sugya_analysis.json
+<TRACTATE>_authority_analysis.json
+<TRACTATE>_argument_analysis.json
+<TRACTATE>_source_relationship_analysis.json
 
-**<TRACTATE>_sugya_analysis.json**
+Required output filename:
+<TRACTATE>_exegesis_analysis.json
 
-This defines the sugya boundaries.
+These names are binding. Replace <TRACTATE> with the tractate name used by the project.
+Do not add version numbers, dates, descriptors, or suffixes to any filename.
 
-Do NOT redefine the sugyot.
 
-Use these boundaries exactly.
+STAGE
 
----
+Source Interpretation / Exegesis Analysis
 
-## FILE 3
+INPUTS
 
-**<TRACTATE>_authority_analysis.json**
+1. <TRACTATE>_bundle.jsonl
+2. <TRACTATE>_sugya_analysis.json
+3. <TRACTATE>_authority_analysis.json
+4. <TRACTATE>_argument_analysis.json
+5. <TRACTATE>_source_relationship_analysis.json
 
-This identifies the authorities and the cited sources.
-
-Use this only as a helper.
-
-Always verify against the original bundle.
-
----
-
-## FILE 4
-
-**<TRACTATE>_argument_analysis.json**
-
-This reconstructs the arguments.
-
-Use it only as a guide.
-
-Always verify every conclusion against the original bundle.
-
-Replace <TRACTATE> with the tractate name used by the project.
-
-The required output filename is:
+OUTPUT
 
 <TRACTATE>_exegesis_analysis.json
 
-Version information belongs inside the JSON through analysis_version, not in the filename.
+Populate only:
 
----
+outputs.exegesis_analysis
 
-# PRIMARY OBJECTIVE
+from OrHaSugya_OutputSchema.json. Return that object as the root output object.
 
-This analysis is NOT a summary of the sugya.
+OBJECTIVE
 
-This analysis is NOT merely a list of sources.
+Reconstruct the interpretive process by which each earlier source is read,
+transformed, and used to produce the sugya's arguments and conclusions.
 
-This analysis is NOT merely a list of rabbis.
+ANALYSIS METHOD
 
-Instead, reconstruct **the complete interpretive process** by which the Gemara transforms earlier sources into the conclusions of the sugya.
+Perform seven passes for each sugya.
 
-Your task is to explain, source by source:
+PASS 1 — SOURCE INVENTORY
 
-* Why this source appears.
-* Why this specific source was chosen instead of another.
-* What words or phrases the Gemara notices.
-* How each rabbi understands those words.
-* How the Hebrew wording influences the interpretation.
-* What logical inferences are drawn from the text.
-* How the interpretation advances the argument.
-* How the interpretation contributes to the sugya as a whole.
+Identify every source that requires interpretation. Reconcile the authority,
+argument, and relationship analyses, but verify each source against the bundle.
 
-The final output must be ONE valid JSON object.
+PASS 2 — FUNCTION
 
----
+Determine why the source appears and which textual, argumentative, legal,
+theological, ethical, or narrative function it performs.
 
-# MULTI-PASS ANALYSIS
+PASS 3 — TEXTUAL ANALYSIS
 
-Perform the analysis in seven passes.
+Identify the exact quoted portion and the Hebrew or Aramaic wording that matters.
+Explain:
+- plain meaning in context;
+- original-source context when available from the inputs;
+- ignored or unused portions;
+- textual and grammatical observations;
+- ambiguities;
+- plausible alternative readings.
 
-## PASS 1
+Do not invent lexical or grammatical claims. When the supplied text is insufficient
+for reliable parsing, preserve the schema fields and state the limitation concisely.
 
-Identify every source.
+PASS 4 — HEBREW / ARAMAIC ANALYSIS
 
-Include:
+For every materially significant phrase, populate all fields defined by the schema:
+phrase, root when reliable, part of speech, grammatical form, literal translation,
+plain meaning, rabbinic reading, reason for the reading, alternatives, and effect
+on the argument.
 
-* Torah
-* Nevi'im
-* Ketuvim
-* Mishnah
-* Tosefta
-* Baraita
-* Earlier Amoraim
-* Contemporary Amoraim
-* Named Rabbis
-* Historical events
-* Earlier arguments
-* Logical principles
+Do not create token-level entries for words that do no interpretive work.
 
----
+PASS 5 — PARTICIPANT INTERPRETATIONS
 
-## PASS 2
+For every rabbinic participant who materially interprets the source, reconstruct:
+- the participant's textual reading;
+- logical reasoning;
+- why the source is used;
+- hermeneutic method;
+- argument role;
+- confidence.
 
-Determine why every source appears.
+Do not assign an interpretation to a participant solely because the participant is
+mentioned nearby.
 
-Classify its function.
+PASS 6 — COMPARISON AND TRANSFORMATION
 
-Choose one or more:
+Explain agreements, disagreements, qualifications, harmonizations, reinterpretations,
+and limitations among readings. Populate interpretive_logic and textual_transformation
+to show the movement from textual observation to inference, logical step, and
+conclusion.
 
-* FOUNDATION
-* TEXTUAL FOUNDATION
-* PROOF
-* SUPPORT
-* QUESTION
-* CHALLENGE
-* OBJECTION
-* DISTINCTION
-* LIMITATION
-* RESOLUTION
-* APPLICATION
-* ILLUSTRATION
-* ETHICAL SUPPORT
-* THEOLOGICAL SUPPORT
-* NARRATIVE SUPPORT
+PASS 7 — SUGYA CONTRIBUTION
 
----
+Explain:
+- the source's relationship to the argument and sugya;
+- its interactions with other sources;
+- what fails if it is removed;
+- whether a replacement is possible;
+- why it matters to the complete interpretive structure;
+- the sugya-level interpretive synthesis required by the schema.
 
-## PASS 3
+ANALYSIS RULES
 
-Perform a complete textual analysis.
+1. The bundle is the controlling text. Later-stage files provide mappings and
+   hypotheses, not independent proof.
 
-Do NOT summarize the verse.
+2. Do not merely summarize verses, statements, or stories. Explain the interpretive
+   mechanism.
 
-Instead determine:
+3. Distinguish plain reading from the rabbinic reading and explain the reason for
+   the difference.
 
-* Which exact Hebrew words matter.
-* Which words are ignored.
-* Which grammatical forms matter.
-* Which ambiguities are exploited.
-* Which assumptions are introduced.
+4. Explain why this source and this wording were useful at this exact point.
 
----
+5. Keep quotations minimal and analysis specific.
 
-## PASS 4
+6. Preserve all conditional arrays and objects, even when no Hebrew analysis,
+   interpretive commentary, alternative reading, interaction, or replacement exists.
 
-Determine how every rabbinic participant interprets the source.
+FINAL CHECK
 
-For every participant reconstruct the complete reasoning process.
-
----
-
-## PASS 5
-
-Compare every interpretation.
-
-Determine
-
-* agreements
-* disagreements
-* reinterpretations
-* qualifications
-* limitations
-* harmonizations
-
----
-
-## PASS 6
-
-Analyze how every source contributes to the overall sugya.
-
-Explain how removing the source would change the sugya.
-
----
-
-## PASS 7
-
-Generate the final JSON.
-
----
-
-# CRITICAL RULE
-
-Never write generic statements.
-
-The following are forbidden:
-
-"The source supports the argument."
-
-"The source advances the discussion."
-
-"The verse is interpreted."
-
-"The source is used in the sugya."
-
-Instead explain HOW.
-
----
-
-# SOURCE ANALYSIS
-
-For every source determine:
-
-```json
-{
-  "citation": "",
-  "source_type": "",
-
-  "quoted_text": "",
-
-  "overall_function": "",
-
-  "importance": "",
-
-  "why_this_source_was_chosen": "",
-
-  "relationship_to_argument": {
-    "summary":"",
-    "details":""
-  },
-
-  "relationship_to_sugya": {
-    "summary":"",
-    "details":""
-  },
-
-  "source_interactions":[ ]
-}
-```
-
----
-
-# TEXTUAL ANALYSIS
-
-For every source perform a textual analysis.
-
-```json
-{
-"textual_analysis":{
-
-"quoted_portion":"",
-
-"hebrew_focus":[ ],
-
-"plain_meaning":"",
-
-"context_in_original_source":"",
-
-"ignored_portions":[ ],
-
-"textual_observations":[ ],
-
-"grammatical_observations":[ ],
-
-"ambiguities":[ ],
-
-"alternative_possible_readings":[ ]
-
-}
-}
-```
-
----
-
-# HEBREW ANALYSIS
-
-Whenever the source is Hebrew Scripture,
-
-analyze every significant Hebrew expression.
-
-Do NOT simply translate.
-
-Instead explain why the wording matters.
-
-```json
-{
-"hebrew_analysis":[
-
-{
-
-"phrase":"",
-
-"root":"",
-
-"part_of_speech":"",
-
-"grammatical_form":"",
-
-"literal_translation":"",
-
-"plain_meaning":"",
-
-"rabbinic_reading":"",
-
-"why_this_reading":"",
-
-"alternative_readings":[ ],
-
-"effect_on_argument":""
-
-}
-
-]
-}
-```
-
-Example:
-
-Phrase:
-
-בשכבך
-
-Root:
-
-שכב
-
-Grammatical form:
-
-Preposition ב + infinitive construct with second-person masculine singular suffix
-
-Literal meaning:
-
-"When you lie down"
-
-Rabbinic reading:
-
-"The time when people normally retire for sleep."
-
-Effect on argument:
-
-"This transforms a description of human behavior into a legal definition of the evening Shema period."
-
----
-
-# INTERPRETIVE LOGIC
-
-Every source must reconstruct the reasoning process.
-
-```json
-{
-"interpretive_logic":{
-
-"textual_observation":"",
-
-"inference":"",
-
-"logical_step":"",
-
-"conclusion":""
-
-}
-}
-```
-
-Example
-
-Observation
-
-"The Torah says בשכבך."
-
-↓
-
-Inference
-
-"The Torah refers to a recognizable behavioral period."
-
-↓
-
-Logical Step
-
-"A behavioral period can define legal time."
-
-↓
-
-Conclusion
-
-"The mitzvah lasts throughout that period."
-
----
-
-# TEXTUAL TRANSFORMATION
-
-Explain how the Gemara changes the meaning of the text.
-
-```json
-{
-"textual_transformation":{
-
-"plain_reading":"",
-
-"rabbinic_reading":"",
-
-"reason_for_difference":""
-
-}
-}
-```
-
----
-
-# INTERPRETIVE COMMENTARY
-
-Every rabbinic interpretation must contain
-
-```json
-{
-
-"rabbi":"",
-
-"position":"",
-
-"textual_reading":{
-
-"summary":"",
-
-"details":""
-
-},
-
-"logical_reasoning":{
-
-"summary":"",
-
-"details":""
-
-},
-
-"why_the_source_is_used":{
-
-"summary":"",
-
-"details":""
-
-},
-
-"hermeneutic_method":[ ],
-
-"argument_role":"",
-
-"confidence":95
-
-}
-```
-
-The DETAILS field must reconstruct the reasoning process.
-
-Never merely state that the source supports something.
-
-Explain HOW.
-
----
-
-# SOURCE INTERACTION
-
-Replace generic relationships with explicit interactions.
-
-```json
-"source_interactions":[
-
-{
-
-"other_source":"",
-
-"interaction_type":"Clarifies",
-
-"details":""
-
-},
-
-{
-
-"other_source":"",
-
-"interaction_type":"Supports",
-
-"details":""
-
-},
-
-{
-
-"other_source":"",
-
-"interaction_type":"Limits",
-
-"details":""
-
-}
-
-]
-```
-
----
-
-# ARGUMENT DEPENDENCY
-
-Every source should include
-
-```json
-{
-"argument_dependency":{
-
-"if_removed":"",
-
-"replacement_possible":true,
-
-"replacement_reason":"",
-
-"importance_to_argument":""
-
-}
-}
-```
-
----
-
-# SUGYA-LEVEL ANALYSIS
-
-After every source has been analyzed,
-
-perform a second analysis.
-
-Determine
-
-```json
-{
-
-"primary_textual_theme":"",
-
-"primary_hermeneutic_method":"",
-
-"development_of_interpretation":"",
-
-"relationship_between_sources":"",
-
-"overall_argument_progression":"",
-
-"overall_message":"",
-
-"why_this_sugya_is_structured_this_way":"",
-
-"textual_strategy":"",
-
-"interpretive_strategy":"",
-
-"how_the_sources_collectively_create_the_argument":""
-
-}
-```
-
----
-
-# FINAL REVIEW
-
-Perform one final verification pass.
-
-Verify that
-
-* Every source has a complete textual analysis.
-* Every Hebrew expression has grammatical analysis.
-* Every interpretation reconstructs the chain of reasoning.
-* Every logical reasoning field explains HOW the conclusion follows.
-* Every source interaction explains the relationship between sources.
-* Every argument dependency explains why the source matters.
-* Every sugya includes a complete interpretive synthesis.
-
-If any field contains a generic statement, rewrite it until it explains the actual reasoning process.
-
-The final output MUST be valid JSON only.
-
-Return or save the completed output as:
-
-<TRACTATE>_exegesis_analysis.json
+Verify that:
+- all materially interpreted sources are included;
+- Hebrew and grammatical claims are supported and not fabricated;
+- every participant interpretation is textually grounded;
+- the chain from wording to inference to argument is explicit;
+- every exegesis_analysis schema field is preserved.

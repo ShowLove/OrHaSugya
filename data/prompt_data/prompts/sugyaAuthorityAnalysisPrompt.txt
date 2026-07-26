@@ -1,480 +1,108 @@
 You are an expert in the structure of the Babylonian Talmud.
 
-You are given TWO files.
+ATTACHED SHARED FILES
 
-FILE 1
+1. OrHaSugya_OutputSchema.json
+2. OrHaSugya_AnalysisStandards.json
 
-The previously reconstructed sugya boundaries.
+Treat both shared files as binding instructions.
 
+The Output Schema is authoritative for the complete JSON structure.
+The Analysis Standards file is authoritative for controlled vocabulary, scoring,
+conditional-value handling, filenames, and global analysis rules.
+
+Do not redefine either shared file inside this prompt.
+Do not omit any field required for this stage.
+When a field is conditional or not applicable, preserve it and use the empty value
+specified by the shared schema and standards.
+
+Return one valid JSON object and no prose outside the JSON.
+
+EXACT FILE CONTRACT
+
+Prompt filename:
+sugyaAuthorityAnalysisPrompt.txt
+
+Required shared input filenames:
+OrHaSugya_OutputSchema.json
+OrHaSugya_AnalysisStandards.json
+
+Required stage input filenames:
 <TRACTATE>_sugya_analysis.json
-
-FILE 2
-
-The original tractate data.
-
 <TRACTATE>_bundle.jsonl
 
-Replace <TRACTATE> with the tractate name used by the project.
+Required output filename:
+<TRACTATE>_authority_analysis.json
 
-The required output filename is:
+These names are binding. Replace <TRACTATE> with the tractate name used by the project.
+Do not add version numbers, dates, descriptors, or suffixes to any filename.
+
+
+STAGE
+
+Authority Structure Analysis
+
+INPUTS
+
+1. <TRACTATE>_sugya_analysis.json
+2. <TRACTATE>_bundle.jsonl
+
+OUTPUT
 
 <TRACTATE>_authority_analysis.json
 
-Version information belongs inside the JSON through analysis_version, not in the filename.
+Populate only:
 
-The purpose of this analysis is NOT to redefine the sugyot.
+outputs.authority_analysis
 
-Instead, the purpose is to reconstruct the AUTHORITY STRUCTURE of each sugya and determine whether the source structure supports the proposed sugya boundaries.
+from OrHaSugya_OutputSchema.json. Return that object as the root output object.
 
-====================================================
-PRIMARY OBJECTIVE
-====================================================
+OBJECTIVE
 
-For every sugya:
+For every supplied sugya, reconstruct its authority structure and evaluate whether
+the source structure supports the existing boundary. Do not alter boundaries.
 
-1. Collect every source cited.
+ANALYSIS RULES
 
-2. Determine how each source functions inside the argument.
+1. Use the supplied sugya boundaries exactly and verify every conclusion against
+   the corresponding bundle range.
 
-3. Determine which sources are structurally central.
+2. Identify every materially used source, including textual sources, named or
+   anonymous authorities, historical incidents, practical examples, logical
+   principles, hermeneutic methods, customs, and aggadic materials.
 
-4. Determine whether the authority structure supports the existing sugya boundary.
+3. Do not create a separate source merely because a speaker makes a procedural
+   statement. Include a speaker as a source only when the speaker's authority,
+   ruling, interpretation, testimony, or act functions evidentially.
 
-Do NOT modify sugya boundaries.
+4. Assign each source:
+   - one source type;
+   - one authority rank;
+   - one structural centrality score;
+   - one primary role;
+   - any direct dependency;
+   - the specific issue, argument, or position it supports;
+   - a confidence score.
 
-Only evaluate them.
+5. Group sources by meaningful shared function or theme. Do not create decorative
+   groups that add no structural information.
 
-====================================================
-SOURCE TYPES
-====================================================
+6. Choose exactly one central source per sugya. This is the source around which the
+   largest part of the discussion turns, not automatically the highest-ranked source.
 
-Identify every cited source.
+7. Record only direct dependencies. Do not infer a complete dependency graph.
 
-Possible source types include:
+8. Evaluate the supplied boundary using source structure alone. Explain whether a
+   distinct source cluster, central source, or authority transition supports it.
 
-Torah
+9. Populate every structural-summary and interleaving field defined by the schema.
+   When interleaving is absent, retain the fields using schema-compliant empty values.
 
-Neviim
+FINAL CHECK
 
-Ketuvim
-
-Mishnah
-
-Tosefta
-
-Baraita
-
-Earlier Amora
-
-Later Amora
-
-Named Rabbi
-
-Unnamed Rabbi
-
-Historical Event
-
-Ma'aseh
-
-Aggadah
-
-Practical Example
-
-Logical Principle
-
-Gezerah Shavah
-
-Kal VaChomer
-
-Binyan Av
-
-Heqesh
-
-Other Derashah
-
-Custom
-
-Halakhic Principle
-
-====================================================
-AUTHORITY RANK
-====================================================
-
-Every source receives ONE Authority Rank.
-
-Use this hierarchy.
-
-100
-
-Torah
-
-95
-
-Explicit Biblical Derivation
-
-90
-
-Mishnah
-
-85
-
-Tosefta
-
-80
-
-Baraita
-
-75
-
-Accepted Halakhic Principle
-
-70
-
-Early Amora
-
-65
-
-Later Amora
-
-60
-
-Named Sage
-
-55
-
-Anonymous Gemara
-
-50
-
-Logical Principle
-
-45
-
-Historical Incident
-
-40
-
-Aggadah
-
-35
-
-Illustration
-
-30
-
-Example
-
-20
-
-Narrative Detail
-
-10
-
-Tangential Reference
-
-Authority Rank measures normative authority only.
-
-====================================================
-STRUCTURAL CENTRALITY
-====================================================
-
-Separately assign Structural Centrality.
-
-100
-
-The sugya cannot exist without this source.
-
-80
-
-Major pillar of the discussion.
-
-60
-
-Frequently relied upon.
-
-40
-
-Supporting evidence.
-
-20
-
-Minor support.
-
-10
-
-Illustration only.
-
-Structural Centrality is NOT Authority Rank.
-
-A Baraita may be more structurally central than a Torah verse.
-
-====================================================
-SOURCE ROLE
-====================================================
-
-Every source receives ONE primary role.
-
-FOUNDATION
-
-QUESTION
-
-PROOF
-
-SUPPORT
-
-OBJECTION
-
-LIMITATION
-
-DISTINCTION
-
-RESOLUTION
-
-DIGRESSION
-
-BACKGROUND
-
-ILLUSTRATION
-
-PRACTICAL APPLICATION
-
-====================================================
-SOURCE DEPENDENCIES
-====================================================
-
-Determine whether each source depends upon another source.
-
-Examples:
-
-Baraita explains Mishnah.
-
-Amora explains Baraita.
-
-Verse supports Mishnah.
-
-Story illustrates Halakhah.
-
-Record only DIRECT dependency.
-
-Do not attempt to construct the full graph.
-
-====================================================
-CENTRAL SOURCE
-====================================================
-
-Choose ONE central source.
-
-This is NOT necessarily the highest authority.
-
-It is the source around which the largest portion of the sugya revolves.
-
-Explain why.
-
-====================================================
-BOUNDARY VALIDATION
-====================================================
-
-Evaluate the proposed sugya boundary.
-
-Options:
-
-SUPPORTED
-
-LIKELY SUPPORTED
-
-UNCERTAIN
-
-LIKELY INCORRECT
-
-INCORRECT
-
-Base this ONLY on source structure.
-
-====================================================
-INTERLEAVING
-====================================================
-
-If an embedded digression introduces temporary sources but later returns to the original authority structure:
-
-Do NOT promote the digression sources to central.
-
-Mark them as:
-
-DIGRESSION
-
-====================================================
-OUTPUT FORMAT
-====================================================
-
-Return ONE JSON object.
-
-Schema:
-
-{
-  "tractate": "...",
-  "analysis_version": 1,
-  "sugyot": [
-
-    {
-
-      "sugya_number": 1,
-
-      "start": {
-        "daf": "...",
-        "segment": ...
-      },
-
-      "end": {
-        "daf": "...",
-        "segment": ...
-      },
-
-      "boundary_validation": {
-
-        "assessment":
-          "SUPPORTED",
-
-        "confidence": 96,
-
-        "reason":
-          "Authority graph changes substantially."
-      },
-
-      "central_source": {
-
-        "citation": "...",
-
-        "type": "...",
-
-        "authority_rank": ...,
-
-        "structural_centrality": ...,
-
-        "reason":
-          "..."
-      },
-
-      "source_groups": [
-
-        {
-
-          "theme":
-            "...",
-
-          "sources": [
-
-            {
-
-              "citation": "...",
-
-              "type": "...",
-
-              "authority_rank": ...,
-
-              "structural_centrality": ...,
-
-              "role": "...",
-
-              "depends_on":
-                "...",
-
-              "supports":
-                "...",
-
-              "confidence": ...
-            }
-
-          ]
-
-        }
-
-      ],
-
-      "summary": {
-
-        "primary_question":
-          "...",
-
-        "primary_resolution":
-          "...",
-
-        "overall_confidence":
-          ...
-      }
-
-    }
-
-  ]
-}
-
-====================================================
-GROUPING RULES
-====================================================
-
-Do NOT produce one flat list of sources.
-
-Instead group sources into logical clusters.
-
-Examples:
-
-Biblical Foundations
-
-Mishnaic Foundations
-
-Baraitot
-
-Primary Amoraic Debate
-
-Supporting Proofs
-
-Secondary Proofs
-
-Aggadic Digression
-
-Practical Conclusions
-
-Create as few groups as necessary.
-
-====================================================
-KEEP THE JSON COMPACT
-====================================================
-
-Avoid long prose.
-
-Use concise explanations.
-
-One sentence per reason.
-
-One sentence per summary.
-
-This JSON will become the input to future analysis passes.
-
-====================================================
-DO NOT
-
-Do NOT include full quotations.
-
-Do NOT include long summaries.
-
-Do NOT build a complete dependency graph.
-
-Do NOT explain every opinion.
-
-Store only structural information.
-
-====================================================
-FINAL REVIEW
-
-Before producing the JSON:
-
-Perform a second pass.
-
-Check whether the Authority Structure agrees with the supplied sugya boundaries.
-
-Only after completing this review generate the JSON.
-
-The output must be valid JSON only.
-
-Return or save the completed output as:
-
-<TRACTATE>_authority_analysis.json
+Verify that:
+- every source is textually grounded in the bundle;
+- authority rank and structural centrality remain conceptually separate;
+- each source has one primary role;
+- exactly one central source exists per sugya;
+- every schema field is preserved.

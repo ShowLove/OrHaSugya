@@ -1,0 +1,531 @@
+{
+  "schema_name": "Or HaSugya Standardized Analysis Output Schema",
+  "schema_version": 1,
+  "schema_notes": {
+    "purpose": "One schema-only template representing every standardized analysis output in the Or HaSugya pipeline.",
+    "usage": "Each key under outputs represents one complete output file type. Replace empty placeholders with analyzed values while preserving every field.",
+    "conditional_fields_rule": "Fields that are not applicable must remain present and use null, an empty string, false, 0, or an empty array according to the field type.",
+    "empty_value_rule": "Do not remove conditional or unused fields. Use null for inapplicable linked objects or dependencies, empty strings for unavailable text, false for booleans, 0 for unavailable numeric values, and empty arrays when no entries exist.",
+    "array_rule": "Arrays in this schema contain one schema-only representative object to expose the required item structure. Actual outputs may contain zero, one, or many items.",
+    "filename_rule": "Each stage must use the exact prompt, input, and output filenames defined in file_contracts. Replace <TRACTATE> with the tractate name used by the project. Do not add version suffixes."
+  },
+  "outputs": {
+    "sugya_analysis": {
+      "tractate": "",
+      "analysis_version": 0,
+      "analysis_type": "",
+      "source_bundle": "",
+      "method_note": "",
+      "sugyot": [
+        {
+          "sugya_number": 0,
+          "start": {
+            "tractate": "",
+            "daf": "",
+            "segment": 0
+          },
+          "end": {
+            "tractate": "",
+            "daf": "",
+            "segment": 0
+          },
+          "title": "",
+          "purpose": "",
+          "structure": "",
+          "contains_digressions": false,
+          "primary_verses_used": [
+            ""
+          ],
+          "primary_rabbis_involved": [
+            ""
+          ],
+          "confidence": 0,
+          "boundary_reason": "",
+          "start_snippet": "",
+          "digressions": [
+            {
+              "start": null,
+              "end": null,
+              "resume_location": null,
+              "note": ""
+            }
+          ],
+          "second_pass_boundary_validation": {
+            "assessment": "",
+            "confidence": 0,
+            "reason": ""
+          }
+        }
+      ]
+    },
+    "authority_analysis": {
+      "tractate": "",
+      "analysis_version": 0,
+      "sugyot": [
+        {
+          "sugya_number": 0,
+          "start": {
+            "daf": "",
+            "segment": 0
+          },
+          "end": {
+            "daf": "",
+            "segment": 0
+          },
+          "boundary_validation": {
+            "assessment": "",
+            "confidence": 0,
+            "reason": ""
+          },
+          "central_source": {
+            "citation": "",
+            "type": "",
+            "authority_rank": 0,
+            "structural_centrality": 0,
+            "reason": ""
+          },
+          "source_groups": [
+            {
+              "theme": "",
+              "sources": [
+                {
+                  "citation": "",
+                  "type": "",
+                  "authority_rank": 0,
+                  "structural_centrality": 0,
+                  "role": "",
+                  "depends_on": null,
+                  "supports": "",
+                  "confidence": 0
+                }
+              ]
+            }
+          ],
+          "summary": {
+            "primary_question": "",
+            "primary_resolution": "",
+            "overall_confidence": 0
+          }
+        }
+      ]
+    },
+    "argument_analysis": {
+      "tractate": "",
+      "analysis_version": 0,
+      "sugyot": [
+        {
+          "sugya_number": 0,
+          "start": {
+            "daf": "",
+            "segment": 0
+          },
+          "end": {
+            "daf": "",
+            "segment": 0
+          },
+          "arguments": [
+            {
+              "argument_number": 0,
+              "title": "",
+              "argument_type": "",
+              "issue": {
+                "summary": "",
+                "details": ""
+              },
+              "question": {
+                "summary": "",
+                "details": ""
+              },
+              "sides": [
+                {
+                  "position": {
+                    "summary": "",
+                    "details": ""
+                  },
+                  "supporting_rabbis": [
+                    ""
+                  ],
+                  "supporting_sources": [
+                    ""
+                  ],
+                  "reasoning": {
+                    "summary": "",
+                    "details": ""
+                  },
+                  "underlying_principle": {
+                    "summary": "",
+                    "details": ""
+                  },
+                  "strength": ""
+                }
+              ],
+              "argument_flow": [
+                ""
+              ],
+              "source_relationships": [
+                {
+                  "citation": "",
+                  "source_type": "",
+                  "role": "",
+                  "supports_argument_number": 0,
+                  "relationship_details": "",
+                  "relationship_analysis": {
+                    "primary_explanation": "",
+                    "additional_explanations": [
+                      ""
+                    ]
+                  }
+                }
+              ],
+              "rabbinic_participants": [
+                {
+                  "name": "",
+                  "role": ""
+                }
+              ],
+              "resolution": {
+                "status": {
+                  "summary": "",
+                  "details": ""
+                },
+                "accepted_position": {
+                  "summary": "",
+                  "details": ""
+                },
+                "conclusion_details": "",
+                "remaining_disagreements": [
+                  {
+                    "position": {
+                      "summary": "",
+                      "details": ""
+                    }
+                  }
+                ]
+              },
+              "confidence": 0
+            }
+          ],
+          "aggadic_analysis": {
+            "present": false,
+            "story": {
+              "summary": "",
+              "details": ""
+            },
+            "characters": [
+              ""
+            ],
+            "conflict": "",
+            "lesson": {
+              "summary": "",
+              "details": ""
+            },
+            "ethical_principle": {
+              "summary": "",
+              "details": ""
+            },
+            "theological_principle": {
+              "summary": "",
+              "details": ""
+            },
+            "practical_takeaway": "",
+            "relationship_to_sugya": ""
+          },
+          "overall_summary": {
+            "main_issue": {
+              "summary": "",
+              "details": ""
+            },
+            "main_conclusion": {
+              "summary": "",
+              "details": ""
+            },
+            "overall_confidence": 0
+          }
+        }
+      ]
+    },
+    "source_relationship_analysis": {
+      "tractate": "",
+      "analysis_version": 0,
+      "analysis_type": "",
+      "source_files": {
+        "bundle": "",
+        "sugya_analysis": "",
+        "authority_analysis": "",
+        "argument_analysis": ""
+      },
+      "method_note": "",
+      "sugyot": [
+        {
+          "sugya_number": 0,
+          "start": {
+            "daf": "",
+            "segment": 0
+          },
+          "end": {
+            "daf": "",
+            "segment": 0
+          },
+          "source_groups": [
+            {
+              "theme": "",
+              "sources": [
+                {
+                  "citation": "",
+                  "source_type": "",
+                  "authority_role": "",
+                  "primary_role": "",
+                  "argument_number": 0,
+                  "position_reference": "",
+                  "why_this_source_was_chosen": "",
+                  "relationship_to_argument": {
+                    "summary": "",
+                    "details": ""
+                  },
+                  "relationship_analysis": {
+                    "primary_explanation": "",
+                    "additional_explanations": [
+                      ""
+                    ]
+                  },
+                  "relationship_to_sugya": {
+                    "summary": "",
+                    "details": ""
+                  },
+                  "source_interactions": [
+                    {
+                      "other_source": "",
+                      "interaction_type": "",
+                      "details": ""
+                    }
+                  ],
+                  "dependency": {
+                    "depends_on": null,
+                    "dependency_type": null,
+                    "dependency_details": null
+                  },
+                  "argument_effect": {
+                    "if_removed": "",
+                    "replacement_possible": false,
+                    "replacement_reason": "",
+                    "importance_to_argument": ""
+                  },
+                  "confidence": 0
+                }
+              ]
+            }
+          ],
+          "relationship_synthesis": {
+            "central_relationship_pattern": "",
+            "relationship_between_source_groups": "",
+            "source_driven_argument_progression": "",
+            "most_important_dependency": null,
+            "effect_of_digressions": null,
+            "collective_contribution": ""
+          },
+          "overall_confidence": 0
+        }
+      ]
+    },
+    "exegesis_analysis": {
+      "tractate": "",
+      "analysis_version": 0,
+      "analysis_type": "",
+      "source_files": {
+        "bundle": "",
+        "sugya_analysis": "",
+        "authority_analysis": "",
+        "argument_analysis": "",
+        "source_relationship_analysis": ""
+      },
+      "method_note": "",
+      "sugyot": [
+        {
+          "sugya_number": 0,
+          "start": {
+            "daf": "",
+            "segment": 0
+          },
+          "end": {
+            "daf": "",
+            "segment": 0
+          },
+          "title": "",
+          "sources": [
+            {
+              "citation": "",
+              "source_type": "",
+              "quoted_text": "",
+              "overall_function": "",
+              "importance": "",
+              "why_this_source_was_chosen": "",
+              "relationship_to_argument": {
+                "summary": "",
+                "details": ""
+              },
+              "relationship_to_sugya": {
+                "summary": "",
+                "details": ""
+              },
+              "source_interactions": [
+                {
+                  "other_source": "",
+                  "interaction_type": "",
+                  "details": ""
+                }
+              ],
+              "textual_analysis": {
+                "quoted_portion": "",
+                "hebrew_focus": [
+                  ""
+                ],
+                "plain_meaning": "",
+                "context_in_original_source": "",
+                "ignored_portions": [
+                  ""
+                ],
+                "textual_observations": [
+                  ""
+                ],
+                "grammatical_observations": [
+                  ""
+                ],
+                "ambiguities": [
+                  ""
+                ],
+                "alternative_possible_readings": [
+                  ""
+                ]
+              },
+              "hebrew_analysis": [
+                {
+                  "phrase": "",
+                  "root": "",
+                  "part_of_speech": "",
+                  "grammatical_form": "",
+                  "literal_translation": "",
+                  "plain_meaning": "",
+                  "rabbinic_reading": "",
+                  "why_this_reading": "",
+                  "alternative_readings": [
+                    ""
+                  ],
+                  "effect_on_argument": ""
+                }
+              ],
+              "interpretive_logic": {
+                "textual_observation": "",
+                "inference": "",
+                "logical_step": "",
+                "conclusion": ""
+              },
+              "textual_transformation": {
+                "plain_reading": "",
+                "rabbinic_reading": "",
+                "reason_for_difference": ""
+              },
+              "interpretive_commentary": [
+                {
+                  "rabbi": "",
+                  "position": "",
+                  "textual_reading": {
+                    "summary": "",
+                    "details": ""
+                  },
+                  "logical_reasoning": {
+                    "summary": "",
+                    "details": ""
+                  },
+                  "why_the_source_is_used": {
+                    "summary": "",
+                    "details": ""
+                  },
+                  "hermeneutic_method": [
+                    ""
+                  ],
+                  "argument_role": "",
+                  "confidence": 0
+                }
+              ],
+              "argument_dependency": {
+                "if_removed": "",
+                "replacement_possible": false,
+                "replacement_reason": "",
+                "importance_to_argument": ""
+              },
+              "confidence": 0,
+              "bundle_location": {
+                "daf": "",
+                "segment": 0
+              }
+            }
+          ],
+          "sugya_level_analysis": {
+            "primary_textual_theme": "",
+            "primary_hermeneutic_method": "",
+            "development_of_interpretation": "",
+            "relationship_between_sources": "",
+            "overall_argument_progression": "",
+            "overall_message": "",
+            "why_this_sugya_is_structured_this_way": "",
+            "textual_strategy": "",
+            "interpretive_strategy": "",
+            "how_the_sources_collectively_create_the_argument": ""
+          },
+          "overall_confidence": 0
+        }
+      ]
+    }
+  },
+  "file_contracts": {
+    "sugya_analysis": {
+      "prompt_filename": "sugyaAnalysisPrompt.txt",
+      "input_filenames": [
+        "<TRACTATE>_bundle.jsonl"
+      ],
+      "output_filename": "<TRACTATE>_sugya_analysis.json"
+    },
+    "authority_analysis": {
+      "prompt_filename": "sugyaAuthorityAnalysisPrompt.txt",
+      "input_filenames": [
+        "<TRACTATE>_sugya_analysis.json",
+        "<TRACTATE>_bundle.jsonl"
+      ],
+      "output_filename": "<TRACTATE>_authority_analysis.json"
+    },
+    "argument_analysis": {
+      "prompt_filename": "sugyaArgumentAnalysisPrompt.txt",
+      "input_filenames": [
+        "<TRACTATE>_sugya_analysis.json",
+        "<TRACTATE>_bundle.jsonl",
+        "<TRACTATE>_authority_analysis.json"
+      ],
+      "output_filename": "<TRACTATE>_argument_analysis.json"
+    },
+    "source_relationship_analysis": {
+      "prompt_filename": "sugyaSourceRelationshipAnalysisPrompt.txt",
+      "input_filenames": [
+        "<TRACTATE>_bundle.jsonl",
+        "<TRACTATE>_sugya_analysis.json",
+        "<TRACTATE>_authority_analysis.json",
+        "<TRACTATE>_argument_analysis.json"
+      ],
+      "output_filename": "<TRACTATE>_source_relationship_analysis.json"
+    },
+    "exegesis_analysis": {
+      "prompt_filename": "sugyaExegesisAnalysisPrompt.txt",
+      "input_filenames": [
+        "<TRACTATE>_bundle.jsonl",
+        "<TRACTATE>_sugya_analysis.json",
+        "<TRACTATE>_authority_analysis.json",
+        "<TRACTATE>_argument_analysis.json",
+        "<TRACTATE>_source_relationship_analysis.json"
+      ],
+      "output_filename": "<TRACTATE>_exegesis_analysis.json"
+    }
+  },
+  "shared_input_filenames": {
+    "output_schema": "OrHaSugya_OutputSchema.json",
+    "analysis_standards": "OrHaSugya_AnalysisStandards.json"
+  }
+}
