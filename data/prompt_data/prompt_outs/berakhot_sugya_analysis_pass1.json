@@ -1,0 +1,2339 @@
+{
+  "tractate": "Berakhot",
+  "analysis_type": "Pass 1 discourse-structure sugya boundary analysis",
+  "note": "This is a first-pass structural segmentation based on the uploaded Berakhot JSONL and the attached prompt. It follows argument/topic transitions and marks likely digressive clusters, but rabbi/verse extraction should be performed in a later verification pass.",
+  "sugyot": [
+    {
+      "sugya_number": 1,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "2a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "2a",
+        "segment": 5
+      },
+      "title": "Opening Mishnah: Time for evening Shema",
+      "purpose": "Establishes the first Mishnah’s dispute over the end time for evening Shema and Rabban Gamliel’s practical ruling.",
+      "structure": "Mishnah → opinions → incident → supporting examples",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "Opening Mishnah and beginning of tractate.",
+      "start_snippet": "The beginning of tractate Berakhot, the first tractate in the first of the six orders of Mishna, opens with a discussion of the recitation of Shema, as the recitation of Shema enco"
+    },
+    {
+      "sugya_number": 2,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "2a",
+        "segment": 6
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "2a",
+        "segment": 11
+      },
+      "title": "Why the Mishnah begins with evening Shema",
+      "purpose": "Explains why the tractate opens with evening rather than morning Shema and connects the order to biblical creation language.",
+      "structure": "Question → source proposal → alternative proof → resolution",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "Formal GEMARA opening on the Mishnah’s order.",
+      "start_snippet": "GEMARA: The Mishna opens with the laws concerning the appropriate time to recite Shema with the question: From when does one recite Shema in the evening? With regard to this questi"
+    },
+    {
+      "sugya_number": 3,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "2a",
+        "segment": 12
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "2b",
+        "segment": 4
+      },
+      "title": "When evening begins: priests, terumah, sunset, and stars",
+      "purpose": "Clarifies the Mishnah’s beginning time for evening Shema through priestly purity, sunset, and emergence of stars.",
+      "structure": "Mishnah phrase → verse analysis → baraita proof → conclusion",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "Shift from order of Mishnah to legal start time.",
+      "start_snippet": "The Gemara proceeds to clarify the rest of the mishna. The Master said in the mishna that the beginning of the period when one recites Shema in the evening is when the priests ente"
+    },
+    {
+      "sugya_number": 4,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "2b",
+        "segment": 5
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "3a",
+        "segment": 3
+      },
+      "title": "Conflicting baraitot about the start of evening Shema",
+      "purpose": "Resolves multiple tannaitic opinions about whether evening Shema begins at the time of priests, poor people, Shabbat meals, or other markers.",
+      "structure": "Contradiction → harmonization → ranking of times → halakhic framing",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 85,
+      "boundary_reason": "New contradiction series on the time of beginning.",
+      "start_snippet": "In our mishna, the Master said: The beginning of the time for the recitation of the evening Shema is: From the time when the priests enter to partake of their teruma. The Gemara ra"
+    },
+    {
+      "sugya_number": 5,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "3a",
+        "segment": 4
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "4a",
+        "segment": 18
+      },
+      "title": "Night watches, midnight, and signs of the night",
+      "purpose": "Analyzes Rabbi Eliezer’s deadline via watches of the night and expands into signs of watches, David’s midnight rising, and Moses’ midnight wording.",
+      "structure": "Mishnah phrase → conceptual question → scriptural proof → aggadic expansion",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "New Mishnah phrase: until the end of the first watch; includes aggadic digression on David/Moses.",
+      "start_snippet": "In the mishna, we learned that Rabbi Eliezer establishes that one may recite the evening Shema until the end of the first watch. These watches are mentioned in the Bible as segment"
+    },
+    {
+      "sugya_number": 6,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "4a",
+        "segment": 19
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "4b",
+        "segment": 12
+      },
+      "title": "Why the Rabbis say until midnight",
+      "purpose": "Explains that the Rabbis may agree with Rabban Gamliel in principle but set midnight as a safeguard against transgression.",
+      "structure": "Mishnah ruling → whose opinion → protective decree → analogous cases",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "Return to the Mishnah’s dispute after aggadic night-watch unit.",
+      "start_snippet": "The Gemara returns to explain what we learned in the mishna: And the Rabbis say: The time for the recitation of the evening Shema is until midnight. The Gemara asks: In accordance "
+    },
+    {
+      "sugya_number": 7,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "4b",
+        "segment": 13
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "5a",
+        "segment": 2
+      },
+      "title": "Juxtaposing redemption and prayer at night",
+      "purpose": "Determines the relationship between evening Shema, redemption, and evening prayer, including objections from later Mishnah material.",
+      "structure": "Amoraic rule → objection → resolution → practice",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 87,
+      "boundary_reason": "New issue: geulah immediately before tefillah.",
+      "start_snippet": "According to Rabbi Yoḥanan, it is a mitzva to recite Shema before the evening prayer. Mar, son of Ravina, raises an objection from a mishna: How can one do that? We learn in a late"
+    },
+    {
+      "sugya_number": 8,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "5a",
+        "segment": 3
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "5a",
+        "segment": 24
+      },
+      "title": "Torah, suffering, and bedtime Shema",
+      "purpose": "Moves from prayer practice into teachings about Torah, suffering, acceptance of affliction, and recitation before sleep.",
+      "structure": "Statement chain → scriptural supports → ethical/practical application",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 78,
+      "boundary_reason": "Loosely connected aggadic chain; may contain smaller embedded units.",
+      "start_snippet": "And Rabbi Levi bar Ḥama said that Rabbi Shimon ben Lakish said: God said to Moses, “Ascend to Me on the mountain and be there, and I will give you the stone tablets and the Torah a"
+    },
+    {
+      "sugya_number": 9,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "5b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "5b",
+        "segment": 27
+      },
+      "title": "Prayer for healing and visiting the sick",
+      "purpose": "Develops the theology of suffering into narratives of illness, healing, and how Sages responded to suffering.",
+      "structure": "Narratives → questions → refusals/acceptance → healing by colleague",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 75,
+      "boundary_reason": "Continuation of suffering but new narrative subunit.",
+      "start_snippet": "and buries his sons, all his transgressions are forgiven."
+    },
+    {
+      "sugya_number": 10,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "6a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "6a",
+        "segment": 25
+      },
+      "title": "Reward and danger of prayer in synagogue",
+      "purpose": "Collects teachings about prayer in synagogue, fixed places, divine presence, and communal prayer.",
+      "structure": "Statements → verses → practical inferences",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "Shift from suffering to synagogue/prayer teachings.",
+      "start_snippet": "In terms of this reward, Rabbi Yosei, son of Rabbi Ḥanina said: One who waits in the synagogue for the other to finish his prayer merits the following blessings, as it is stated: “"
+    },
+    {
+      "sugya_number": 11,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "6b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "6b",
+        "segment": 37
+      },
+      "title": "Demons, crowds, and divine attention to communal prayer",
+      "purpose": "Expands on unseen forces and the value of communal prayer and Torah gathering.",
+      "structure": "Aggadic teachings → practical signs → theological conclusions",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 70,
+      "boundary_reason": "Continuation of prayer/synagogue with embedded demonology.",
+      "start_snippet": "in the phylacteries of the head, where there are four separate compartments. And all of the verses are written together on one parchment in the phylacteries of the arm, which has o"
+    },
+    {
+      "sugya_number": 12,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "7a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "7a",
+        "segment": 22
+      },
+      "title": "God’s prayer, anger, and divine favor",
+      "purpose": "Explores God’s prayer, divine anger, propitious moments, and Balaam/Rabbi Yehoshua ben Levi narratives.",
+      "structure": "Question → scriptural derivation → narrative proof → ethical conclusion",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 75,
+      "boundary_reason": "New aggadic cluster on God’s prayer/anger.",
+      "start_snippet": "Along the same lines, Rabbi Yoḥanan said in the name of Rabbi Yosei: From where is it derived that the Holy One, Blessed be He, prays? As it is stated: “I will bring them to My hol"
+    },
+    {
+      "sugya_number": 13,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "7a",
+        "segment": 23
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "7a",
+        "segment": 36
+      },
+      "title": "Moses’ requests and seeing God’s ways",
+      "purpose": "Analyzes Moses’ requests regarding divine presence, knowledge of God’s ways, and seeing God’s face/back.",
+      "structure": "Amoraic teaching → three requests → scriptural reconciliation",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "Explicit shift to Moses’ requests.",
+      "start_snippet": "And Rabbi Yoḥanan said in the name of Rabbi Yosei regarding Moses’ request that the Divine Presence rest upon Israel as it once had: Moses requested three things from the Holy One,"
+    },
+    {
+      "sugya_number": 14,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "7b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "7b",
+        "segment": 28
+      },
+      "title": "Abraham, fixed prayer, and provoking the wicked",
+      "purpose": "Collects teachings in the names of Rabbi Yoḥanan/Rabbi Shimon b. Yoḥai on Abraham, prayer, wickedness, and fixed prayer.",
+      "structure": "Statement chain → prooftexts → reconciliations",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 72,
+      "boundary_reason": "New chain of attributed aggadic statements.",
+      "start_snippet": "Until now, the Gemara has cited statements made by Rabbi Yoḥanan in the name of the tanna, Rabbi Yosei. Now, the Gemara begins to cite what Rabbi Yoḥanan said in the name of Rabbi "
+    },
+    {
+      "sugya_number": 15,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "8a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "8a",
+        "segment": 15
+      },
+      "title": "Communal prayer and the synagogue",
+      "purpose": "Develops the unique power of communal prayer, synagogue attendance, and the proper setting for Torah/prayer.",
+      "structure": "Prooftexts → baraitot → practical consequences",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "Clear return to prayer/synagogue practice.",
+      "start_snippet": "What is the meaning of that which is written: “But as for me, let my prayer be unto You, Lord, in a time of favor; O God, in the abundance of Your mercy, answer me with the truth o"
+    },
+    {
+      "sugya_number": 16,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "8a",
+        "segment": 16
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "8a",
+        "segment": 29
+      },
+      "title": "Torah study, halakha, and study location",
+      "purpose": "Compares gates of Zion, halakhic study, synagogue, and the place of one’s teacher.",
+      "structure": "Statement chain → practice of Sages → objections/resolutions",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 78,
+      "boundary_reason": "New subtopic: Torah study and halakhic venues.",
+      "start_snippet": "Returning to the tractate’s central topic, Rava said to Rafram bar Pappa: Let the Master say to us some of those outstanding statements that you said in the name of Rav Ḥisda with "
+    },
+    {
+      "sugya_number": 17,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "8a",
+        "segment": 30
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "8b",
+        "segment": 5
+      },
+      "title": "Completing the weekly Torah portion",
+      "purpose": "Establishes the obligation to complete the weekly portion with the congregation, including timing and Targum.",
+      "structure": "Rule → examples → timing questions → practical advice",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "Explicit new practical ruling.",
+      "start_snippet": "Rav Huna bar Yehuda said that Rabbi Ami said: A person should always complete his Torah portions with the congregation. The congregation reads a particular Torah portion every Shab"
+    },
+    {
+      "sugya_number": 18,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "8b",
+        "segment": 6
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "8b",
+        "segment": 16
+      },
+      "title": "Ethical and practical advice of Sages",
+      "purpose": "Records advice from Rabbi Yehoshua ben Levi and Rava on conduct, danger, respect for elders, and prayer situations.",
+      "structure": "Advice chain → stories → supports",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 70,
+      "boundary_reason": "Advice collection interrupts central Shema timeline.",
+      "start_snippet": "He also advised them: Be careful with the jugular veins, in accordance with the opinion of Rabbi Yehuda, as we learned in a mishna with regard to the laws of ritual slaughter: Rabb"
+    },
+    {
+      "sugya_number": 19,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "8b",
+        "segment": 17
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "9a",
+        "segment": 4
+      },
+      "title": "Latest time for evening Shema and dawn cases",
+      "purpose": "Returns to Rabban Gamliel’s ruling and explores whether Shema can be read twice near dawn.",
+      "structure": "Mishnah return → baraita → contradiction → resolution",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "Explicit return to Mishnah: Rabban Gamliel says until dawn.",
+      "start_snippet": "The Gemara returns to explain the mishna, in which we learned that Rabban Gamliel says: One may recite Shema until dawn. Rav Yehuda said that Shmuel said: The halakha is in accorda"
+    },
+    {
+      "sugya_number": 20,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "9a",
+        "segment": 5
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "9a",
+        "segment": 11
+      },
+      "title": "Rabban Gamliel’s sons and mitzvot until dawn",
+      "purpose": "Explains the sons’ question and the relationship between Rabban Gamliel, Rabbis, and mitzvot whose time extends until dawn.",
+      "structure": "Mishnah incident → clarification → examples",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "Direct Mishnah analysis.",
+      "start_snippet": "The mishna relates that there was an incident where Rabban Gamliel’s sons returned very late from a wedding hall and they asked their father if they were permitted to recite Shema "
+    },
+    {
+      "sugya_number": 21,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "9a",
+        "segment": 12
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "9a",
+        "segment": 28
+      },
+      "title": "Eating the Paschal lamb: midnight or dawn",
+      "purpose": "Compares the Mishnah’s list with baraitot about eating the Paschal lamb and analyzes Rabbi Akiva/R. Elazar b. Azarya.",
+      "structure": "Contradiction → tannaitic dispute → verse exegesis",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New halakhic comparison triggered by Mishnah’s examples.",
+      "start_snippet": "The Gemara notes: In our mishna, the eating of the Paschal lamb was not taught among those mitzvot that may be performed until dawn, indicating that the mitzva of eating the Pascha"
+    },
+    {
+      "sugya_number": 22,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "9a",
+        "segment": 29
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "9b",
+        "segment": 8
+      },
+      "title": "Aggadot of the Exodus and Egyptian wealth",
+      "purpose": "Expands from the Exodus discussion into teachings on spoils, divine promises, and Moses’ dialogue at the burning bush.",
+      "structure": "Aggadic transition → verse readings → divine-human dialogue",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 72,
+      "boundary_reason": "Explicit transition: since topic involved Exodus.",
+      "start_snippet": "Since the last topic discussed in the Gemara revolved around the exodus from Egypt, the Gemara cites additional aggadic midrash on that subject. With regard to the verse: “Speak, p"
+    },
+    {
+      "sugya_number": 23,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "9b",
+        "segment": 9
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "9b",
+        "segment": 31
+      },
+      "title": "Morning Shema: first time and vatikin",
+      "purpose": "Introduces the Mishnah on morning Shema and analyzes the earliest time, vatikin, sunrise, and juxtaposing redemption to prayer.",
+      "structure": "Mishnah → baraitot → halakhic ruling → prayer practice",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 92,
+      "boundary_reason": "New Mishnah.",
+      "start_snippet": "MISHNA: From when does one recite Shema in the morning? From when a person can distinguish between sky-blue [tekhelet] and white. Rabbi Eliezer says: From when one can distinguish "
+    },
+    {
+      "sugya_number": 24,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "10a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "10a",
+        "segment": 11
+      },
+      "title": "Davidic psalms, Berurya, and interpreting verses",
+      "purpose": "Continues aggadic interpretation of Psalms and related verses, including Brurya and polemical readings.",
+      "structure": "Verse interpretation → stories → moral/theological conclusions",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 70,
+      "boundary_reason": "Aggadic continuation from Psalms material.",
+      "start_snippet": "Every chapter that was dear to David, he began with “happy is” and concluded with “happy is.” He opened with “happy is,” as it is written: “Happy is the man who has not walked in t"
+    },
+    {
+      "sugya_number": 25,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "10a",
+        "segment": 12
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "10a",
+        "segment": 26
+      },
+      "title": "David’s five worlds and the soul’s praise",
+      "purpose": "Interprets 'Bless the Lord, O my soul' as stages of life and analogies between soul and God.",
+      "structure": "Question → five-world scheme → prooftexts → analogy",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 76,
+      "boundary_reason": "New homiletic unit on David/soul.",
+      "start_snippet": "Rabbi Yoḥanan said explanations of other verses in the name of Rabbi Shimon ben Yoḥai: What is the meaning of that which is written: “She opens her mouth with wisdom, and the teach"
+    },
+    {
+      "sugya_number": 26,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "10a",
+        "segment": 27
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "10a",
+        "segment": 32
+      },
+      "title": "Hezekiah, Isaiah, prayer, and not despairing",
+      "purpose": "Uses the Hezekiah-Isaiah narrative to teach prayer despite a harsh decree.",
+      "structure": "Narrative conflict → rebuke → prayer principle → prooftexts",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New narrative anchored by Rav Hamnuna.",
+      "start_snippet": "What did the Holy One, Blessed be He, do to effect compromise between Hezekiah and Isaiah? He brought the suffering of illness upon Hezekiah and told Isaiah: Go and visit the sick."
+    },
+    {
+      "sugya_number": 27,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "10b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "10b",
+        "segment": 14
+      },
+      "title": "Hezekiah’s prayer and divine answer",
+      "purpose": "Continues the Hezekiah narrative through his prayer, signs, recovery, and theological consequences.",
+      "structure": "Narrative continuation → verses → lessons",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "Continuation of previous sugya.",
+      "start_snippet": "Similarly, Rabbi Ḥanan said: Even if the master of dreams, in a true dream, an angel (Ma’ayan HaBerakhot) tells a person that tomorrow he will die, he should not prevent himself fr"
+    },
+    {
+      "sugya_number": 28,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "10b",
+        "segment": 15
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "10b",
+        "segment": 41
+      },
+      "title": "Hannah’s prayer as paradigm",
+      "purpose": "Transitions to Hannah’s prayer as a model for prayer language, posture, and divine petition.",
+      "structure": "Verse analysis → halakhic implications → narrative readings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New biblical prayer model.",
+      "start_snippet": "Rav and Shmuel argued over the meaning of small chamber. One of them said: They had an uncovered second story on their roof, over which they built a ceiling; and one of them said: "
+    },
+    {
+      "sugya_number": 29,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "11a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "11a",
+        "segment": 25
+      },
+      "title": "Morning Shema blessings and Beit Shammai/Beit Hillel posture",
+      "purpose": "Introduces Mishnah on reciting Shema in different postures and the blessings before and after Shema.",
+      "structure": "Mishnah → tannaitic dispute → practice story → legal conclusion",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "New Mishnah and distinct legal subject.",
+      "start_snippet": "GEMARA: The Gemara begins by clarifying the rationale for Beit Shammai’s opinion. Granted, Beit Hillel explain the rationale for their opinion and the rationale for Beit Shammai’s "
+    },
+    {
+      "sugya_number": 30,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "11a",
+        "segment": 26
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "11b",
+        "segment": 7
+      },
+      "title": "Formula of blessings before morning Shema",
+      "purpose": "Determines the first blessing before Shema and how to include day/night themes.",
+      "structure": "Question → blessing formula → objections → resolutions",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "Gemara begins blessing formula.",
+      "start_snippet": "GEMARA: The Gemara begins by determining the formula of the two blessings preceding the morning Shema. The Gemara asks: What blessing does one recite?"
+    },
+    {
+      "sugya_number": 31,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "11b",
+        "segment": 8
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "11b",
+        "segment": 19
+      },
+      "title": "Ahava Rabba and blessings over Torah",
+      "purpose": "Analyzes the second blessing before Shema and whether it can cover Torah study.",
+      "structure": "Formula dispute → practical case → blessing alternatives",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 80,
+      "boundary_reason": "New blessing formula question.",
+      "start_snippet": "The Gemara asks: And what is the formula of the other blessing recited before Shema? Rav Yehuda said in the name of Shmuel: An abounding love [ahava rabba]. And Rabbi Elazar instru"
+    },
+    {
+      "sugya_number": 32,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "11b",
+        "segment": 20
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "12a",
+        "segment": 3
+      },
+      "title": "Temple recitation and blessings of Shema",
+      "purpose": "Examines which blessing the priests recited in the Temple and implications for the required blessings.",
+      "structure": "Mishnah Tamid → identification debate → inference",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 78,
+      "boundary_reason": "Shift to Temple practice.",
+      "start_snippet": "The Gemara returns to dealing with the blessings that accompany Shema, and describes the practice in the Temple. We learned there, in a mishna in tractate Tamid: In the morning the"
+    },
+    {
+      "sugya_number": 33,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "12a",
+        "segment": 4
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "12a",
+        "segment": 9
+      },
+      "title": "Ten Commandments in daily prayer and heretics",
+      "purpose": "Discusses why the Ten Commandments were or were not included in daily recitation.",
+      "structure": "Historical practice → proposed institution → rejection due to minim",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New issue: Ten Commandments in liturgy.",
+      "start_snippet": "The Gemara related above that the priests in the Temple read the Ten Commandments, along with the sections of Shema, VeHaya im Shamoa, VaYomer, True and Firm, Avoda, and the priest"
+    },
+    {
+      "sugya_number": 34,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "12a",
+        "segment": 10
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "12a",
+        "segment": 25
+      },
+      "title": "Mistaken blessings and whether openings determine endings",
+      "purpose": "Analyzes cases where one began or intended the wrong blessing and whether the blessing counts.",
+      "structure": "Halakhic problem → cases → principle → objections",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 78,
+      "boundary_reason": "New general blessing principle.",
+      "start_snippet": "We learned in the mishna: Where the Sages said to recite a long blessing, one may not shorten it, and vice-versa. The Gemara proceeds to address a particular problem arising from c"
+    },
+    {
+      "sugya_number": 35,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "12a",
+        "segment": 26
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "12b",
+        "segment": 13
+      },
+      "title": "Bowing in blessings and prayer for scholars",
+      "purpose": "Discusses bowing at God’s name and the obligation to pray or suffer concern for a Torah scholar.",
+      "structure": "Practice → objections → ethical expansion",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 70,
+      "boundary_reason": "Begins with bowing; contains embedded concern-for-scholar unit.",
+      "start_snippet": "The Gemara raises an objection based on what we learned in praise of a priest: “And he was afraid before My name” (Malachi 2:5), indicating that one must be humbled and not upright"
+    },
+    {
+      "sugya_number": 36,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "12b",
+        "segment": 14
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "12b",
+        "segment": 22
+      },
+      "title": "Why certain passages are included in Shema",
+      "purpose": "Explains why Balaam’s blessings were not added and why the tzitzit passage is included, including Exodus at night.",
+      "structure": "Proposal → rejection → list of reasons → Mishnah transition",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "Liturgy content unit.",
+      "start_snippet": "Rabbi Abbahu ben Zutarti said that Rabbi Yehuda bar Zevida said: The Sages sought to establish the blessings of Balaam that appear in the Torah portion of Balak, as part of the twi"
+    },
+    {
+      "sugya_number": 37,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "12b",
+        "segment": 23
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "13a",
+        "segment": 15
+      },
+      "title": "Remembering the Exodus at night",
+      "purpose": "Analyzes Ben Zoma and the Sages on mentioning the Exodus at night and in the messianic future.",
+      "structure": "Mishnah → baraita → scriptural interpretation → analogy",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "New Mishnah.",
+      "start_snippet": "MISHNA: It is a mitzva by Torah law to mention the exodus from Egypt at night, but some held that this mitzva was, like phylacteries or ritual fringes, fulfilled only during the da"
+    },
+    {
+      "sugya_number": 38,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "13a",
+        "segment": 16
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "13b",
+        "segment": 12
+      },
+      "title": "Intent and language in Shema",
+      "purpose": "Introduces Mishnah about intent while reading Shema and analyzes whether Shema must be recited in Hebrew.",
+      "structure": "Mishnah → inference → baraita dispute → verse exegesis",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 91,
+      "boundary_reason": "New Mishnah.",
+      "start_snippet": "MISHNA: The first question discussed in the mishna is the question of intent. One who was reading the sections of the Torah which comprise Shema, and the time for the recitation of"
+    },
+    {
+      "sugya_number": 39,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "13b",
+        "segment": 13
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "13b",
+        "segment": 21
+      },
+      "title": "Intent in the first verse and recitation practice",
+      "purpose": "Determines the level of intent required for Shema, especially the first verse and Rabbi Yehuda HaNasi’s practice.",
+      "structure": "Baraita → practice narratives → halakhic limits",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "Specific subunit on first verse.",
+      "start_snippet": "The Sages taught in another baraita with regard to one who recites Shema and utters the verse, “Hear, Israel, the Lord is our God, the Lord is One.” Intent of the heart is only req"
+    },
+    {
+      "sugya_number": 40,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "13b",
+        "segment": 22
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "14a",
+        "segment": 3
+      },
+      "title": "Improper posture and interruptions during Shema",
+      "purpose": "Analyzes reclining/lying positions and permitted interruptions for greetings during Shema.",
+      "structure": "Case → objections → amended Mishnah → baraita support",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "Shift to physical posture/interruption.",
+      "start_snippet": "Rav Yosef said: One who is lying [perakdan] on his back may not recite Shema, for lying that way is unbecoming. The Gemara asks: Is that to say that one may not recite Shema in thi"
+    },
+    {
+      "sugya_number": 41,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "14a",
+        "segment": 4
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "14a",
+        "segment": 19
+      },
+      "title": "Interrupting for Hallel, tasting, greeting before prayer",
+      "purpose": "Applies interruption logic to Hallel, tasting while fasting, and greeting before prayer.",
+      "structure": "Cases → rulings → objections → qualifications",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 70,
+      "boundary_reason": "Related interruption cluster with embedded applications.",
+      "start_snippet": "Rabbi Ḥiyya said to him: One interrupts and it is of no concern. Rabba said: On days when the individual completes the entire hallel, i.e., the days on which there is a rabbinic ob"
+    },
+    {
+      "sugya_number": 42,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "14a",
+        "segment": 20
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "14b",
+        "segment": 10
+      },
+      "title": "Breaks between Shema paragraphs and emet veyatziv",
+      "purpose": "Determines where one may interrupt and whether one joins 'the Lord your God' to 'True'.",
+      "structure": "Mishnah phrase → halakhic ruling → textual support",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "Return to Mishnah breaks.",
+      "start_snippet": "We learned in the mishna: These are the breaks between the paragraphs at which one is permitted to interrupt under certain circumstances. According to the first tanna, one may inte"
+    },
+    {
+      "sugya_number": 43,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "14b",
+        "segment": 11
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "14b",
+        "segment": 25
+      },
+      "title": "Order of Shema paragraphs and relation to tefillin/prayer",
+      "purpose": "Explains the order of Shema portions and related sequencing with tefillin and prayer.",
+      "structure": "Mishnah reason → alternative derivation → practical stories",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "New Mishnah rationale.",
+      "start_snippet": "We learned in the mishna: Rabbi Yehoshua ben Korḥa said: Why did the portion of Shema precede that of VeHaya im Shamoa? So that one will first accept upon himself the yoke of the k"
+    },
+    {
+      "sugya_number": 44,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "15a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "15b",
+        "segment": 30
+      },
+      "title": "Audible recitation, precision, and interruption in Shema",
+      "purpose": "Analyzes whether Shema must be audible and precise and how recitation interruptions are handled.",
+      "structure": "Mishnah → tannaitic dispute → practical cases",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New Mishnah material.",
+      "start_snippet": "should relieve himself, wash his hands, don phylacteries, recite Shema, and pray, and that is acceptance of the complete Kingdom of Heaven."
+    },
+    {
+      "sugya_number": 45,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "16a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "16b",
+        "segment": 25
+      },
+      "title": "Workers, grooms, and exemptions from Shema/prayer",
+      "purpose": "Examines laborers, newlyweds, and those preoccupied with mitzvot regarding Shema and prayer obligations.",
+      "structure": "Mishnah cases → exemption principle → stories",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New Mishnah.",
+      "start_snippet": "tents juxtaposed to streams, as it is written: “As streams stretched forth, as gardens by the riverside; as aloes [ahalim] planted by the Lord, as cedars by the water” (Numbers 24:"
+    },
+    {
+      "sugya_number": 46,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "17a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "17b",
+        "segment": 17
+      },
+      "title": "Mourning, burial, and exemption from mitzvot",
+      "purpose": "Analyzes exemptions for mourners and burial participants, plus prayers of Sages after study.",
+      "structure": "Mishnah → baraitot → practical distinctions → prayers",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 78,
+      "boundary_reason": "New chapter/mishnah sphere around death/mitzvah preoccupation.",
+      "start_snippet": "in the heavenly entourage [pamalia] of angels each of whom ministers to a specific nation (see Daniel 10), and whose infighting causes war on earth; and in the earthly entourage, t"
+    },
+    {
+      "sugya_number": 47,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "18a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "18b",
+        "segment": 17
+      },
+      "title": "Do the dead know? Cemetery, spirits, and stories",
+      "purpose": "Investigates whether the dead are aware of the living through narratives and scriptural proofs.",
+      "structure": "Question → stories → proofs/counterproofs → distinction",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "Major aggadic sugya with embedded narratives.",
+      "start_snippet": "And there is no need for others to recite a blessing beforehand on his behalf, nor do others invite him to join in Grace after Meals, as he cannot be a member of the quorum of thre"
+    },
+    {
+      "sugya_number": 48,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "19a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "19b",
+        "segment": 17
+      },
+      "title": "Honor of sages and human dignity vs Torah prohibition",
+      "purpose": "Examines when human dignity or rabbinic honor overrides ritual/halakhic concerns.",
+      "structure": "Mishnah/baraita → principles → objections → resolutions",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 85,
+      "boundary_reason": "New legal-ethical unit.",
+      "start_snippet": "And if it should enter your mind that the dead do not know, then what of it if he tells them? The Gemara rejects this: Rather what will you say, that they know? Then why does he ne"
+    },
+    {
+      "sugya_number": 49,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "20a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "20a",
+        "segment": 10
+      },
+      "title": "Women, slaves, minors, and obligation in Shema/prayer",
+      "purpose": "Establishes who is obligated or exempt from Shema, tefillin, prayer, mezuzah, and Grace after Meals.",
+      "structure": "Mishnah → obligation analysis → Torah/rabbinic distinctions",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "New Mishnah.",
+      "start_snippet": "but he does become impure for a met mitzva. Here too, the question is asked: Let us say that the obligation to bury a met mitzva, which is predicated on the preservation of human d"
+    },
+    {
+      "sugya_number": 50,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "20b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "20b",
+        "segment": 22
+      },
+      "title": "Miracles, earlier generations, and kavod in prayer",
+      "purpose": "Compares earlier/later generations and includes stories of piety, danger, and divine response.",
+      "structure": "Aggadic comparison → stories → moral explanation",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 70,
+      "boundary_reason": "Digressive aggadic expansion after obligations.",
+      "start_snippet": "and from phylacteries, but they are obligated in the mitzvot of prayer, mezuza, and Grace after Meals. The Gemara explains the rationale for these exemptions and obligations."
+    },
+    {
+      "sugya_number": 51,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "21a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "21a",
+        "segment": 17
+      },
+      "title": "Doubt in Shema/prayer and interrupting Amidah",
+      "purpose": "Analyzes what to do when one is uncertain whether he recited Shema/prayer and whether one interrupts prayer.",
+      "structure": "Halakhic doubt → derivations → practical rulings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New halakhic topic.",
+      "start_snippet": "The Gemara challenges: And prayer, which is also a matter in which the community is engaged, and we learned in the mishna: One who was standing in prayer and remembered that he is "
+    },
+    {
+      "sugya_number": 52,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "21b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "21b",
+        "segment": 19
+      },
+      "title": "Baal keri, Torah words, and Ezra’s decree",
+      "purpose": "Introduces restrictions on one who experienced seminal emission regarding Shema, Torah, and immersion.",
+      "structure": "Mishnah → biblical derivation → decree parameters",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "New Mishnah/ritual purity topic.",
+      "start_snippet": "or a case where he prayed as part of a congregation and began to repeat it as part of a congregation; however, in a case where he initially prayed by himself and subsequently joine"
+    },
+    {
+      "sugya_number": 53,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "22a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "22b",
+        "segment": 19
+      },
+      "title": "Nine kav, forty se’a, and teaching Torah after emission",
+      "purpose": "Works through immersion requirements and distinctions among baal keri, zav, and teaching others.",
+      "structure": "Baraitot → contradictions → practical rulings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "Continuation of purity decree.",
+      "start_snippet": "that a woman who engaged in intercourse and saw menstrual blood is not required to immerse herself, but one who experienced a seminal emission alone, with no concurrent impurity, i"
+    },
+    {
+      "sugya_number": 54,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "23a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "23b",
+        "segment": 23
+      },
+      "title": "Tefillin, bathrooms, and bodily functions",
+      "purpose": "Analyzes how one handles tefillin when entering bathrooms, sleeping, or dealing with bodily needs.",
+      "structure": "Case law → baraitot → safeguards",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 87,
+      "boundary_reason": "New practical tefillin/body unit.",
+      "start_snippet": "One Sage held that, as a rule, if one interrupted his prayer and delayed continuing his prayer for an interval sufficient to complete the entire prayer, he returns to the beginning"
+    },
+    {
+      "sugya_number": 55,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "24a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "24b",
+        "segment": 22
+      },
+      "title": "Reciting Shema in presence of nakedness, filth, or improper sounds",
+      "purpose": "Determines when Shema/prayer is prohibited due to nakedness, excrement, urine, or immodesty.",
+      "structure": "Mishnah/baraita → distinctions → applications",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "New recitation purity environment unit.",
+      "start_snippet": "Because whatever offers more protection is preferable even at the cost of deprecation. And where under his head does he place them? Rabbi Yirmeya said: He places them between the p"
+    },
+    {
+      "sugya_number": 56,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "25a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "25b",
+        "segment": 25
+      },
+      "title": "Covering excrement/urine and clean places for prayer",
+      "purpose": "Continues environmental requirements for recitation, including covering and distancing.",
+      "structure": "Cases → distinctions → practical rulings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 80,
+      "boundary_reason": "Continuation of prior unit.",
+      "start_snippet": "However, for prayer, one may not recite it until he covers his heart, because in prayer he addresses God directly and he must dress accordingly."
+    },
+    {
+      "sugya_number": 57,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "26a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "26b",
+        "segment": 15
+      },
+      "title": "Prayer times and origins of the daily prayers",
+      "purpose": "Introduces Mishnah on prayer times and dispute whether prayers correspond to patriarchs or sacrifices.",
+      "structure": "Mishnah → amoraic dispute → proofs → synthesis",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 92,
+      "boundary_reason": "New chapter/topic: tefillah times.",
+      "start_snippet": "atop a chest is like a vessel within a vessel. On a similar note, Rabbi Yehoshua ben Levi said: One who wishes to engage in marital relations in a room in which there is a Torah sc"
+    },
+    {
+      "sugya_number": 58,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "27a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "27b",
+        "segment": 22
+      },
+      "title": "Mincha, Arvit, and optional evening prayer",
+      "purpose": "Analyzes deadlines for Mincha, the status of Arvit as optional, and Rabban Gamliel/Rabbi Yehoshua conflict.",
+      "structure": "Mishnah → halakhic rulings → institutional narrative",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "Clear major unit with academy leadership narrative.",
+      "start_snippet": "is identical to the opinion of the Rabbis, as the end of the period that begins with the midpoint of the afternoon is sunset."
+    },
+    {
+      "sugya_number": 59,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "28a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "28a",
+        "segment": 19
+      },
+      "title": "Removal of Rabban Gamliel and appointment of Rabbi Elazar b. Azarya",
+      "purpose": "Continues the institutional story and its consequences for the academy and halakhah.",
+      "structure": "Narrative continuation → consequences → reconciliation",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "Continuation of prior narrative.",
+      "start_snippet": "There is room for concern. Perhaps they will remove you from office just as they removed Rabban Gamliel. He said to her, based on the folk saying: Let a person use an expensive gob"
+    },
+    {
+      "sugya_number": 60,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "28b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "28b",
+        "segment": 24
+      },
+      "title": "Additional Amidah, heretics, and Rabbi Eliezer’s prayer",
+      "purpose": "Examines blessings added to prayer, the blessing against heretics, and proper form of prayer.",
+      "structure": "Institutional history → liturgical formulation → ethical rulings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "New liturgical content unit.",
+      "start_snippet": "After mentioning until when the additional prayer may be recited, the Gemara relates: Rav Avya was ill and did not come to Rav Yosef’s Shabbat lecture. When Rav Avya came the follo"
+    },
+    {
+      "sugya_number": 61,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "29a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "29b",
+        "segment": 18
+      },
+      "title": "Havineinu, travel prayer, and abbreviated prayer",
+      "purpose": "Analyzes abbreviated Amidah forms, prayers while traveling, and emergency prayer.",
+      "structure": "Mishnah → formulas → cases → halakhic rulings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New Mishnah/prayer form.",
+      "start_snippet": "and scrutinized it, in an attempt to remember the blessing for two or three hours, and they did not remove him from serving as prayer leader."
+    },
+    {
+      "sugya_number": 62,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "30a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "30a",
+        "segment": 19
+      },
+      "title": "Direction of prayer and praying while traveling",
+      "purpose": "Determines orientation toward Jerusalem/Temple and how travelers pray.",
+      "structure": "Baraitot → hierarchy of sacred direction → practical exceptions",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "Continuation of prayer posture/location.",
+      "start_snippet": "a person should associate himself with the congregation and should not pray for himself alone. How should he say it? May it be Your will, Lord our God, that You lead us to peace, e"
+    },
+    {
+      "sugya_number": 63,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "30b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "30b",
+        "segment": 25
+      },
+      "title": "Concentration, standing before prayer, and pious preparation",
+      "purpose": "Begins chapter on kavvanah in prayer, including waiting before prayer and proper mental state.",
+      "structure": "Mishnah → pious practice → proofs",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "New Mishnah: one may only stand to pray from seriousness.",
+      "start_snippet": "in Neharde’a, where there is always a prayer quorum, except for the day when the king’s army [pulmusa] came to the city, and the Sages were preoccupied and did not pray communally,"
+    },
+    {
+      "sugya_number": 64,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "31a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "31b",
+        "segment": 27
+      },
+      "title": "Hannah’s prayer as legal model",
+      "purpose": "Derives laws of prayer from Hannah’s speech, including quiet prayer, intoxication, and rebuke.",
+      "structure": "Narrative exegesis → legal derivations → dialogue",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "Major prayer-form model.",
+      "start_snippet": "He brought a valuable cup worth four hundred zuz and broke it before them and they became sad."
+    },
+    {
+      "sugya_number": 65,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "32a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "32b",
+        "segment": 31
+      },
+      "title": "Moses’ prayer, divine appeasement, and power of prayer",
+      "purpose": "Develops teachings on prayer’s force and narratives of Moses confronting divine wrath.",
+      "structure": "Statement chain → verses → analogies → conclusions",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 78,
+      "boundary_reason": "Aggadic prayer theology.",
+      "start_snippet": "As it is written in a future prophecy: “In that day, says the Lord, I will assemble the lame, and I will gather those who are abandoned and those with whom I have dealt in wickedne"
+    },
+    {
+      "sugya_number": 66,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "33a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "33b",
+        "segment": 31
+      },
+      "title": "Errors in prayer, additions, and divine attributes",
+      "purpose": "Analyzes mistakes in prayer, saying 'Your mercy reaches bird nests,' and proper theology in blessings.",
+      "structure": "Mishnah → objections → theological correction",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 85,
+      "boundary_reason": "New prayer correctness unit.",
+      "start_snippet": "The officer said to him: No. The pious man continued: And if you would greet him, what would they do to you? The officer said to him: They would cut off my head with a sword. The p"
+    },
+    {
+      "sugya_number": 67,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "34a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "34b",
+        "segment": 32
+      },
+      "title": "Bowing, prayer mistakes, and signs of accepted prayer",
+      "purpose": "Determines where one bows, what mistakes require repetition, and signs for prayer acceptance.",
+      "structure": "Mishnah → baraitot → stories → conclusion",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "Continuation of prayer performance.",
+      "start_snippet": "Can one have that degree of familiarity with Heaven, to the extent that he can take his words lightly and say them however he likes? If he did not focus his attention initially, we"
+    },
+    {
+      "sugya_number": 68,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "35a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "35a",
+        "segment": 21
+      },
+      "title": "Blessings over food: source and prohibition of benefit without blessing",
+      "purpose": "Introduces chapter six: sources for blessings before eating and the theology of enjoying the world.",
+      "structure": "Mishnah → source search → principle → applications",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 92,
+      "boundary_reason": "New Mishnah: food blessings.",
+      "start_snippet": "MISHNA: This mishna discusses the blessings recited over various foods. How does one recite a blessing over fruits? Over different fruits that grow on a tree one recites: Who creat"
+    },
+    {
+      "sugya_number": 69,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "35b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "35b",
+        "segment": 23
+      },
+      "title": "Wine, grain, and hierarchy of food blessings",
+      "purpose": "Clarifies why wine receives a special blessing and compares bread, oil, and other foods.",
+      "structure": "Question → challenge → distinction → hierarchy",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 85,
+      "boundary_reason": "Subunit under food blessings.",
+      "start_snippet": "and here, where it says that He gave the earth to mankind refers to after a blessing is recited."
+    },
+    {
+      "sugya_number": 70,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "36a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "36b",
+        "segment": 20
+      },
+      "title": "Fruit-tree blessings and classification of foods",
+      "purpose": "Determines blessings for fruit, vegetables, capers, pepper, and other produce categories.",
+      "structure": "Cases → botanical/legal classification → rulings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New classification cluster.",
+      "start_snippet": "in which all boiled vegetables were boiled. A certain amount of oil is added to anigeron."
+    },
+    {
+      "sugya_number": 71,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "37a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "37b",
+        "segment": 13
+      },
+      "title": "Grain products, rice, porridge, and five species",
+      "purpose": "Determines blessings for grain-derived foods and rice based on food identity and preparation.",
+      "structure": "Baraitot → contradictions → resolutions → rulings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New grain/rice unit.",
+      "start_snippet": "Therefore, he teaches us: Anything that has of the five species of grain in it, even if it is in the context of a mixture with other ingredients. And had he taught us only: Anythin"
+    },
+    {
+      "sugya_number": 72,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "38a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "38b",
+        "segment": 15
+      },
+      "title": "Cooked vegetables, oil, and altered foods",
+      "purpose": "Analyzes blessings when foods are cooked, crushed, transformed, or eaten medicinally.",
+      "structure": "Cases → principles → stories/practice",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 80,
+      "boundary_reason": "Continuation of food classification.",
+      "start_snippet": "thick [ke’avin], so that they appear like loaves of bread, they are obligated in ḥalla, and if he shaped them like boards [kelimmudin], they are exempt, since they will certainly o"
+    },
+    {
+      "sugya_number": 73,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "39a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "39b",
+        "segment": 11
+      },
+      "title": "Preference among foods and blessing priority",
+      "purpose": "Determines which food receives the blessing first when multiple foods are present.",
+      "structure": "Amoraic dispute → baraitot → practice stories",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New priority unit.",
+      "start_snippet": "it lacks the requisite measure? The smallest quantity of food that is considered eating is the size of an olive-bulk, and an olive with its pit removed is smaller than that."
+    },
+    {
+      "sugya_number": 74,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "40a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "40b",
+        "segment": 25
+      },
+      "title": "Incorrect blessing formulas and general rules",
+      "purpose": "Analyzes when an imprecise blessing works and how general/specific formulas function.",
+      "structure": "Mishnah → formula cases → legal principles",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 85,
+      "boundary_reason": "New Mishnah/formula unit.",
+      "start_snippet": "Continuing to discuss the halakhot of breaking bread, Rav said: One who broke bread, and before eating it, offered a piece to another, and said: Take it and recite a blessing, take"
+    },
+    {
+      "sugya_number": 75,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "41a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "41b",
+        "segment": 8
+      },
+      "title": "Seven species and precedence in blessings",
+      "purpose": "Determines precedence among foods, especially the seven species and verse order.",
+      "structure": "Verse exegesis → practical ranking → cases",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "New precedence unit.",
+      "start_snippet": "Granted, according to the one who said that novelot temara are dates felled by the wind, that is why here, when our mishna speaks of ruined dates, it calls them novelot, unmodified"
+    },
+    {
+      "sugya_number": 76,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "42a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "42a",
+        "segment": 10
+      },
+      "title": "Foods during/after meals and exemption by bread/wine",
+      "purpose": "Analyzes which foods require blessings before/after when eaten in relation to bread or wine.",
+      "structure": "Mishnah → meal structure → exceptions",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New meal context unit.",
+      "start_snippet": "as it causes a blessing itself. It is so significant, that one recites a blessing over it together with other blessings like kiddush and havdala, even though he does not particular"
+    },
+    {
+      "sugya_number": 77,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "42b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "42b",
+        "segment": 14
+      },
+      "title": "Group blessings, reclining, and shared meals",
+      "purpose": "Determines when one person can bless for others based on reclining or shared intent.",
+      "structure": "Mishnah → cases → social meal structure",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New group meal unit.",
+      "start_snippet": "Additionally: If wine came before them during the meal, each and every diner recites a blessing over the wine for himself. If the wine came after the meal, one recites a blessing o"
+    },
+    {
+      "sugya_number": 78,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "43a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "43b",
+        "segment": 20
+      },
+      "title": "Fragrant spices and blessings over scent",
+      "purpose": "Moves into blessings over fragrance and proper formulas for different scents.",
+      "structure": "Mishnah/practice → classification → rulings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New scent-blessing unit.",
+      "start_snippet": "and reversed his cloak, so that his tear which he had rent in mourning of Rav was behind him, and in mourning, he rent another tear in his garment. He said: Rav is dead, and we hav"
+    },
+    {
+      "sugya_number": 79,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "44a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "44a",
+        "segment": 17
+      },
+      "title": "Primary and secondary foods; fruits of Genosar",
+      "purpose": "Establishes ikkar/tafel principle and includes hyperbolic praise of Genosar fruit.",
+      "structure": "Mishnah → challenge → exceptional case → aggadic expansion",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "New Mishnah with embedded Genosar digression.",
+      "start_snippet": "MISHNA: If they brought salted food before him to eat first and bread with it, he recites a blessing over the salted food and thereby exempts the bread, because the salted food is "
+    },
+    {
+      "sugya_number": 80,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "44b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "45a",
+        "segment": 2
+      },
+      "title": "After-blessings for foods and liquids",
+      "purpose": "Analyzes which foods require after-blessings and the formulas for various categories.",
+      "structure": "Amoraic rulings → practice disputes → conclusions",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "Continuation of food blessing law.",
+      "start_snippet": "Rav Yitzḥak bar Avdimi said in the name of Rabbeinu, Rav: Over the egg and types of meat [kupra], at the start, one recites: By Whose word all things came to be, and at the end: Wh"
+    },
+    {
+      "sugya_number": 81,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "45a",
+        "segment": 3
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "45b",
+        "segment": 24
+      },
+      "title": "Zimmun: who joins and how",
+      "purpose": "Introduces chapter seven on zimmun and who may join a group for Grace after Meals.",
+      "structure": "Mishnah → cases → eligibility rules",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "New chapter/topic.",
+      "start_snippet": "May we return unto thee : What benediction do we say !"
+    },
+    {
+      "sugya_number": 82,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "46a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "46b",
+        "segment": 15
+      },
+      "title": "Who leads Grace after Meals and order of blessings",
+      "purpose": "Analyzes who recites for the group and the structure/order of Birkat HaMazon.",
+      "structure": "Story → halakhic question → blessing order",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New leadership/order unit.",
+      "start_snippet": "The Gemara recounts: Rabbi Zeira took ill. Rabbi Abbahu went to visit him and resolved: If the little man with the scorched legs, a nickname for Rabbi Zeira, is cured, I will make "
+    },
+    {
+      "sugya_number": 83,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "47a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "48a",
+        "segment": 1
+      },
+      "title": "Who is excluded or included in zimmun",
+      "purpose": "Determines whether am ha’aretz, servants, minors, women, and others may join zimmun.",
+      "structure": "Mishnah → definitions → cases → rulings",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "Zimmun eligibility continuation.",
+      "start_snippet": "nor with regard to dirty hands, i.e., with regard to washing hands at the end of a meal."
+    },
+    {
+      "sugya_number": 84,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "48a",
+        "segment": 2
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "48b",
+        "segment": 13
+      },
+      "title": "Source and structure of Birkat HaMazon",
+      "purpose": "Derives Grace after Meals from Torah and traces its blessings to Moses, Joshua, David/Solomon, and Yavneh.",
+      "structure": "Halakhic conclusion → derivation → historical institution",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "Shift from zimmun participants to blessing text/source.",
+      "start_snippet": "The Gemara concludes: The halakha is not in accordance with all of these statements. Rather, the halakha is in accordance with this statement that Rav Naḥman said: A minor who know"
+    },
+    {
+      "sugya_number": 85,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "49a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "49b",
+        "segment": 18
+      },
+      "title": "Required mentions in Birkat HaMazon",
+      "purpose": "Determines covenant, Torah, kingship, Jerusalem, Shabbat/Festival insertions, and error correction.",
+      "structure": "Formula requirements → objections → corrections",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New Birkat HaMazon formula unit.",
+      "start_snippet": "and that, the covenant of circumcision, was given with thirteen covenants, as the word brit, covenant, appears thirteen times in the portion dealing with the circumcision of Abraha"
+    },
+    {
+      "sugya_number": 86,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "50a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "50b",
+        "segment": 15
+      },
+      "title": "Zimmun wording and group division",
+      "purpose": "Analyzes whether to say 'bless' or 'let us bless' and when groups may divide for zimmun.",
+      "structure": "Formula dispute → numerical consequences → baraitot",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "Return to zimmun formula.",
+      "start_snippet": "He may even say: Bless; nevertheless: Let us bless, is preferable as Rav Adda bar Ahava said that they said in the school of Rav: We learned: A group of six to ten people may divid"
+    },
+    {
+      "sugya_number": 87,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "51a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "51a",
+        "segment": 22
+      },
+      "title": "Cup of blessing and post-meal practices",
+      "purpose": "Covers rules for washing, cup of blessing, and proper handling of the blessing cup.",
+      "structure": "Mishnah/practice → ten requirements → disputes",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New ritual cup unit.",
+      "start_snippet": "The Gemara asks: With regard to a food item that does not become disgusting as well, let him shift it to the side and recite the blessing. Why need he spit it out? Rav Yitzḥak Kask"
+    },
+    {
+      "sugya_number": 88,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "51b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "52a",
+        "segment": 19
+      },
+      "title": "Beit Shammai and Beit Hillel: order at meals and Havdalah",
+      "purpose": "Begins chapter eight disputes between Beit Shammai/Hillel over wine, kiddush, washing, and Havdalah.",
+      "structure": "Mishnah disputes → explanations → harmonizations",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 90,
+      "boundary_reason": "New chapter/unit.",
+      "start_snippet": "we will act stringently and not assist the right hand with the left."
+    },
+    {
+      "sugya_number": 89,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "52b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "52b",
+        "segment": 34
+      },
+      "title": "Impurity of hands/cups and meal order disputes",
+      "purpose": "Continues Beit Shammai/Hillel disputes concerning cups, hands, and table cleaning.",
+      "structure": "Dispute → rationale → practical concerns",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "Continuation of chapter eight disputes.",
+      "start_snippet": "while its inner side, and its rim, the edge of the vessel that protrudes outwards, and its ear-shaped handle, and its straight handles are pure. However, if the inside of the vesse"
+    },
+    {
+      "sugya_number": 90,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "53a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "53a",
+        "segment": 34
+      },
+      "title": "Havdalah candle, spices, and benefit from light",
+      "purpose": "Analyzes which fire/spices qualify for Havdalah and when one may bless over light.",
+      "structure": "Mishnah → baraitot → distinctions",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "New Havdalah components unit.",
+      "start_snippet": "If we say that did not rest means that it did not rest from labor, even from labor that is permitted? Wasn’t it taught in a baraita that over light that was kindled on Shabbat for "
+    },
+    {
+      "sugya_number": 91,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "53b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "53b",
+        "segment": 33
+      },
+      "title": "Who fulfills whose Havdalah blessing",
+      "purpose": "Determines benefit from light and whether one fulfills obligations through another’s blessing.",
+      "structure": "Mishnah → amoraic interpretations → stories",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 80,
+      "boundary_reason": "Continuation of Havdalah light/blessing.",
+      "start_snippet": "We learned in the mishna: And one does not recite the blessing over the candle until he derives benefit from its light."
+    },
+    {
+      "sugya_number": 92,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "54a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "54a",
+        "segment": 16
+      },
+      "title": "Blessings over miracles, natural phenomena, and good/bad news",
+      "purpose": "Introduces chapter nine’s blessings over exceptional events and experiences.",
+      "structure": "Mishnah → categories → examples",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 92,
+      "boundary_reason": "New chapter/topic.",
+      "start_snippet": "This mishna, which includes all of this chapter’s mishnayot, contains a series of blessings and halakhot that are not recited at specific times, but rather in response to various e"
+    },
+    {
+      "sugya_number": 93,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "54b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "54b",
+        "segment": 23
+      },
+      "title": "Miracle sites and communal/national miracles",
+      "purpose": "Explains sites requiring miracle blessings through biblical and rabbinic stories.",
+      "structure": "Baraita → narrative expansion → proof",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "Miracle-site subunit.",
+      "start_snippet": "and prepared caves for themselves and they hid in them. They said: When Israel passes here we will kill them. And they did not know that the Ark of the Covenant preceded the childr"
+    },
+    {
+      "sugya_number": 94,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "55a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "55b",
+        "segment": 21
+      },
+      "title": "Prayer length, dreams, and interpretation",
+      "purpose": "Transitions to dreams and their interpretation, including whether dreams follow the mouth.",
+      "structure": "Statements → stories → interpretation principles",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 78,
+      "boundary_reason": "New dream unit after prayer teachings.",
+      "start_snippet": "Anyone who prolongs his prayer and expects it to be answered, will ultimately come to heartache, as it is stated: “Hope deferred makes the heart sick” (Proverbs 13:12). Similarly, "
+    },
+    {
+      "sugya_number": 95,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "56a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "56b",
+        "segment": 21
+      },
+      "title": "Bar Haddaya and dream interpretation narratives",
+      "purpose": "Long narrative illustrating dream interpretation depending on interpreter/payment.",
+      "structure": "Story cycle → repeated dreams → interpretations → consequence",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 75,
+      "boundary_reason": "Embedded narrative within dream sugya.",
+      "start_snippet": "On a similar note, the Gemara relates that the Roman emperor said to Rabbi Yehoshua, son of Rabbi Ḥananya: You Jews say that you are extremely wise. If that is so, tell me what I w"
+    },
+    {
+      "sugya_number": 96,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "57a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "57b",
+        "segment": 22
+      },
+      "title": "Dream symbols and their meanings",
+      "purpose": "Catalogues dream symbols involving animals, verses, books, and objects.",
+      "structure": "Symbol lists → interpretive rules",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 78,
+      "boundary_reason": "Continuation of dream interpretation by catalogue.",
+      "start_snippet": "This opinion, that seeing an elephant is a good omen, refers to a case where one saw it saddled, while this opinion, that it is a bad omen, refers to a case where the elephant is n"
+    },
+    {
+      "sugya_number": 97,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "58a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "58b",
+        "segment": 15
+      },
+      "title": "Blessings over crowds, sages, kings, and ruins",
+      "purpose": "Analyzes blessings upon seeing multitudes, sages, kings, and restored/destroyed houses.",
+      "structure": "Baraitot → examples → stories",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New seeing-blessings unit.",
+      "start_snippet": "With regard to Babylonia, the Gemara cites what Rabbi Yirmeya ben Elazar said: When Babylonia was cursed, its neighbors were cursed along with it. When Samaria was cursed, its neig"
+    },
+    {
+      "sugya_number": 98,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "59a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "59a",
+        "segment": 15
+      },
+      "title": "Cosmic phenomena: thunder, stars, earthquakes, rainbows",
+      "purpose": "Explains blessings over natural phenomena and their theological meanings.",
+      "structure": "Mishnah items → cosmology → blessing formulas",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New natural phenomena unit.",
+      "start_snippet": "as if it was appended onto it. The Gemara explains: And the fact that Ursa Major follows Pleiades, it is as if Ursa Major is saying to Pleiades: Give me back my children, my two st"
+    },
+    {
+      "sugya_number": 99,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "59b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "59b",
+        "segment": 17
+      },
+      "title": "Sun cycle, sea, rivers, and rain",
+      "purpose": "Continues blessings over celestial cycles, seas/rivers, and rain.",
+      "structure": "Baraitot → formulas → disputes",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "Continuation of phenomena blessings.",
+      "start_snippet": "The Sages taught: One who sees the sun in the beginning of its cycle, the moon in its might, the planets in their orbit, or the signs of the zodiac aligned in their order recites: "
+    },
+    {
+      "sugya_number": 100,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "60a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "60a",
+        "segment": 30
+      },
+      "title": "Good/bad tidings and daily blessings",
+      "purpose": "Determines blessings on new items, good/bad news, and daily routines.",
+      "structure": "Mishnah → cases → daily blessing sequence",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "New experiential/daily blessing unit.",
+      "start_snippet": "The Gemara deduces: This proves by inference that if he purchases a new object and then purchases a similar object, everyone agrees that he is not required to recite a blessing, as"
+    },
+    {
+      "sugya_number": 101,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "60b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "60b",
+        "segment": 13
+      },
+      "title": "Bathroom, sleep, and morning blessings",
+      "purpose": "Gives formulas for entering/exiting bathroom, sleep, and waking/morning blessings.",
+      "structure": "Daily routines → blessing formulas",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "Continuation of daily blessings.",
+      "start_snippet": "One who enters a bathroom says to the angels who accompany him at all times: Be honored, honorable holy ones, servants of the One on High, give honor to the God of Israel, leave me"
+    },
+    {
+      "sugya_number": 102,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "61a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "61b",
+        "segment": 16
+      },
+      "title": "Two inclinations and loving God with both inclinations",
+      "purpose": "Analyzes creation of human nature, good/evil inclinations, and martyrdom of Rabbi Akiva.",
+      "structure": "Verse exegesis → anthropology → story",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 84,
+      "boundary_reason": "New theological-anthropological unit.",
+      "start_snippet": "He does for the best."
+    },
+    {
+      "sugya_number": 103,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "62a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "62b",
+        "segment": 25
+      },
+      "title": "Bathroom conduct and modesty",
+      "purpose": "Derives bathroom etiquette and modest conduct from stories of Sages and practical teachings.",
+      "structure": "Stories → lessons → conduct rules",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 82,
+      "boundary_reason": "New practical modesty unit.",
+      "start_snippet": "It was taught in a baraita in tractate Derekh Eretz that Rabbi Akiva said: I once entered the bathroom after my teacher Rabbi Yehoshua, and I learned three things from observing hi"
+    },
+    {
+      "sugya_number": 104,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "63a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "63a",
+        "segment": 27
+      },
+      "title": "Temple Mount reverence and blessing formulas in the Temple",
+      "purpose": "Analyzes reverence for holy places and the wording of blessings/greetings with God’s name.",
+      "structure": "Mishnah → derivations → institutional enactments",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 86,
+      "boundary_reason": "Return to Mishnah’s Temple Mount/blessing rules.",
+      "start_snippet": "and say as follows: With regard to the Temple Mount, where one is prohibited from wearing shoes, let us derive the prohibition of spitting from the case of shoes. However, with reg"
+    },
+    {
+      "sugya_number": 105,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "63b",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "63b",
+        "segment": 24
+      },
+      "title": "Authority of Eretz Yisrael, Torah transmission, and Yavneh teachings",
+      "purpose": "Discusses calendrical authority, Torah leaving Zion, and teachings delivered at Yavneh.",
+      "structure": "Narrative → authority principle → homiletic teachings",
+      "contains_digressions": "Yes",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 76,
+      "boundary_reason": "Late aggadic/institutional cluster.",
+      "start_snippet": "And in order to underscore this, tell our brethren in exile: If they obey the Sages of Eretz Yisrael to excommunicate Ḥanina, fine; and if they do not obey us, it is as if they are"
+    },
+    {
+      "sugya_number": 106,
+      "start": {
+        "tractate": "Berakhot",
+        "daf": "64a",
+        "segment": 1
+      },
+      "end": {
+        "tractate": "Berakhot",
+        "daf": "64a",
+        "segment": 15
+      },
+      "title": "Closing teachings: peace, Torah scholars, and conclusion",
+      "purpose": "Concludes with teachings about Torah scholars, peace, and the tractate’s closing formulas.",
+      "structure": "Statement chain → verses → closing blessing",
+      "contains_digressions": "No",
+      "primary_verses_used": "See source segments; extracted in later pass",
+      "primary_rabbis_involved": "See source segments; extracted in later pass",
+      "confidence": 88,
+      "boundary_reason": "Closing sugya of tractate.",
+      "start_snippet": "as it is stated: “And Oved-edom had sons…Peulletai the eighth,” and in the continuation of the same verse it is written: “For God blessed him” (I Chronicles 26:4–5); apparently, th"
+    }
+  ]
+}

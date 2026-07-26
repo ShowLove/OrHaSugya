@@ -36,12 +36,23 @@ Thumbs.db
 # =========================================================
 # PROJECT DATA (IMPORTANT FOR YOUR PROJECT)
 # =========================================================
-data/
+
+# Ignore everything in data/
+data/*
+
+# Except prompt_data and everything inside it
+!data/prompt_data/
+!data/prompt_data/**
+
+# Ignore generated files everywhere else
 *.json
 *.jsonl
 *.log
 *.db
 *.sqlite
+
+# But keep ALL files in data/prompt_data/
+!data/prompt_data/**
 
 
 # =========================================================
