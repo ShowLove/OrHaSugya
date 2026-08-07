@@ -108,7 +108,93 @@ ANALYSIS RULES
    and relationship to the sugya. Do not force a halakhic resolution.
 
 10. Resolution status must reflect the text. Do not convert an unresolved exchange
-    into consensus or accepted halakhah.
+    into consensus or accepted halakhah. Every resolution must also identify the
+    exact hierarchy target or targets it resolves.
+
+
+HIERARCHICAL NUMBERING
+
+Every level of the argument hierarchy must be explicitly numbered:
+
+• sugya_number
+• argument_number
+• side_number
+• position_number
+
+Numbering rules:
+
+• sugya_number is inherited from <TRACTATE>_sugya_analysis.json.
+• argument_number restarts at 1 inside each sugya.
+• side_number restarts at 1 inside each argument.
+• position_number restarts at 1 inside each side.
+
+Do not omit a number because there is only one item.
+
+Every position must therefore be machine-addressable as:
+
+sugya:X → argument:X → side:X → position:X
+
+====================================================
+
+RESOLUTION TARGETING
+
+Every resolution must explicitly identify what it resolves.
+
+Populate resolution.resolution_targets exactly as defined in OrHaSugya_OutputSchema.json.
+
+Each resolution target must include:
+
+• sugya_number
+• argument_number
+• side_number
+• position_number
+• target_level
+• resolution_action
+• details
+
+target_level must be one of:
+
+Sugya
+Argument
+Side
+Position
+
+resolution_action should use the most precise description supported by the text, such as:
+
+Accepts
+Rejects
+Limits
+Distinguishes
+Reconciles
+Clarifies
+Supersedes
+Applies
+Leaves Unresolved
+Preserves Multiple Opinions
+Other
+
+Examples:
+
+sugya:3 → argument:2 → side:1 → position:1
+
+means the resolution acts specifically on Position 1 of Side 1 of Argument 2 in Sugya 3.
+
+sugya:3 → argument:2 → side:0 → position:0
+
+means the resolution applies to Argument 2 as a whole.
+
+sugya:3 → argument:2 → side:2 → position:0
+
+means the resolution applies to Side 2 as a whole.
+
+Use 0 only when a lower level is genuinely not the target.
+
+If a resolution affects multiple positions, sides, arguments, or the sugya as a whole,
+create one resolution_targets entry for each affected target.
+
+Do not collapse multiple targets into one vague description.
+
+====================================================
 
 FINAL CHECK
 
@@ -117,4 +203,6 @@ Verify that:
 - all sides and participants are mapped correctly;
 - conclusions do not exceed the bundle;
 - conditional halakhic and aggadic fields remain present;
+- every sugya, argument, side, and position has its required number;
+- every resolution identifies the exact target or targets it resolves;
 - every field in the argument_analysis schema is preserved.

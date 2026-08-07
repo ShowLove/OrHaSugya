@@ -7,7 +7,9 @@
     "conditional_fields_rule": "Fields that are not applicable must remain present and use null, an empty string, false, 0, or an empty array according to the field type.",
     "empty_value_rule": "Do not remove conditional or unused fields. Use null for inapplicable linked objects or dependencies, empty strings for unavailable text, false for booleans, 0 for unavailable numeric values, and empty arrays when no entries exist.",
     "array_rule": "Arrays in this schema contain one schema-only representative object to expose the required item structure. Actual outputs may contain zero, one, or many items.",
-    "filename_rule": "Each stage must use the exact prompt, input, and output filenames defined in file_contracts. Replace <TRACTATE> with the tractate name used by the project. Do not add version suffixes."
+    "filename_rule": "Each stage must use the exact prompt, input, and output filenames defined in file_contracts. Replace <TRACTATE> with the tractate name used by the project. Do not add version suffixes.",
+    "hierarchical_numbering_rule": "In argument_analysis, every sugya, argument, side, and position must be explicitly numbered with sugya_number, argument_number, side_number, and position_number. argument_number restarts within each sugya; side_number restarts within each argument; position_number restarts within each side.",
+    "resolution_targeting_rule": "Every argument resolution must include resolution_targets. Each target identifies the exact sugya_number, argument_number, side_number, and position_number affected, plus target_level, resolution_action, and details. Use 0 for lower levels only when the resolution applies to a higher-level target."
   },
   "outputs": {
     "sugya_analysis": {
@@ -138,7 +140,10 @@
               },
               "sides": [
                 {
+                  "sugya_number": 0,
+                  "side_number": 0,
                   "position": {
+                    "position_number": 0,
                     "summary": "",
                     "details": ""
                   },
@@ -199,6 +204,17 @@
                       "summary": "",
                       "details": ""
                     }
+                  }
+                ],
+                "resolution_targets": [
+                  {
+                    "sugya_number": 0,
+                    "argument_number": 0,
+                    "side_number": 0,
+                    "position_number": 0,
+                    "target_level": "",
+                    "resolution_action": "",
+                    "details": ""
                   }
                 ]
               },
