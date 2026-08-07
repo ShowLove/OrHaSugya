@@ -66,3 +66,69 @@ Do not add version numbers or suffixes to filenames. Version history is managed 
 
 Every prompt repeats its own exact file contract so the filename requirements remain
 visible even when the prompt is read separately.
+
+
+## Required inputs for each prompt
+
+Every prompt requires these shared inputs:
+- `OrHaSugya_OutputSchema.json`
+- `OrHaSugya_AnalysisStandards.json`
+
+### Stage 1 — sugyaAnalysisPrompt.txt
+Required inputs:
+- OrHaSugya_OutputSchema.json
+- OrHaSugya_AnalysisStandards.json
+- <TRACTATE>_bundle.jsonl
+Produces:
+- <TRACTATE>_sugya_analysis.json
+
+### Stage 2 — sugyaAuthorityAnalysisPrompt.txt
+Required inputs:
+- OrHaSugya_OutputSchema.json
+- OrHaSugya_AnalysisStandards.json
+- <TRACTATE>_bundle.jsonl
+- <TRACTATE>_sugya_analysis.json
+Produces:
+- <TRACTATE>_authority_analysis.json
+
+### Stage 3 — sugyaArgumentAnalysisPrompt.txt
+Required inputs:
+- OrHaSugya_OutputSchema.json
+- OrHaSugya_AnalysisStandards.json
+- <TRACTATE>_bundle.jsonl
+- <TRACTATE>_sugya_analysis.json
+- <TRACTATE>_authority_analysis.json
+Produces:
+- <TRACTATE>_argument_analysis.json
+
+### Stage 4 — sugyaSourceRelationshipAnalysisPrompt.txt
+Required inputs:
+- OrHaSugya_OutputSchema.json
+- OrHaSugya_AnalysisStandards.json
+- <TRACTATE>_bundle.jsonl
+- <TRACTATE>_sugya_analysis.json
+- <TRACTATE>_authority_analysis.json
+- <TRACTATE>_argument_analysis.json
+Produces:
+- <TRACTATE>_source_relationship_analysis.json
+
+### Stage 5 — sugyaExegesisAnalysisPrompt.txt
+Required inputs:
+- OrHaSugya_OutputSchema.json
+- OrHaSugya_AnalysisStandards.json
+- <TRACTATE>_bundle.jsonl
+- <TRACTATE>_sugya_analysis.json
+- <TRACTATE>_authority_analysis.json
+- <TRACTATE>_argument_analysis.json
+- <TRACTATE>_source_relationship_analysis.json
+Produces:
+- <TRACTATE>_exegesis_analysis.json
+
+### Dependency Summary
+1. Sugya Analysis ← Bundle
+2. Authority Analysis ← Bundle + Sugya Analysis
+3. Argument Analysis ← Bundle + Sugya Analysis + Authority Analysis
+4. Source Relationship Analysis ← Bundle + Sugya Analysis + Authority Analysis + Argument Analysis
+5. Exegesis Analysis ← Bundle + Bundle + Sugya Analysis + Authority Analysis + Argument Analysis + Source Relationship Analysis
+
+The canonical filenames are defined in OrHaSugya_OutputSchema.json.
